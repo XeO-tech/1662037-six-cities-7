@@ -1,0 +1,136 @@
+const AVATAR_URL = 'https://i.pravatar.cc/74';
+
+export const reviews = [
+  {
+    'comment': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    'date': '2019-05-08T14:13:56.569Z',
+    'id': 1,
+    'rating': 4,
+    'user': {
+      'avatar_url': `${AVATAR_URL}?rnd=${Math.random()}`,
+      'id': 11,
+      'is_pro': false,
+      'name': 'Max',
+    },
+  },
+  {
+    'comment': 'Classic. So good.',
+    'date': '2019-04-11T14:13:56.569Z',
+    'id': 1,
+    'rating': 3,
+    'user': {
+      'avatar_url': `${AVATAR_URL}?rnd=${Math.random()}`,
+      'id': 23,
+      'is_pro': true,
+      'name': 'Linda',
+    },
+  },
+  {
+    'comment': 'Incredibly thought out! Ahhhhhhh...',
+    'date': '2019-05-01T14:13:56.569Z',
+    'id': 1,
+    'rating': 5,
+    'user': {
+      'avatar_url': `${AVATAR_URL}?rnd=${Math.random()}`,
+      'id': 14,
+      'is_pro': false,
+      'name': 'Dmitri',
+    },
+  },
+  {
+    'comment': 'Super fresh :)',
+    'date': '2019-06-02T14:13:56.569Z',
+    'id': 2,
+    'rating': 2,
+    'user': {
+      'avatar_url': `${AVATAR_URL}?rnd=${Math.random()}`,
+      'id': 40,
+      'is_pro': false,
+      'name': 'Simon',
+    },
+  },
+  {
+    'comment': 'Truly fab illustration!!',
+    'date': '2019-05-03T14:13:56.569Z',
+    'id': 2,
+    'rating': 1,
+    'user': {
+      'avatar_url': `${AVATAR_URL}?rnd=${Math.random()}`,
+      'id': 32,
+      'is_pro': true,
+      'name': 'Alex',
+    },
+  },
+  {
+    'comment': 'Flat design is going to die.',
+    'date': '2019-05-04T14:13:56.569Z',
+    'id': 3,
+    'rating': 4,
+    'user': {
+      'avatar_url': `${AVATAR_URL}?rnd=${Math.random()}`,
+      'id': 15,
+      'is_pro': false,
+      'name': 'Serg',
+    },
+  },
+  {
+    'comment': 'I want to learn this kind of camera angle! Teach me.',
+    'date': '2019-01-05T14:13:56.569Z',
+    'id': 4,
+    'rating': 3,
+    'user': {
+      'avatar_url': `${AVATAR_URL}?rnd=${Math.random()}`,
+      'id': 16,
+      'is_pro': true,
+      'name': 'Lola',
+    },
+  },
+  {
+    'comment': 'Let me take a nap... great shapes, anyway.',
+    'date': '2019-09-06T14:13:56.569Z',
+    'id': 4,
+    'rating': 3,
+    'user': {
+      'avatar_url': `${AVATAR_URL}?rnd=${Math.random()}`,
+      'id': 17,
+      'is_pro': false,
+      'name': 'Karina',
+    },
+  },
+  {
+    'comment': 'Just cool mate',
+    'date': '2019-08-07T14:13:56.569Z',
+    'id': 4,
+    'rating': 5,
+    'user': {
+      'avatar_url': `${AVATAR_URL}?rnd=${Math.random()}`,
+      'id': 18,
+      'is_pro': true,
+      'name': 'Petr',
+    },
+  },
+  {
+    'comment': 'My 58 year old son rates this boldness very nice m8',
+    'date': '2019-01-09T14:13:56.569Z',
+    'id': 4,
+    'rating': 5,
+    'user': {
+      'avatar_url': `${AVATAR_URL}?rnd=${Math.random()}`,
+      'id': 19,
+      'is_pro': false,
+      'name': 'Glen',
+    },
+  },
+  {
+    'comment': 'I think clients would love this.',
+    'date': '2019-02-10T14:13:56.569Z',
+    'id': 4,
+    'rating': 2,
+    'user': {
+      'avatar_url': `${AVATAR_URL}?rnd=${Math.random()}`,
+      'id': 20,
+      'is_pro': true,
+      'name': 'Paul',
+    },
+  },
+];
