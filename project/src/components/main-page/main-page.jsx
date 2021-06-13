@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Card from '../card/card';
+import OffersList from '../offers-list/offers-list';
+import { cardProp } from '../card/card.prop';
+
 
 function MainPage(props) {
-  const {offersNumber} = props;
+  const {offers} = props;
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -93,7 +95,7 @@ function MainPage(props) {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                { new Array(offersNumber).fill('').map((element) => <Card key={`card ${Math.random()}`}/>) }
+                <OffersList offers={offers} />)
               </div>
             </section>
             <div className="cities__right-section">
@@ -107,7 +109,7 @@ function MainPage(props) {
 }
 
 MainPage.propTypes = {
-  offersNumber: PropTypes.number.isRequired,
+  offers: PropTypes.arrayOf(cardProp),
 };
 
 export default MainPage;

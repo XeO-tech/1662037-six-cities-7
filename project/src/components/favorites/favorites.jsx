@@ -1,6 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { cardProp } from '../card/card.prop';
 
-function Favorites() {
+
+function Favorites(props) {
+  const {offers} = props;
+  const favoriteOffers = offers.filter((offer) => offer.isFavorite);
+
   return (
     <div className="page">
       <header className="header">
@@ -165,5 +171,9 @@ function Favorites() {
     </div>
   );
 }
+
+Favorites.propTypes = {
+  offers: PropTypes.arrayOf(cardProp),
+};
 
 export default Favorites;
