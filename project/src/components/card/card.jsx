@@ -1,17 +1,36 @@
 import React from 'react';
 import { cardProp } from '../card/card.prop';
+import PropTypes from 'prop-types';
+
+const Setting = {
+  favoritesPage: {
+    ARTICLE_CLASS: 'favorites__card place-card',
+    MAIN_DIV_CLASS: 'favorites__image-wrapper place-card__image-wrapper',
+    INFO_DIV_CLASS: 'favorites__card-info place-card__info',
+    IMAGE_WIDTH: '150',
+    IMAGE_HEIGHT: '110',
+  },
+  mainPage: {
+    ARTICLE_CLASS: 'cities__place-card place-card',
+    MAIN_DIV_CLASS: 'cities__image-wrapper place-card__image-wrapper',
+    INFO_DIV_CLASS: 'place-card__info',
+    IMAGE_WIDTH: '260',
+    IMAGE_HEIGHT: '200',
+  },
+};
 
 function Card(props) {
-  const {offer} = props;
+  const {offer, isFavoritePage} = props;
+  const setting = isFavoritePage ? Setting.favoritesPage : Setting.mainPage;
 
   return (
-    <article className="cities__place-card place-card">
-      <div className="cities__image-wrapper place-card__image-wrapper">
+    <article className={setting.ARTICLE_CLASS}>
+      <div className={setting.MAIN_DIV_CLASS}>
         <a href="foo">
-          <img className="place-card__image" src={offer.previewImage} width="260" height="200" alt="Place pic" />
+          <img className="place-card__image" src={offer.previewImage} width={setting.IMAGE_WIDTH} height={setting.IMAGE_HEIGHT} alt="Place pic" />
         </a>
       </div>
-      <div className="place-card__info">
+      <div className={setting.INFO_DIV_CLASS}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{offer.price}</b>
@@ -38,6 +57,9 @@ function Card(props) {
     </article>);
 }
 
-Card.propTypes = cardProp;
+Card.propTypes = {
+  offer: cardProp,
+  isFavoritePage: PropTypes.bool.isRequired,
+};
 
 export default Card;
