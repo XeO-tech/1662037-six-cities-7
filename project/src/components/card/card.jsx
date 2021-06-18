@@ -20,11 +20,15 @@ const Setting = {
 };
 
 function Card(props) {
-  const {offer, isFavoritePage} = props;
+  const {offer, isFavoritePage, mouseEnterHandler, mouseLeaveHandler} = props;
   const setting = isFavoritePage ? Setting.favoritesPage : Setting.mainPage;
 
   return (
-    <article className={setting.ARTICLE_CLASS}>
+    <article
+      onMouseEnter = {mouseEnterHandler}
+      onMouseLeave = {mouseLeaveHandler}
+      className={setting.ARTICLE_CLASS}
+    >
       <div className={setting.MAIN_DIV_CLASS}>
         <a href="foo">
           <img className="place-card__image" src={offer.previewImage} width={setting.IMAGE_WIDTH} height={setting.IMAGE_HEIGHT} alt="Place pic" />
@@ -60,6 +64,8 @@ function Card(props) {
 Card.propTypes = {
   offer: cardProp,
   isFavoritePage: PropTypes.bool.isRequired,
+  mouseEnterHandler: PropTypes.func,
+  mouseLeaveHandler: PropTypes.func,
 };
 
 export default Card;

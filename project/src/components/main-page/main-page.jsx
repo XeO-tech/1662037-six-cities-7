@@ -98,7 +98,7 @@ function MainPage(props) {
                 <OffersList
                   offers={offers}
                   isFavoritePage={false}
-                />)
+                />
               </div>
             </section>
             <div className="cities__right-section">
