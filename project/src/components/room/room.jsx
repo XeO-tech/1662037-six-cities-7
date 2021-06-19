@@ -1,18 +1,31 @@
 import React from 'react';
 import CommentForm from '../comment-form/comment-form';
+import NotFound from '../not-found/not-found';
 import { offers } from '../../mocks/offers';
 import { reviews } from '../../mocks/reviews';
 import { adaptOfferToClient, adaptReviewToClient, defineRatingWidth } from '../../utils';
 import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
 
+const roomTypeAlias = {
+  apartment: 'Apartment',
+  room: 'Private Room',
+  house: 'House',
+  hotel: 'Hotel',
+};
+
 function Room(props) {
   const offer = adaptOfferToClient(offers.filter((offerItem) => offerItem.id === Number(props.match.params.id))[0]);
 
+  if (!offer) {
+    return <NotFound />;
+  }
+
   const offerReviews = reviews
     .filter((review) => review.id === Number(props.match.params.id))
-    .map((review) => adaptReviewToClient(review));
-
+    .slice(0,9)
+    .map((review) => adaptReviewToClient(review))
+    .sort((a, b) => new Date(b.date) - new Date(a.date));
 
   return (
     <div className="page">
@@ -48,11 +61,13 @@ function Room(props) {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {offer.images.map((imageUrl) => (
-                <div key={imageUrl} className="property__image-wrapper">
-                  <img className="property__image" src={imageUrl} alt={offer.type} />
-                </div>
-              ))}
+              {offer.images
+                .slice(0,4)
+                .map((imageUrl) => (
+                  <div key={imageUrl} className="property__image-wrapper">
+                    <img className="property__image" src={imageUrl} alt={offer.type} />
+                  </div>
+                ))}
             </div>
           </div>
           <div className="property__container container">
@@ -83,7 +98,7 @@ function Room(props) {
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-                  {offer.type[0].toUpperCase() + offer.type.slice(1)}
+                  {roomTypeAlias[offer.type]}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
                   {offer.bedrooms} Bedrooms
@@ -109,15 +124,18 @@ function Room(props) {
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
+                  <div className={`property__avatar-wrapper ${offer.host.isPro ? 'property__avatar-wrapper--pro' : ''} user__avatar-wrapper`}>
                     <img className="property__avatar user__avatar" src={offer.host.avatarUrl} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="property__user-name">
                     {offer.host.name}
                   </span>
-                  <span className="property__user-status">
-                    {offer.host.isPro ? 'Pro': ''}
-                  </span>
+                  {
+                    offer.host.isPro &&
+                    <span className="property__user-status">
+                    Pro
+                    </span>
+                  }
                 </div>
                 <div className="property__description">
                   <p className="property__text">

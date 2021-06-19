@@ -50,7 +50,7 @@ export const offers = [
     host: {
       'avatar_url': `${AVATAR_URL}?rnd=${Math.random()}`,
       id: 1,
-      'is_pro': false,
+      'is_pro': true,
       name: 'Vasya',
     },
     id: 2,

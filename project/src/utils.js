@@ -1,6 +1,10 @@
 import cloneDeep from 'lodash/cloneDeep';
 
 export const adaptOfferToClient = (offer) => {
+  if (offer === undefined) {
+    return;
+  }
+
   const clonedOffer = cloneDeep(offer);
 
   const adaptedOffer = Object.assign(
