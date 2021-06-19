@@ -2,9 +2,7 @@ import React from 'react';
 import { cardProp } from '../card/card.prop';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../const';
 import { defineRatingWidth } from '../../utils';
-
 
 const Setting = {
   favoritesPage: {
@@ -34,9 +32,9 @@ function Card(props) {
       className={setting.ARTICLE_CLASS}
     >
       <div className={setting.MAIN_DIV_CLASS}>
-        <Link to ={AppRoute.FAVORITES}>
+        <a href="foo">
           <img className="place-card__image" src={offer.previewImage} width={setting.IMAGE_WIDTH} height={setting.IMAGE_HEIGHT} alt="Place pic" />
-        </Link>
+        </a>
       </div>
       <div className={setting.INFO_DIV_CLASS}>
         <div className="place-card__price-wrapper">
