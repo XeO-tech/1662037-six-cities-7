@@ -96,3 +96,4 @@ export const adaptReviewToServer = (review) => {
   return adaptedReview;
 };
 
+export const defineRatingWidth = (rating) => `${Math.round(rating)*20}%`;

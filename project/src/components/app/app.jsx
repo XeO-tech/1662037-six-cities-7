@@ -27,9 +27,7 @@ function App(props) {
         <Route exact path={AppRoute.FAVORITES}>
           <Favorites offers = {offers}/>
         </Route>
-        <Route exact path={AppRoute.ROOM}>
-          <Room />
-        </Route>
+        <Route exact path={AppRoute.ROOM} component={Room} />
         <Route>
           <NotFound />
         </Route>
