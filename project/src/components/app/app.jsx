@@ -8,9 +8,10 @@ import Favorites from '../favorites/favorites';
 import Room from '../room/room';
 import NotFound from '../not-found/not-found';
 import { cardProp } from '../card/card.prop';
+import { reviewProp } from '../comment-form/review.prop';
 
 function App(props) {
-  const {offersNumber, offers} = props;
+  const {offersNumber, offers, reviews} = props;
 
   return (
     <BrowserRouter>
@@ -27,7 +28,7 @@ function App(props) {
         <Route exact path={AppRoute.FAVORITES}>
           <Favorites offers = {offers}/>
         </Route>
-        <Route exact path={AppRoute.ROOM} component={Room} />
+        <Route exact path={AppRoute.ROOM} render={(properties) => <Room {...properties} offers={offers} reviews={reviews} /> } />
         <Route>
           <NotFound />
         </Route>
@@ -39,20 +40,7 @@ function App(props) {
 App.propTypes = {
   offersNumber: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(cardProp),
-  // reviews: PropTypes.arrayOf(
-  //   PropTypes.shape({
-  //     comment: PropTypes.string.isRequired,
-  //     date: PropTypes.string.isRequired,
-  //     id: 1,
-  //     rating: 4,
-  //     user: {
-  //       avatarUrl: PropTypes.string.isRequired,
-  //       id: 11,
-  //       isPro: PropTypes.bool.isRequired,
-  //       name: PropTypes.string.isRequired,
-  //     },
-  //   }),
-  // ),
+  reviews: PropTypes.arrayOf(reviewProp),
 };
 
 export default App;

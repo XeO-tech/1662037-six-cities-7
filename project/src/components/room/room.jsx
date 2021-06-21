@@ -1,13 +1,13 @@
 import React from 'react';
 import CommentForm from '../comment-form/comment-form';
 import NotFound from '../not-found/not-found';
-import { offers } from '../../mocks/offers';
-import { reviews } from '../../mocks/reviews';
-import { adaptOfferToClient, adaptReviewToClient, defineRatingWidth } from '../../utils';
+import { defineRatingWidth } from '../../utils';
 import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
+import { cardProp } from '../card/card.prop';
+import { reviewProp } from '../comment-form/review.prop';
 
 const roomTypeAlias = {
   apartment: 'Apartment',
@@ -17,7 +17,9 @@ const roomTypeAlias = {
 };
 
 function Room(props) {
-  const offer = adaptOfferToClient(offers.filter((offerItem) => offerItem.id === Number(props.match.params.id))[0]);
+  const {offers, reviews} = props;
+
+  const offer = offers.filter((offerItem) => offerItem.id === Number(props.match.params.id))[0];
 
   if (!offer) {
     return <NotFound />;
@@ -26,7 +28,6 @@ function Room(props) {
   const offerReviews = reviews
     .filter((review) => review.id === Number(props.match.params.id))
     .slice(0,9)
-    .map((review) => adaptReviewToClient(review))
     .sort((a, b) => new Date(b.date) - new Date(a.date));
 
   return (
@@ -292,6 +293,8 @@ Room.propTypes = {
       id: PropTypes.string.isRequired,
     }),
   }),
+  offers: PropTypes.arrayOf(cardProp),
+  reviews: PropTypes.arrayOf(reviewProp),
 };
 
 export default Room;
