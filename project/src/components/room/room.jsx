@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { cardProp } from '../card/card.prop';
-import { reviewProp } from '../comment-form/review.prop';
+import { reviewProp } from './review.prop';
 
 const roomTypeAlias = {
   apartment: 'Apartment',

@@ -8,7 +8,7 @@ import Favorites from '../favorites/favorites';
 import Room from '../room/room';
 import NotFound from '../not-found/not-found';
 import { cardProp } from '../card/card.prop';
-import { reviewProp } from '../comment-form/review.prop';
+import { reviewProp } from '../room/review.prop';
 
 function App(props) {
   const {offersNumber, offers, reviews} = props;
