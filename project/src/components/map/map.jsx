@@ -20,14 +20,14 @@ function Map(props) {
 
   const icon = leaflet.icon({
     iconUrl: 'img/pin.svg',
-    iconSize: [30, 30],
-    iconAnchor: [15, 30],
+    iconSize: [20, 30],
+    iconAnchor: [10, 30],
   });
 
   const activeIcon = leaflet.icon({
     iconUrl: 'img/pin-active.svg',
-    iconSize: [30, 30],
-    iconAnchor: [15, 30],
+    iconSize: [20, 30],
+    iconAnchor: [10, 30],
   });
 
   useEffect(() => {
