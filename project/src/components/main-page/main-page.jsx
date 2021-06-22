@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import OffersList from '../offers-list/offers-list';
 import { cardProp } from '../card/card.prop';
@@ -8,6 +8,12 @@ import Map from '../map/map';
 
 function MainPage(props) {
   const {offers} = props;
+
+  const [activeCard, setActiveCard] = useState(null);
+
+  const onListItemHover = (offerID) => {
+    setActiveCard(offerID);
+  };
 
   const emptyPage = (
     <div className="cities__places-container cities__places-container--empty container">
@@ -45,11 +51,12 @@ function MainPage(props) {
           <OffersList
             offers={offers}
             isFavoritePage={false}
+            onListItemHover = {onListItemHover}
           />
         </div>
       </section>
       <div className="cities__right-section">
-        <section className="cities__map map"><Map offers={offers} /></section>
+        <section className="cities__map map"><Map offers={offers} activeCard={activeCard} /></section>
       </div>
     </div>
   );

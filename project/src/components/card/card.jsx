@@ -22,13 +22,12 @@ const Setting = {
 };
 
 function Card(props) {
-  const {offer, isFavoritePage, mouseEnterHandler, mouseLeaveHandler} = props;
+  const {offer, isFavoritePage, onListItemHover} = props;
   const setting = isFavoritePage ? Setting.favoritesPage : Setting.mainPage;
 
   return (
     <article
-      onMouseEnter = {mouseEnterHandler}
-      onMouseLeave = {mouseLeaveHandler}
+      onMouseEnter = {onListItemHover}
       className={setting.ARTICLE_CLASS}
     >
       <div className={setting.MAIN_DIV_CLASS}>
@@ -66,8 +65,7 @@ function Card(props) {
 Card.propTypes = {
   offer: cardProp,
   isFavoritePage: PropTypes.bool.isRequired,
-  mouseEnterHandler: PropTypes.func,
-  mouseLeaveHandler: PropTypes.func,
+  onListItemHover: PropTypes.func,
 };
 
 export default Card;

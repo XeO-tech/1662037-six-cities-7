@@ -16,10 +16,16 @@ function Map(props) {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
-  const {offers} = props;
+  const {offers, activeCard} = props;
 
   const icon = leaflet.icon({
     iconUrl: 'img/pin.svg',
+    iconSize: [30, 30],
+    iconAnchor: [15, 30],
+  });
+
+  const activeIcon = leaflet.icon({
+    iconUrl: 'img/pin-active.svg',
     iconSize: [30, 30],
     iconAnchor: [15, 30],
   });
@@ -32,12 +38,12 @@ function Map(props) {
             lat: offer.location.latitude,
             lng: offer.location.longitude,
           }, {
-            icon: icon,
+            icon: (offer.id === activeCard) ? activeIcon : icon,
           })
           .addTo(map);
       });
     }
-  }, [map, offers, icon]);
+  }, [map, offers, icon, activeIcon, activeCard]);
 
   return (
     <div style={{height: '100%'}} ref={mapRef} />
@@ -46,6 +52,7 @@ function Map(props) {
 
 Map.propTypes = {
   offers: PropTypes.arrayOf(cardProp),
+  activeCard: PropTypes.number,
 };
 
 export default Map;
