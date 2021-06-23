@@ -9,10 +9,10 @@ import Map from '../map/map';
 function MainPage(props) {
   const {offers} = props;
 
-  const [activeCard, setActiveCard] = useState(null);
+  const [activeCardId, setActiveCardId] = useState(null);
 
   const onListItemHover = (offerID) => {
-    setActiveCard(offerID);
+    setActiveCardId(offerID);
   };
 
   const emptyPage = (
@@ -56,7 +56,7 @@ function MainPage(props) {
         </div>
       </section>
       <div className="cities__right-section">
-        <section className="cities__map map"><Map offers={offers} activeCard={activeCard} /></section>
+        <section className="cities__map map"><Map offers={offers} activeCardId={activeCardId} /></section>
       </div>
     </div>
   );

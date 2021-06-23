@@ -5,18 +5,10 @@ import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from './useMap';
 
-const city = {
-  title: 'Amsterdam',
-  lat: 52.38333,
-  lng: 4.9,
-  zoom: 10,
-};
-
 function Map(props) {
+  const {offers, activeCardId} = props;
   const mapRef = useRef(null);
-  const map = useMap(mapRef, city);
-
-  const {offers, activeCard} = props;
+  const map = useMap(mapRef, offers[0].city);
 
   const icon = leaflet.icon({
     iconUrl: 'img/pin.svg',
@@ -38,12 +30,12 @@ function Map(props) {
             lat: offer.location.latitude,
             lng: offer.location.longitude,
           }, {
-            icon: (offer.id === activeCard) ? activeIcon : icon,
+            icon: (offer.id === activeCardId) ? activeIcon : icon,
           })
           .addTo(map);
       });
     }
-  }, [map, offers, icon, activeIcon, activeCard]);
+  }, [map, offers, icon, activeIcon, activeCardId]);
 
   return (
     <div style={{height: '100%'}} ref={mapRef} />
@@ -52,7 +44,7 @@ function Map(props) {
 
 Map.propTypes = {
   offers: PropTypes.arrayOf(cardProp),
-  activeCard: PropTypes.number,
+  activeCardId: PropTypes.number,
 };
 
 export default Map;
