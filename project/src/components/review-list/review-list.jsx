@@ -7,9 +7,12 @@ function ReviewsList(props) {
   const {reviews} = props;
 
   return (
-    <ul className="reviews__list">
-      {reviews.map((review) => <Review key={review.date} review={review} />)}
-    </ul>
+    <>
+      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
+      <ul className="reviews__list">
+        {reviews.map((review) => <Review key={review.date} review={review} />)}
+      </ul>
+    </>
   );
 }
 
