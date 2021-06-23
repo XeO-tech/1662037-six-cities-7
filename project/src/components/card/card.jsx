@@ -45,15 +45,9 @@ function Card(props) {
 }
 
 Card.propTypes = {
-  offer: cardProp,
+  offer: cardProp.offer,
   onListItemHover: PropTypes.func,
-  setting: PropTypes.shape({
-    ARTICLE_CLASS: PropTypes.string.isRequired,
-    MAIN_DIV_CLASS: PropTypes.string.isRequired,
-    INFO_DIV_CLASS: PropTypes.string.isRequired,
-    IMAGE_WIDTH: PropTypes.number.isRequired,
-    IMAGE_HEIGHT: PropTypes.number.isRequired,
-  }),
+  setting: cardProp.setting,
 };
 
 export default Card;

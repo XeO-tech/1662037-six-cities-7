@@ -185,7 +185,7 @@ Room.propTypes = {
       id: PropTypes.string.isRequired,
     }),
   }),
-  offers: PropTypes.arrayOf(cardProp),
+  offers: PropTypes.arrayOf(cardProp.offer),
   reviews: PropTypes.arrayOf(reviewProp),
 };
 

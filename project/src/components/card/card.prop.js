@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
-export const cardProp =
-  PropTypes.shape({
+export const cardProp = {
+  offer: PropTypes.shape({
     bedrooms: PropTypes.number.isRequired,
     city: PropTypes.shape({
       location: PropTypes.shape({
@@ -34,4 +34,13 @@ export const cardProp =
     rating: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-  }).isRequired;
+  }).isRequired,
+  setting: PropTypes.shape({
+    ARTICLE_CLASS: PropTypes.string.isRequired,
+    MAIN_DIV_CLASS: PropTypes.string.isRequired,
+    INFO_DIV_CLASS: PropTypes.string.isRequired,
+    IMAGE_WIDTH: PropTypes.string.isRequired,
+    IMAGE_HEIGHT: PropTypes.string.isRequired,
+  }).isRequired,
+};
+

@@ -38,6 +38,7 @@ function Favorites(props) {
               <OffersList
                 offers={favoriteOffers.filter((offer) => offer.city.name === location)}
                 setting={CardSetting.favoritesPage}
+                onListItemHover={() => false}
               />
             </div>
           </li>
@@ -91,7 +92,7 @@ function Favorites(props) {
 }
 
 Favorites.propTypes = {
-  offers: PropTypes.arrayOf(cardProp),
+  offers: PropTypes.arrayOf(cardProp.offer),
 };
 
 export default Favorites;

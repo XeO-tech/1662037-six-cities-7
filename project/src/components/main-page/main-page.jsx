@@ -138,7 +138,7 @@ function MainPage(props) {
 }
 
 MainPage.propTypes = {
-  offers: PropTypes.arrayOf(cardProp),
+  offers: PropTypes.arrayOf(cardProp.offer),
 };
 
 export default MainPage;

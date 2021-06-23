@@ -21,15 +21,9 @@ function OffersList(props) {
 }
 
 OffersList.propTypes = {
-  offers: PropTypes.arrayOf(cardProp),
+  offers: PropTypes.arrayOf(cardProp.offer),
   onListItemHover: PropTypes.func,
-  setting: PropTypes.shape({
-    ARTICLE_CLASS: PropTypes.string.isRequired,
-    MAIN_DIV_CLASS: PropTypes.string.isRequired,
-    INFO_DIV_CLASS: PropTypes.string.isRequired,
-    IMAGE_WIDTH: PropTypes.number.isRequired,
-    IMAGE_HEIGHT: PropTypes.number.isRequired,
-  }),
+  setting: PropTypes.shape(cardProp.setting),
 };
 
 export default OffersList;

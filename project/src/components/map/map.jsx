@@ -43,7 +43,7 @@ function Map(props) {
 }
 
 Map.propTypes = {
-  offers: PropTypes.arrayOf(cardProp),
+  offers: PropTypes.arrayOf(cardProp.offer),
   activeCardId: PropTypes.number,
 };
 

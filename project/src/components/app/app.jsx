@@ -39,7 +39,7 @@ function App(props) {
 
 App.propTypes = {
   offersNumber: PropTypes.number.isRequired,
-  offers: PropTypes.arrayOf(cardProp),
+  offers: PropTypes.arrayOf(cardProp.offer),
   reviews: PropTypes.arrayOf(reviewProp),
 };
 
