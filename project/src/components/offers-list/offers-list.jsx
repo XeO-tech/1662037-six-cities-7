@@ -5,17 +5,16 @@ import PropTypes from 'prop-types';
 
 
 function OffersList(props) {
-  const {offers, isFavoritePage, onListItemHover} = props;
+  const {offers, setting, onListItemHover} = props;
 
   return (
     <>
       {offers.map((offer) => (
         <Card
           onListItemHover = {() => onListItemHover(offer.id)}
-
+          setting={setting}
           key={offer.id}
           offer={offer}
-          isFavoritePage = {isFavoritePage}
         />))}
     </>
   );
@@ -24,7 +23,13 @@ function OffersList(props) {
 OffersList.propTypes = {
   offers: PropTypes.arrayOf(cardProp),
   onListItemHover: PropTypes.func,
-  isFavoritePage: PropTypes.bool.isRequired,
+  setting: PropTypes.shape({
+    ARTICLE_CLASS: PropTypes.string.isRequired,
+    MAIN_DIV_CLASS: PropTypes.string.isRequired,
+    INFO_DIV_CLASS: PropTypes.string.isRequired,
+    IMAGE_WIDTH: PropTypes.number.isRequired,
+    IMAGE_HEIGHT: PropTypes.number.isRequired,
+  }),
 };
 
 export default OffersList;

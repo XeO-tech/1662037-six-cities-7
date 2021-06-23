@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { cardProp } from '../card/card.prop';
-import Card from '../card/card';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
+import OffersList from '../offers-list/offers-list';
+import { CardSetting } from '../../const';
 
 function Favorites(props) {
   const {offers} = props;
@@ -34,15 +35,10 @@ function Favorites(props) {
               </div>
             </div>
             <div className="favorites__places">
-              {favoriteOffers
-                .filter((offer) => offer.city.name === location)
-                .map((offer) => (
-                  <Card
-                    key = {offer.id}
-                    offer = {offer}
-                    isFavoritePage
-                  />
-                ))}
+              <OffersList
+                offers={favoriteOffers.filter((offer) => offer.city.name === location)}
+                setting={CardSetting.favoritesPage}
+              />
             </div>
           </li>
         ))}

@@ -4,26 +4,8 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { defineRatingWidth } from '../../utils';
 
-const Setting = {
-  favoritesPage: {
-    ARTICLE_CLASS: 'favorites__card place-card',
-    MAIN_DIV_CLASS: 'favorites__image-wrapper place-card__image-wrapper',
-    INFO_DIV_CLASS: 'favorites__card-info place-card__info',
-    IMAGE_WIDTH: '150',
-    IMAGE_HEIGHT: '110',
-  },
-  mainPage: {
-    ARTICLE_CLASS: 'cities__place-card place-card',
-    MAIN_DIV_CLASS: 'cities__image-wrapper place-card__image-wrapper',
-    INFO_DIV_CLASS: 'place-card__info',
-    IMAGE_WIDTH: '260',
-    IMAGE_HEIGHT: '200',
-  },
-};
-
 function Card(props) {
-  const {offer, isFavoritePage, onListItemHover} = props;
-  const setting = isFavoritePage ? Setting.favoritesPage : Setting.mainPage;
+  const {offer, onListItemHover, setting} = props;
 
   return (
     <article
@@ -64,8 +46,14 @@ function Card(props) {
 
 Card.propTypes = {
   offer: cardProp,
-  isFavoritePage: PropTypes.bool.isRequired,
   onListItemHover: PropTypes.func,
+  setting: PropTypes.shape({
+    ARTICLE_CLASS: PropTypes.string.isRequired,
+    MAIN_DIV_CLASS: PropTypes.string.isRequired,
+    INFO_DIV_CLASS: PropTypes.string.isRequired,
+    IMAGE_WIDTH: PropTypes.number.isRequired,
+    IMAGE_HEIGHT: PropTypes.number.isRequired,
+  }),
 };
 
 export default Card;

@@ -5,6 +5,7 @@ import { cardProp } from '../card/card.prop';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import Map from '../map/map';
+import { CardSetting } from '../../const';
 
 function MainPage(props) {
   const {offers} = props;
@@ -50,7 +51,7 @@ function MainPage(props) {
         <div className="cities__places-list places__list tabs__content">
           <OffersList
             offers={offers}
-            isFavoritePage={false}
+            setting={CardSetting.mainPage}
             onListItemHover = {onListItemHover}
           />
         </div>
