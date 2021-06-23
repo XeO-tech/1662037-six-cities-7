@@ -2,12 +2,12 @@ import React from 'react';
 import CommentForm from '../comment-form/comment-form';
 import NotFound from '../not-found/not-found';
 import { defineRatingWidth } from '../../utils';
-import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { cardProp } from '../card/card.prop';
-import { reviewProp } from './review.prop';
+import { reviewProp } from '../review/review.prop';
+import ReviewsList from '../review-list/review-list';
 
 const roomTypeAlias = {
   apartment: 'Apartment',
@@ -148,32 +148,7 @@ function Room(props) {
               </div>
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{offerReviews.length}</span></h2>
-                <ul className="reviews__list">
-                  {offerReviews.map((review) => (
-                    <li key={review.date} className="reviews__item">
-                      <div className="reviews__user user">
-                        <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                          <img className="reviews__avatar user__avatar" src={review.user.avatarUrl} width="54" height="54" alt="Reviews avatar" />
-                        </div>
-                        <span className="reviews__user-name">
-                          {review.user.name}
-                        </span>
-                      </div>
-                      <div className="reviews__info">
-                        <div className="reviews__rating rating">
-                          <div className="reviews__stars rating__stars">
-                            <span style={{width: defineRatingWidth(review.rating)}}></span>
-                            <span className="visually-hidden">Rating</span>
-                          </div>
-                        </div>
-                        <p className="reviews__text">
-                          {review.comment}
-                        </p>
-                        <time className="reviews__time" dateTime={dayjs(review.date).format('YYYY-MM-DD')}>{dayjs(review.date).format('MMMM DD')}</time>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+                <ReviewsList reviews={offerReviews} />
                 <CommentForm />
               </section>
             </div>
