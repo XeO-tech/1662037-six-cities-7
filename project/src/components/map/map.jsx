@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { cardProp } from '../card/card.prop';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import useMap from './useMap';
+import useMap from '../../hooks/map/useMap';
 
 function Map(props) {
   const {offers, activeCardId} = props;
