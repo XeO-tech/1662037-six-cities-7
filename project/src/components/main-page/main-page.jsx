@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import Map from '../map/map';
 import { CardSetting } from '../../const';
+import { cities } from '../../const';
+import CitiesList from '../cities_list/cities-list';
+
 
 function MainPage(props) {
   const {offers} = props;
@@ -94,40 +97,7 @@ function MainPage(props) {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="foo">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="foo">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="foo">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active" href="foo">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="foo">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="foo">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
-          </section>
+          <CitiesList cities={cities} />
         </div>
         <div className="cities">
           {offers.length === 0 ? emptyPage : pageWithCards}
