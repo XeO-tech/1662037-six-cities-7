@@ -1,9 +1,9 @@
 import { ActionType } from './action';
 import { offers } from '../mocks/offers';
-import { defaultCity } from '../const';
+import { cities } from '../const';
 
 const initialState = {
-  city: defaultCity,
+  city: cities[0],
   offers,
 };
 

@@ -14,15 +14,6 @@ export const roomTypeAlias = {
   hotel: 'Hotel',
 };
 
-export const defaultCity = {
-  location: {
-    latitude: 52.370216,
-    longitude: 4.895168,
-    zoom: 10,
-  },
-  name: 'Amsterdam',
-};
-
 export const CardSetting = {
   favoritesPage: {
     ARTICLE_CLASS: 'favorites__card place-card',
