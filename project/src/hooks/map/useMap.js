@@ -2,16 +2,19 @@ import {useEffect, useState} from 'react';
 import leaflet from 'leaflet';
 
 function useMap(mapRef, city) {
-  const [map, setMap] = useState(null);
+  const [map, setMap] = useState({instance: null, markerLayer: null});
 
   useEffect(() => {
-    if (mapRef.current !== null && map === null) {
+    const markerLayer = leaflet.layerGroup();
+
+    if (mapRef.current !== null && map.instance === null) {
       const instance = leaflet.map(mapRef.current, {
         center: {
           lat: city.location.latitude,
           lng: city.location.longitude,
         },
         zoom: city.location.zoom,
+        layers: [markerLayer],
       });
 
       leaflet
@@ -23,7 +26,18 @@ function useMap(mapRef, city) {
         )
         .addTo(instance);
 
-      setMap(instance);
+      setMap({instance, markerLayer});
+    }
+
+    if (map.instance !== null) {
+      map.markerLayer.clearLayers();
+
+      map.instance.setView(
+        {
+          lat: city.location.latitude,
+          lng: city.location.longitude,
+        },
+        city.location.zoom);
     }
   }, [mapRef, map, city]);
 

@@ -39,8 +39,8 @@ export const offers = [
     bedrooms: 3,
     city: {
       location: {
-        latitude: 52.370216,
-        longitude: 4.895168,
+        latitude: 48.853416,
+        longitude: 2.334011,
         zoom: 10,
       },
       name: 'Paris',
@@ -58,8 +58,8 @@ export const offers = [
     'is_favorite': true,
     'is_premium': false,
     location: {
-      latitude: 52.3909553943508,
-      longitude: 4.85309666406198,
+      latitude: 48.853416,
+      longitude: 2.334011,
       zoom: 8,
     },
     'max_adults': 4,

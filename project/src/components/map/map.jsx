@@ -23,7 +23,7 @@ function Map(props) {
   });
 
   useEffect(() => {
-    if (map) {
+    if (map.instance) {
       offers.forEach((offer) => {
         leaflet
           .marker({
@@ -32,7 +32,7 @@ function Map(props) {
           }, {
             icon: (offer.id === activeCardId) ? activeIcon : icon,
           })
-          .addTo(map);
+          .addTo(map.markerLayer);
       });
     }
   }, [map, offers, icon, activeIcon, activeCardId]);
