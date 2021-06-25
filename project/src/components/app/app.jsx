@@ -19,7 +19,6 @@ function App(props) {
         <Route exact path={AppRoute.ROOT}>
           <MainPage
             offersNumber = {offersNumber}
-            offers = {offers}
           />
         </Route>
         <Route exact path={AppRoute.LOGIN}>

@@ -8,7 +8,7 @@ import Map from '../map/map';
 import { CardSetting } from '../../const';
 import { cities } from '../../const';
 import CitiesList from '../cities_list/cities-list';
-
+import { connect } from 'react-redux';
 
 function MainPage(props) {
   const {offers} = props;
@@ -111,4 +111,9 @@ MainPage.propTypes = {
   offers: PropTypes.arrayOf(cardProp.offer),
 };
 
-export default MainPage;
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+});
+
+export {MainPage};
+export default connect(mapStateToProps, null)(MainPage);
