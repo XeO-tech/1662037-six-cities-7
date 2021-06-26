@@ -36,7 +36,7 @@ export const offers = [
     type: 'apartment',
   },
   {
-    bedrooms: 3,
+    bedrooms: 2,
     city: {
       location: {
         latitude: 48.853416,
@@ -70,7 +70,7 @@ export const offers = [
     type: 'apartment',
   },
   {
-    bedrooms: 2,
+    bedrooms: 5,
     city: {
       location: {
         latitude: 52.370216,
@@ -104,7 +104,7 @@ export const offers = [
     type: 'house',
   },
   {
-    bedrooms: 2,
+    bedrooms: 6,
     city: {
       location: {
         latitude: 52.370216,
@@ -138,7 +138,7 @@ export const offers = [
     type: 'room',
   },
   {
-    bedrooms: 2,
+    bedrooms: 7,
     city: {
       location: {
         latitude: 52.370216,

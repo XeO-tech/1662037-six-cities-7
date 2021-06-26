@@ -6,7 +6,7 @@ import { ActionCreator } from '../../store/action';
 import { cardProp } from '../card/card.prop';
 
 function OffersSorting(props) {
-  const {activeSorting, onSortingClick, sortedOffers} = props;
+  const {activeSorting, onSortingClick, defaultSortedOffers} = props;
   const sortingNames = Object.values(SortingType);
 
   return (
@@ -22,7 +22,7 @@ function OffersSorting(props) {
         {sortingNames.map((sortingName) => (
           <li
             key={sortingName}
-            onClick={() => onSortingClick(sortingName, sortedOffers)}
+            onClick={() => onSortingClick(sortingName, defaultSortedOffers)}
             className={`places__option ${activeSorting === sortingName ? 'places__option--active' : ''}`}
             tabIndex={0}
           >
@@ -37,12 +37,12 @@ function OffersSorting(props) {
 OffersSorting.propTypes = {
   activeSorting: PropTypes.string.isRequired,
   onSortingClick: PropTypes.func.isRequired,
-  sortedOffers: PropTypes.arrayOf(cardProp.offer),
+  defaultSortedOffers: PropTypes.arrayOf(cardProp.offer),
 };
 
 const mapStateToProps = (state) => ({
   activeSorting: state.activeSorting,
-  sortedOffers: state.sortedOffers,
+  defaultSortedOffers: state.defaultSortedOffers,
 });
 
 const mapDispatchToProps = (dispatch) => ({

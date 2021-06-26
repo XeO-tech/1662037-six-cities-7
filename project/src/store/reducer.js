@@ -5,11 +5,13 @@ import { adaptOfferToClient } from '../components/utils/adapter';
 import { SortingType } from '../const';
 
 const adaptedOffers = offers.map((offer) => adaptOfferToClient(offer));
+const initialStateOffers = adaptedOffers.filter((offer) => offer.city.name === cities[0]);
 
 const initialState = {
   city: cities[0],
-  filteredOffers: adaptedOffers.filter((offer) => offer.city.name === cities[0]),
-  sortedOffers: adaptedOffers.filter((offer) => offer.city.name === cities[0]),
+  filteredOffers: initialStateOffers,
+  defaultSortedOffers: initialStateOffers,
+  sortedOffers: initialStateOffers,
   activeSorting: SortingType.POPULAR,
 };
 
@@ -25,6 +27,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         filteredOffers: action.payload,
         sortedOffers: action.payload,
+        defaultSortedOffers: action.payload,
         activeSorting: SortingType.POPULAR,
       };
     case ActionType.CHANGE_SORTING:

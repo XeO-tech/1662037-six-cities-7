@@ -96,6 +96,7 @@ function MainPage(props) {
 
 MainPage.propTypes = {
   filteredOffers: PropTypes.arrayOf(cardProp.offer),
+  sortedOffers: PropTypes.arrayOf(cardProp.offer),
   activeCity: PropTypes.string.isRequired,
 };
 
