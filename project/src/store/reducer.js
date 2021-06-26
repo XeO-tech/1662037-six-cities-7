@@ -9,6 +9,7 @@ const adaptedOffers = offers.map((offer) => adaptOfferToClient(offer));
 const initialState = {
   city: cities[0],
   filteredOffers: adaptedOffers.filter((offer) => offer.city.name === cities[0]),
+  sortedOffers: adaptedOffers.filter((offer) => offer.city.name === cities[0]),
   activeSorting: SortingType.POPULAR,
 };
 
@@ -23,12 +24,14 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         filteredOffers: action.payload,
+        sortedOffers: action.payload,
+        activeSorting: SortingType.POPULAR,
       };
     case ActionType.CHANGE_SORTING:
       return {
         ...state,
         activeSorting: action.payload.newSorting,
-        filteredOffers: action.payload.sortedOffers,
+        sortedOffers: action.payload.sortedOffers,
       };
     default:
       return state;

@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import OffersSorting from '../offers-sorting/offers-sorting';
 
 function MainPage(props) {
-  const {filteredOffers, activeCity} = props;
+  const {filteredOffers, activeCity, sortedOffers} = props;
 
   const [activeCardId, setActiveCardId] = useState(null);
 
@@ -40,7 +40,7 @@ function MainPage(props) {
         <OffersSorting offers={filteredOffers}/>
         <div className="cities__places-list places__list tabs__content">
           <OffersList
-            offers={filteredOffers}
+            offers={sortedOffers}
             setting={CardSetting.mainPage}
             onListItemHover = {onListItemHover}
           />
@@ -101,6 +101,7 @@ MainPage.propTypes = {
 
 const mapStateToProps = (state) => ({
   filteredOffers: state.filteredOffers,
+  sortedOffers: state.sortedOffers,
   activeCity: state.city,
 });
 
