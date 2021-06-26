@@ -14,6 +14,13 @@ export const roomTypeAlias = {
   hotel: 'Hotel',
 };
 
+export const SortingType = {
+  POPULAR: 'Popular',
+  PRICE_ASCENDING: 'Price: low to high',
+  PRICE_DESCENDING: 'Price: high to low',
+  RATING: 'Top rated first',
+};
+
 export const CardSetting = {
   favoritesPage: {
     ARTICLE_CLASS: 'favorites__card place-card',
