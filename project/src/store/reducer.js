@@ -8,7 +8,7 @@ const adaptedOffers = offers.map((offer) => adaptOfferToClient(offer));
 
 const initialState = {
   city: cities[0],
-  offers: adaptedOffers.filter((offer) => offer.city.name === cities[0]),
+  filteredOffers: adaptedOffers.filter((offer) => offer.city.name === cities[0]),
   activeSorting: SortingType.POPULAR,
 };
 

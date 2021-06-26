@@ -11,15 +11,13 @@ import { cardProp } from '../card/card.prop';
 import { reviewProp } from '../review/review.prop';
 
 function App(props) {
-  const {offersNumber, offers, reviews} = props;
+  const { offers, reviews} = props;
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.ROOT}>
-          <MainPage
-            offersNumber = {offersNumber}
-          />
+          <MainPage />
         </Route>
         <Route exact path={AppRoute.LOGIN}>
           <SignIn />
@@ -37,7 +35,6 @@ function App(props) {
 }
 
 App.propTypes = {
-  offersNumber: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(cardProp.offer),
   reviews: PropTypes.arrayOf(reviewProp),
 };

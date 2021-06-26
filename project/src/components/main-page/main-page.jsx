@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import OffersSorting from '../offers-sorting/offers-sorting';
 
 function MainPage(props) {
-  const {offers, activeCity} = props;
+  const {filteredOffers, activeCity} = props;
 
   const [activeCardId, setActiveCardId] = useState(null);
 
@@ -36,18 +36,18 @@ function MainPage(props) {
     <div className="cities__places-container container">
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
-        <b className="places__found">{offers.length} places to stay in {activeCity}</b>
+        <b className="places__found">{filteredOffers.length} places to stay in {activeCity}</b>
         <OffersSorting />
         <div className="cities__places-list places__list tabs__content">
           <OffersList
-            offers={offers}
+            offers={filteredOffers}
             setting={CardSetting.mainPage}
             onListItemHover = {onListItemHover}
           />
         </div>
       </section>
       <div className="cities__right-section">
-        <section className="cities__map map"><Map offers={offers} activeCardId={activeCardId} /></section>
+        <section className="cities__map map"><Map offers={filteredOffers} activeCardId={activeCardId} /></section>
       </div>
     </div>
   );
@@ -87,7 +87,7 @@ function MainPage(props) {
           <CitiesList cities={cities} />
         </div>
         <div className="cities">
-          {offers.length === 0 ? emptyPage : pageWithCards}
+          {filteredOffers.length === 0 ? emptyPage : pageWithCards}
         </div>
       </main>
     </div>
@@ -95,14 +95,14 @@ function MainPage(props) {
 }
 
 MainPage.propTypes = {
-  offers: PropTypes.arrayOf(cardProp.offer),
+  filteredOffers: PropTypes.arrayOf(cardProp.offer),
   activeCity: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers,
+  filteredOffers: state.filteredOffers,
   activeCity: state.city,
 });
 
-export {MainPage};
+export { MainPage };
 export default connect(mapStateToProps, null)(MainPage);
