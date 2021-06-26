@@ -1,5 +1,8 @@
 import { offers } from '../mocks/offers';
-import { adaptOfferToClient } from '../utils';
+import { adaptOfferToClient } from '../components/utils/adapter';
+import { SortingType } from '../const';
+import { sortOffersByPriceAscending, sortOffersByPriceDescending, sortOffersByRating } from '../components/utils/utils';
+
 
 const adaptedOffers = offers.map((offer) => adaptOfferToClient(offer));
 
@@ -18,8 +21,26 @@ export const ActionCreator = {
     type: ActionType.FILL_OFFERS_LIST,
     payload: adaptedOffers.filter((offer) => offer.city.name === newCity),
   }),
-  changeSorting: (newSorting) => ({
-    type: ActionType.CHANGE_SORTING,
-    payload: newSorting,
-  }),
+  changeSorting: (newSorting, offersToSort) => {
+    let sortedOffers;
+
+    switch (newSorting) {
+      case SortingType.PRICE_ASCENDING:
+        sortedOffers = sortOffersByPriceAscending(offersToSort);
+        break;
+      case SortingType.PRICE_DESCENDING:
+        sortedOffers = sortOffersByPriceDescending(offersToSort);
+        break;
+      case SortingType.RATING:
+        sortedOffers = sortOffersByRating(offersToSort);
+        break;
+      default:
+        sortedOffers = offersToSort;
+    }
+
+    return {
+      type: ActionType.CHANGE_SORTING,
+      payload: { newSorting, sortedOffers},
+    };
+  },
 };

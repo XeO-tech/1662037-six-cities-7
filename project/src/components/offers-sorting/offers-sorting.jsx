@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { SortingType } from '../../const';
 import { ActionCreator } from '../../store/action';
+import { cardProp } from '../card/card.prop';
 
 function OffersSorting(props) {
-  const {activeSorting, onSortingClick} = props;
+  const {activeSorting, onSortingClick, offers} = props;
   const sortingNames = Object.values(SortingType);
 
   return (
@@ -21,7 +22,7 @@ function OffersSorting(props) {
         {sortingNames.map((sortingName) => (
           <li
             key={sortingName}
-            onClick={() => onSortingClick(sortingName)}
+            onClick={() => onSortingClick(sortingName, offers)}
             className={`places__option ${activeSorting === sortingName ? 'places__option--active' : ''}`}
             tabIndex={0}
           >
@@ -36,6 +37,7 @@ function OffersSorting(props) {
 OffersSorting.propTypes = {
   activeSorting: PropTypes.string.isRequired,
   onSortingClick: PropTypes.func.isRequired,
+  offers: PropTypes.arrayOf(cardProp.offer),
 };
 
 const mapStateToProps = (state) => ({
@@ -43,8 +45,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onSortingClick(newSorting) {
-    dispatch(ActionCreator.changeSorting(newSorting));
+  onSortingClick(newSorting, defaultSortedOffers) {
+    dispatch(ActionCreator.changeSorting(newSorting, defaultSortedOffers));
   },
 });
 

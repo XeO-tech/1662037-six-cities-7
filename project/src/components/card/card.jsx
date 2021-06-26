@@ -2,7 +2,7 @@ import React from 'react';
 import { cardProp } from '../card/card.prop';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { defineRatingWidth } from '../../utils';
+import { defineRatingWidth } from '../utils/utils';
 
 function Card(props) {
   const {offer, onListItemHover, setting} = props;

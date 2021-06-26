@@ -37,7 +37,7 @@ function MainPage(props) {
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
         <b className="places__found">{filteredOffers.length} places to stay in {activeCity}</b>
-        <OffersSorting />
+        <OffersSorting offers={filteredOffers}/>
         <div className="cities__places-list places__list tabs__content">
           <OffersList
             offers={filteredOffers}

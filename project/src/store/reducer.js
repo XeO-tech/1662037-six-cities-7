@@ -1,7 +1,7 @@
 import { ActionType } from './action';
 import { offers } from '../mocks/offers';
 import { cities } from '../const';
-import { adaptOfferToClient } from '../utils';
+import { adaptOfferToClient } from '../components/utils/adapter';
 import { SortingType } from '../const';
 
 const adaptedOffers = offers.map((offer) => adaptOfferToClient(offer));
@@ -22,12 +22,13 @@ const reducer = (state = initialState, action) => {
     case ActionType.FILL_OFFERS_LIST:
       return {
         ...state,
-        offers: action.payload,
+        filteredOffers: action.payload,
       };
     case ActionType.CHANGE_SORTING:
       return {
         ...state,
-        activeSorting: action.payload,
+        activeSorting: action.payload.newSorting,
+        filteredOffers: action.payload.sortedOffers,
       };
     default:
       return state;
