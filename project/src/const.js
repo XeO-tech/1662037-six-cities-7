@@ -7,6 +7,20 @@ export const AppRoute = {
   ROOT: '/',
 };
 
+export const ApiRoute = {
+  HOTELS: '/hotels',
+  FAVORITE: '/favorite',
+  COMMENTS: '/commetns/:hotel_id',
+  LOGIN: '/login',
+  LOGOUT: '/logout',
+};
+
+export const AuthorizationStatus = {
+  AUTH: 'AUTH',
+  NO_AUTH: 'NO_AUTH',
+  UNKNOWN: 'UNKNOWN',
+};
+
 export const roomTypeAlias = {
   apartment: 'Apartment',
   room: 'Private Room',
