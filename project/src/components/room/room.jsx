@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import CommentForm from '../comment-form/comment-form';
 import NotFound from '../not-found/not-found';
 import { defineRatingWidth } from '../../utils/utils';
@@ -16,12 +16,6 @@ import { CardSetting } from '../../const';
 
 function Room(props) {
   const {offers, reviews} = props;
-
-  const [activeCardId, setActiveCardId] = useState(null);
-
-  const onListItemHover = (offerID) => {
-    setActiveCardId(offerID);
-  };
 
   const offer = offers.filter((offerItem) => offerItem.id === Number(props.match.params.id))[0];
 
@@ -159,7 +153,7 @@ function Room(props) {
             </div>
           </div>
           <section className="property__map map">
-            <Map offers={offersNearBy} activeCardId={activeCardId} />
+            <Map offers={offersNearBy} activeCardId={offer.id} />
           </section>
         </section>
         <div className="container">
@@ -169,7 +163,7 @@ function Room(props) {
               <OffersList
                 offers={offersNearBy}
                 setting={CardSetting.offerPage}
-                onListItemHover={onListItemHover}
+                onListItemHover={() => {}}
               />
             </div>
           </section>
