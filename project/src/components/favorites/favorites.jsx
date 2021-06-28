@@ -40,6 +40,7 @@ function Favorites(props) {
                 offers={favoriteOffers.filter((offer) => offer.city.name === location)}
                 setting={CardSetting.favoritesPage}
                 onListItemHover={() => {}}
+                onListItemOut={() => {}}
               />
             </div>
           </li>

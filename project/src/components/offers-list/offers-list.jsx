@@ -5,13 +5,14 @@ import PropTypes from 'prop-types';
 
 
 function OffersList(props) {
-  const {offers, setting, onListItemHover} = props;
-  // console.log(offers);
+  const {offers, setting, onListItemHover, onListItemOut} = props;
+
   return (
     <>
       {offers.map((offer) => (
         <Card
           onListItemHover = {() => onListItemHover(offer.id)}
+          onListItemOut = {() => onListItemOut(offer.id)}
           setting={setting}
           key={offer.id}
           offer={offer}
@@ -23,6 +24,7 @@ function OffersList(props) {
 OffersList.propTypes = {
   offers: PropTypes.arrayOf(cardProp.offer),
   onListItemHover: PropTypes.func,
+  onListItemOut: PropTypes.func,
   setting: PropTypes.shape(cardProp.setting),
 };
 
