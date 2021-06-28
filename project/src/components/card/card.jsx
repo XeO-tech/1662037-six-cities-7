@@ -6,6 +6,7 @@ import { defineRatingWidth } from '../utils/utils';
 
 function Card(props) {
   const {offer, onListItemHover, setting} = props;
+  const offerUrl = `/offer/${offer.id}`;
 
   return (
     <article
@@ -13,9 +14,9 @@ function Card(props) {
       className={setting.ARTICLE_CLASS}
     >
       <div className={setting.MAIN_DIV_CLASS}>
-        <a href="foo">
+        <Link to={offerUrl}>
           <img className="place-card__image" src={offer.previewImage} width={setting.IMAGE_WIDTH} height={setting.IMAGE_HEIGHT} alt="Place pic" />
-        </a>
+        </Link>
       </div>
       <div className={setting.INFO_DIV_CLASS}>
         <div className="place-card__price-wrapper">
@@ -37,7 +38,7 @@ function Card(props) {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${offer.id}`}>{offer.title}</Link>
+          <Link to={offerUrl}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>
