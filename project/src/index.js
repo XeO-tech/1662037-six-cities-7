@@ -9,10 +9,6 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 
-const Setting = {
-  OFFERS_NUMBER: 5,
-};
-
 const store = createStore(
   reducer,
   composeWithDevTools(),
@@ -22,7 +18,6 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <App
-        offersNumber = {Setting.OFFERS_NUMBER}
         offers = {offers.map((offer) => adaptOfferToClient(offer))}
         reviews = {reviews.map((review) => adaptReviewToClient(review))}
       />

@@ -9,6 +9,7 @@ import Room from '../room/room';
 import NotFound from '../not-found/not-found';
 import { cardProp } from '../card/card.prop';
 import { reviewProp } from '../review/review.prop';
+import { connect } from 'react-redux';
 
 function App(props) {
   const { offers, reviews} = props;
@@ -39,4 +40,10 @@ App.propTypes = {
   reviews: PropTypes.arrayOf(reviewProp),
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+  reviews: state.reviews,
+});
+
+export { App };
+export default connect(mapStateToProps, null)(App);

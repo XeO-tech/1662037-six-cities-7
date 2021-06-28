@@ -1,14 +1,18 @@
 import { ActionType } from './action';
 import { offers } from '../mocks/offers';
+import { reviews } from '../mocks/reviews';
 import { cities } from '../const';
-import { adaptOfferToClient } from '../components/utils/adapter';
+import { adaptOfferToClient, adaptReviewToClient } from '../components/utils/adapter';
 import { SortingType } from '../const';
 
 const adaptedOffers = offers.map((offer) => adaptOfferToClient(offer));
+const adaptedReviews = reviews.map((review) => adaptReviewToClient(review));
 const initialStateOffers = adaptedOffers.filter((offer) => offer.city.name === cities[0]);
 
 const initialState = {
   city: cities[0],
+  offers: adaptedOffers,
+  reviews: adaptedReviews,
   filteredOffers: initialStateOffers,
   defaultSortedOffers: initialStateOffers,
   sortedOffers: initialStateOffers,
