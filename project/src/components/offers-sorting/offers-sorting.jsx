@@ -1,12 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { SortingType } from '../../const';
-import { ActionCreator } from '../../store/action';
-import { cardProp } from '../card/card.prop';
 
 function OffersSorting(props) {
-  const {activeSorting, onSortingClick, defaultSortedOffers} = props;
+  const {activeSorting, onSortingChange} = props;
   const sortingNames = Object.values(SortingType);
 
   return (
@@ -22,7 +19,7 @@ function OffersSorting(props) {
         {sortingNames.map((sortingName) => (
           <li
             key={sortingName}
-            onClick={() => onSortingClick(sortingName, defaultSortedOffers)}
+            onClick={() => onSortingChange(sortingName)}
             className={`places__option ${activeSorting === sortingName ? 'places__option--active' : ''}`}
             tabIndex={0}
           >
@@ -36,20 +33,7 @@ function OffersSorting(props) {
 
 OffersSorting.propTypes = {
   activeSorting: PropTypes.string.isRequired,
-  onSortingClick: PropTypes.func.isRequired,
-  defaultSortedOffers: PropTypes.arrayOf(cardProp.offer),
+  onSortingChange: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  activeSorting: state.activeSorting,
-  defaultSortedOffers: state.defaultSortedOffers,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onSortingClick(newSorting, defaultSortedOffers) {
-    dispatch(ActionCreator.changeSorting(newSorting, defaultSortedOffers));
-  },
-});
-
-export { OffersSorting };
-export default connect(mapStateToProps, mapDispatchToProps)(OffersSorting);
+export default OffersSorting;

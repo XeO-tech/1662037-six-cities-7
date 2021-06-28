@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 function OffersList(props) {
   const {offers, setting, onListItemHover} = props;
-
+  // console.log(offers);
   return (
     <>
       {offers.map((offer) => (

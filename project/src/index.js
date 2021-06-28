@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './components/app/app';
 import { offers } from './mocks/offers';
 import { reviews } from './mocks/reviews';
-import { adaptOfferToClient, adaptReviewToClient } from './components/utils/adapter';
+import { adaptOfferToClient, adaptReviewToClient } from './utils/adapter';
 import { reducer } from './store/reducer';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';

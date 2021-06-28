@@ -1,7 +1,7 @@
 import React from 'react';
 import dayjs from 'dayjs';
 import { reviewProp } from '../review/review.prop';
-import { defineRatingWidth } from '../utils/utils';
+import { defineRatingWidth } from '../../utils/utils';
 
 function Review(props) {
   const {review} = props;

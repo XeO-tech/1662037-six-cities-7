@@ -10,16 +10,38 @@ import { cities } from '../../const';
 import CitiesList from '../cities_list/cities-list';
 import { connect } from 'react-redux';
 import OffersSorting from '../offers-sorting/offers-sorting';
-import { getFilteredOffers } from '../utils/utils';
+import { getFilteredOffers } from '../../utils/utils';
+import { SortingType } from '../../const';
+import { sortOffersByPriceAscending, sortOffersByPriceDescending, sortOffersByRating } from '../../utils/utils';
 
 function MainPage(props) {
-  const {filteredOffers, activeCity, sortedOffers} = props;
+  const {filteredOffers, activeCity} = props;
 
   const [activeCardId, setActiveCardId] = useState(null);
+  const [activeSorting, setActiveSorting] = useState(SortingType.POPULAR);
 
   const onListItemHover = (offerID) => {
     setActiveCardId(offerID);
   };
+
+  const onSortingChange = (newSortingType) => setActiveSorting(newSortingType);
+
+  let sortedOffers;
+
+  switch (activeSorting) {
+    case SortingType.PRICE_ASCENDING:
+      sortedOffers = sortOffersByPriceAscending(filteredOffers);
+      break;
+    case SortingType.PRICE_DESCENDING:
+      sortedOffers = sortOffersByPriceDescending(filteredOffers);
+      break;
+    case SortingType.RATING:
+      sortedOffers = sortOffersByRating(filteredOffers);
+      break;
+    default:
+      sortedOffers = [...filteredOffers];
+  }
+
 
   const emptyPage = (
     <div className="cities__places-container cities__places-container--empty container">
@@ -38,7 +60,7 @@ function MainPage(props) {
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
         <b className="places__found">{filteredOffers.length} places to stay in {activeCity}</b>
-        <OffersSorting offers={filteredOffers}/>
+        <OffersSorting offers={filteredOffers} activeSorting={activeSorting} onSortingChange={onSortingChange}/>
         <div className="cities__places-list places__list tabs__content">
           <OffersList
             offers={sortedOffers}
@@ -97,13 +119,11 @@ function MainPage(props) {
 
 MainPage.propTypes = {
   filteredOffers: PropTypes.arrayOf(cardProp.offer),
-  sortedOffers: PropTypes.arrayOf(cardProp.offer),
   activeCity: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   filteredOffers: getFilteredOffers(state.offers, state.city),
-  sortedOffers: state.sortedOffers,
   activeCity: state.city,
 });
 

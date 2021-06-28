@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import CommentForm from '../comment-form/comment-form';
 import NotFound from '../not-found/not-found';
-import { defineRatingWidth } from '../utils/utils';
+import { defineRatingWidth } from '../../utils/utils';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
