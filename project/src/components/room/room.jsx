@@ -22,7 +22,6 @@ function Room(props) {
   if (!offer) {
     return <NotFound />;
   }
-
   const offersNearBy = offers.slice(offers.length - 4, offers.length-1);
 
   const offerReviews = reviews
@@ -153,7 +152,7 @@ function Room(props) {
             </div>
           </div>
           <section className="property__map map">
-            <Map offers={offersNearBy} activeCardId={offer.id} />
+            <Map offers={offersNearBy} activeCardId={offer.id} currentCard={offer}/>
           </section>
         </section>
         <div className="container">

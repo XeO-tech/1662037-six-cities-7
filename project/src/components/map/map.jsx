@@ -6,9 +6,9 @@ import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/map/useMap';
 
 function Map(props) {
-  const {offers, activeCardId} = props;
+  const {offers, activeCardId, currentCard} = props;
   const mapRef = useRef(null);
-  const map = useMap(mapRef, offers[0].city);
+  const map = useMap(mapRef, currentCard ? currentCard : offers[0].city);
 
   const icon = leaflet.icon({
     iconUrl: 'img/pin.svg',
@@ -24,7 +24,10 @@ function Map(props) {
 
   useEffect(() => {
     if (map.instance) {
-      offers.forEach((offer) => {
+      let allOffers;
+      currentCard ? allOffers = [...offers, currentCard] : allOffers = [...offers];
+
+      allOffers.forEach((offer) => {
         leaflet
           .marker({
             lat: offer.location.latitude,
@@ -35,7 +38,7 @@ function Map(props) {
           .addTo(map.markerLayer);
       });
     }
-  }, [map, offers, icon, activeIcon, activeCardId]);
+  }, [map, offers, icon, activeIcon, activeCardId, currentCard]);
 
   return (
     <div style={{height: '100%'}} ref={mapRef} />
@@ -45,6 +48,7 @@ function Map(props) {
 Map.propTypes = {
   offers: PropTypes.arrayOf(cardProp.offer),
   activeCardId: PropTypes.number,
+  currentCard: cardProp.offer,
 };
 
 export default Map;
