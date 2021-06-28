@@ -24,7 +24,7 @@ function App(props) {
           <SignIn />
         </Route>
         <Route exact path={AppRoute.FAVORITES}>
-          <Favorites offers = {offers}/>
+          <Favorites />
         </Route>
         <Route exact path={AppRoute.ROOM} render={(properties) => <Room {...properties} offers={offers} reviews={reviews} /> } />
         <Route>

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import OffersList from '../offers-list/offers-list';
 import { CardSetting } from '../../const';
+import { connect } from 'react-redux';
 
 function Favorites(props) {
   const {offers} = props;
@@ -95,4 +96,9 @@ Favorites.propTypes = {
   offers: PropTypes.arrayOf(cardProp.offer),
 };
 
-export default Favorites;
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+});
+
+export { Favorites };
+export default connect(mapStateToProps, null)(Favorites);
