@@ -13,7 +13,6 @@ const initialState = {
   city: cities[0],
   offers: adaptedOffers,
   reviews: adaptedReviews,
-  filteredOffers: initialStateOffers,
   defaultSortedOffers: initialStateOffers,
   sortedOffers: initialStateOffers,
   activeSorting: SortingType.POPULAR,
@@ -29,7 +28,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.FILL_OFFERS_LIST:
       return {
         ...state,
-        filteredOffers: action.payload,
         sortedOffers: action.payload,
         defaultSortedOffers: action.payload,
         activeSorting: SortingType.POPULAR,
