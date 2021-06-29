@@ -13,9 +13,10 @@ import OffersSorting from '../offers-sorting/offers-sorting';
 import { getFilteredOffers } from '../../utils/utils';
 import { sortOffers } from '../../utils/utils';
 import { SortingType } from '../../const';
+import { AuthorizationStatus } from '../../const';
 
 function MainPage(props) {
-  const {filteredOffers, activeCity} = props;
+  const {filteredOffers, activeCity, authorizationStatus} = props;
 
   const [activeCardId, setActiveCardId] = useState(null);
   const [activeSorting, setActiveSorting] = useState(SortingType.POPULAR);
@@ -66,6 +67,33 @@ function MainPage(props) {
     </div>
   );
 
+  const authorizedUserLink = (
+    <>
+      <li className="header__nav-item user">
+        <Link to={AppRoute.FAVORITES} className="header__nav-link header__nav-link--profile">
+          <div className="header__avatar-wrapper user__avatar-wrapper">
+          </div>
+          <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+        </Link>
+      </li>
+      <li className="header__nav-item">
+        <Link to={AppRoute.LOGOUT} className="header__nav-link">
+          <span className="header__signout">Sign out</span>
+        </Link>
+      </li>
+    </>
+  );
+
+  const unAthorizedUserLink = (
+    <li className="header__nav-item user">
+      <Link to={AppRoute.LOGIN} className="header__nav-link header__nav-link--profile">
+        <div className="header__avatar-wrapper user__avatar-wrapper">
+        </div>
+        <span className="header__login">Sign in</span>
+      </Link>
+    </li>
+  );
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -78,18 +106,7 @@ function MainPage(props) {
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <Link to={AppRoute.FAVORITES} className="header__nav-link header__nav-link--profile">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </Link>
-                </li>
-                <li className="header__nav-item">
-                  <a className="header__nav-link" href="foo">
-                    <span className="header__signout">Sign out</span>
-                  </a>
-                </li>
+                { authorizationStatus === AuthorizationStatus.AUTH ? authorizedUserLink : unAthorizedUserLink}
               </ul>
             </nav>
           </div>
@@ -111,11 +128,13 @@ function MainPage(props) {
 MainPage.propTypes = {
   filteredOffers: PropTypes.arrayOf(cardProp.offer).isRequired,
   activeCity: PropTypes.string.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   filteredOffers: getFilteredOffers(state.offers, state.city),
   activeCity: state.city,
+  authorizationStatus: state.authorizationStatus,
 });
 
 export { MainPage };

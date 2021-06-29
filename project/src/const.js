@@ -2,6 +2,7 @@ export const cities = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', '
 
 export const AppRoute = {
   LOGIN: '/login',
+  LOGOUT: '/logout',
   FAVORITES: '/favorites',
   ROOM: '/offer/:id',
   ROOT: '/',
