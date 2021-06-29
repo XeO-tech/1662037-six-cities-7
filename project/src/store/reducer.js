@@ -8,6 +8,7 @@ const initialState = {
   offers: [],
   reviews: [],
   authorizationStatus: AuthorizationStatus.UNKNOWN,
+  isDataLoaded: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -21,6 +22,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         offers: action.payload.map((offer) => adaptOfferToClient(offer)),
+        isDataLoaded: true,
       };
     case ActionType.LOAD_REVIEWS:
       return {

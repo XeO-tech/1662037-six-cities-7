@@ -7,11 +7,15 @@ import SignIn from '../sign-in/sign-in';
 import Favorites from '../favorites/favorites';
 import Room from '../room/room';
 import NotFound from '../not-found/not-found';
-import { cardProp } from '../card/card.prop';
-import { reviewProp } from '../review/review.prop';
 import { connect } from 'react-redux';
+import LoadingSpinner from '../loading-spinner/loading-spinner';
 
 function App(props) {
+  const {isDataLoaded} = props;
+
+  if (!isDataLoaded) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <BrowserRouter>
@@ -35,13 +39,11 @@ function App(props) {
 }
 
 App.propTypes = {
-  offers: PropTypes.arrayOf(cardProp.offer).isRequired,
-  reviews: PropTypes.arrayOf(reviewProp),
+  isDataLoaded: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  offers: state.offers,
-  reviews: state.reviews,
+  isDataLoaded: state.isDataLoaded,
 });
 
 export { App };
