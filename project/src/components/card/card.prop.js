@@ -34,13 +34,13 @@ export const cardProp = {
     rating: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-  }).isRequired,
+  }),
   setting: PropTypes.shape({
     ARTICLE_CLASS: PropTypes.string.isRequired,
     MAIN_DIV_CLASS: PropTypes.string.isRequired,
     INFO_DIV_CLASS: PropTypes.string.isRequired,
     IMAGE_WIDTH: PropTypes.string.isRequired,
     IMAGE_HEIGHT: PropTypes.string.isRequired,
-  }).isRequired,
+  }),
 };
 

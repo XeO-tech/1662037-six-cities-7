@@ -22,10 +22,10 @@ function OffersList(props) {
 }
 
 OffersList.propTypes = {
-  offers: PropTypes.arrayOf(cardProp.offer),
+  offers: PropTypes.arrayOf(cardProp.offer).isRequired,
   onListItemHover: PropTypes.func,
   onListItemOut: PropTypes.func,
-  setting: PropTypes.shape(cardProp.setting),
+  setting: cardProp.setting.isRequired,
 };
 
 export default OffersList;

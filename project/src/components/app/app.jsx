@@ -12,7 +12,6 @@ import { reviewProp } from '../review/review.prop';
 import { connect } from 'react-redux';
 
 function App(props) {
-  const { offers, reviews} = props;
 
   return (
     <BrowserRouter>
@@ -26,7 +25,7 @@ function App(props) {
         <Route exact path={AppRoute.FAVORITES}>
           <Favorites />
         </Route>
-        <Route exact path={AppRoute.ROOM} render={(properties) => <Room {...properties} offers={offers} reviews={reviews} /> } />
+        <Route exact path={AppRoute.ROOM} render={(properties) => <Room {...properties} /> } />
         <Route>
           <NotFound />
         </Route>
@@ -36,7 +35,7 @@ function App(props) {
 }
 
 App.propTypes = {
-  offers: PropTypes.arrayOf(cardProp.offer),
+  offers: PropTypes.arrayOf(cardProp.offer).isRequired,
   reviews: PropTypes.arrayOf(reviewProp),
 };
 

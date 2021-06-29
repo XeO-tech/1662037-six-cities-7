@@ -6,16 +6,18 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { cardProp } from '../card/card.prop';
-import { reviewProp } from '../review/review.prop';
+// import { reviewProp } from '../review/review.prop';
 import ReviewsList from '../review-list/review-list';
 import Map from '../map/map';
 import OffersList from '../offers-list/offers-list';
 import { roomTypeAlias } from '../../const';
 import { CardSetting } from '../../const';
+import { connect } from 'react-redux';
 
 
 function Room(props) {
-  const {offers, reviews} = props;
+  const {offers} = props;
+  const reviews = [];
 
   const offer = offers.filter((offerItem) => offerItem.id === Number(props.match.params.id))[0];
 
@@ -179,8 +181,13 @@ Room.propTypes = {
       id: PropTypes.string.isRequired,
     }),
   }),
-  offers: PropTypes.arrayOf(cardProp.offer),
-  reviews: PropTypes.arrayOf(reviewProp),
+  offers: PropTypes.arrayOf(cardProp.offer).isRequired,
 };
 
-export default Room;
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+
+});
+
+export { Room };
+export default connect(mapStateToProps, null)(Room);

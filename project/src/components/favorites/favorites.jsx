@@ -94,7 +94,7 @@ function Favorites(props) {
 }
 
 Favorites.propTypes = {
-  offers: PropTypes.arrayOf(cardProp.offer),
+  offers: PropTypes.arrayOf(cardProp.offer).isRequired,
 };
 
 const mapStateToProps = (state) => ({

@@ -7,7 +7,7 @@ const REQUEST_TIMEOUT = 5000;
 //   UNAUTHORIZED: 401,
 // };
 
-const token = localStorage.getItem('token') ?? '';
+// const token = localStorage.getItem('token') ?? '';
 
 // export const createAPI = (onUnauthorized) => {
 
@@ -15,9 +15,9 @@ export const createAPI = () => {
   const api = axios.create({
     baseURL: BACKEND_URL,
     timeout: REQUEST_TIMEOUT,
-    headers: {
-      'x-token': token,
-    },
+    // headers: {
+    //   'x-token': token,
+    // },
   });
 
   const onSuccess = (response) => response;

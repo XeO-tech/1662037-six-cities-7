@@ -47,10 +47,10 @@ function Card(props) {
 }
 
 Card.propTypes = {
-  offer: cardProp.offer,
+  offer: cardProp.offer.isRequired,
   onListItemHover: PropTypes.func,
   onListItemOut: PropTypes.func,
-  setting: cardProp.setting,
+  setting: cardProp.setting.isRequired,
 };
 
 export default Card;

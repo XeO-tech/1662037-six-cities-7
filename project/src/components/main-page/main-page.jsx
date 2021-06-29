@@ -123,7 +123,7 @@ function MainPage(props) {
 }
 
 MainPage.propTypes = {
-  filteredOffers: PropTypes.arrayOf(cardProp.offer),
+  filteredOffers: PropTypes.arrayOf(cardProp.offer).isRequired,
   activeCity: PropTypes.string.isRequired,
 };
 

@@ -6,7 +6,3 @@ export const fetchOffersList = () => (dispatch, _getState, api) => (
     .then(({data}) => dispatch(ActionCreator.loadOffers(data)))
 );
 
-export const fetchReviewsList = (reviewID) => (dispatch, _getState, api) => (
-  api.get(`${ApiRoute.COMMENTS}/${reviewID}`)
-    .then(({data}) => dispatch(ActionCreator.loadReviews(data)))
-);
