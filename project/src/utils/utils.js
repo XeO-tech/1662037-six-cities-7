@@ -1,4 +1,5 @@
 import { SortingType } from '../const';
+import { AuthorizationStatus } from '../const';
 
 export const defineRatingWidth = (rating) => `${Math.round(rating)*20}%`;
 
@@ -31,3 +32,6 @@ export const sortOffers = (activeSorting, offers) => {
   }
   return sortedOffers;
 };
+
+export const isAuthUnknown = (authorizationStatus) =>
+  authorizationStatus === AuthorizationStatus.UNKNOWN;

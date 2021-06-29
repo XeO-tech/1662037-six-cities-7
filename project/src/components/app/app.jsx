@@ -9,11 +9,12 @@ import Room from '../room/room';
 import NotFound from '../not-found/not-found';
 import { connect } from 'react-redux';
 import LoadingSpinner from '../loading-spinner/loading-spinner';
+import { isAuthUnknown } from '../../utils/utils';
 
 function App(props) {
-  const {isDataLoaded} = props;
+  const {isDataLoaded, authorizationStatus} = props;
 
-  if (!isDataLoaded) {
+  if (isAuthUnknown(authorizationStatus) || !isDataLoaded) {
     return <LoadingSpinner />;
   }
 
@@ -40,10 +41,12 @@ function App(props) {
 
 App.propTypes = {
   isDataLoaded: PropTypes.bool.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   isDataLoaded: state.isDataLoaded,
+  authorizationStatus: state.authorizationStatus,
 });
 
 export { App };

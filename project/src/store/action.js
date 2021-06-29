@@ -2,7 +2,7 @@ export const ActionType = {
   CHANGE_CITY: 'app/changeCity',
   LOAD_OFFERS: 'data/offers',
   LOAD_REVIEWS: 'data/reviews',
-  REQUIRED_AUTHORIZATION: 'user/requiredAuthorization',
+  REQUIRE_AUTHORIZATION: 'user/requireAuthorization',
   LOGOUT: 'user/logout',
 };
 
@@ -19,8 +19,8 @@ export const ActionCreator = {
     type: ActionType.LOAD_REVIEWS,
     payload: reviews,
   }),
-  requiredAuthorization: (status) => ({
-    type: ActionType.REQUIRED_AUTHORIZATION,
+  requireAuthorization: (status) => ({
+    type: ActionType.REQUIRE_AUTHORIZATION,
     payload: status,
   }),
   logout: () => ({

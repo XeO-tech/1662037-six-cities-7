@@ -5,11 +5,15 @@ import { reducer } from './store/reducer';
 import { createStore, applyMiddleware } from 'redux';
 import { createAPI } from './services/api';
 import thunk from 'redux-thunk';
-import { fetchOffersList } from './services/api-actions';
+import { fetchOffersList, checkAuth } from './store/api-actions';
 import { Provider } from 'react-redux';
-import {composeWithDevTools} from 'redux-devtools-extension';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { ActionCreator } from './store/action';
+import { AuthorizationStatus } from './const';
 
-const api = createAPI();
+const api = createAPI(
+  () => store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH)),
+);
 
 const store = createStore(
   reducer,
@@ -19,6 +23,7 @@ const store = createStore(
 );
 
 store.dispatch(fetchOffersList());
+store.dispatch(checkAuth());
 
 ReactDOM.render(
   <React.StrictMode>

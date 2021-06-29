@@ -29,7 +29,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         reviews: action.payload.map((review) => adaptReviewToClient(review)),
       };
-    case ActionType.REQUIRED_AUTHORIZATION:
+    case ActionType.REQUIRE_AUTHORIZATION:
       return {
         ...state,
         authorizationStatus: action.payload,
