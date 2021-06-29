@@ -11,14 +11,16 @@ import CitiesList from '../cities_list/cities-list';
 import { connect } from 'react-redux';
 import OffersSorting from '../offers-sorting/offers-sorting';
 import { getFilteredOffers } from '../../utils/utils';
+import { sortOffers } from '../../utils/utils';
 import { SortingType } from '../../const';
-import { sortOffersByPriceAscending, sortOffersByPriceDescending, sortOffersByRating } from '../../utils/utils';
 
 function MainPage(props) {
   const {filteredOffers, activeCity} = props;
 
   const [activeCardId, setActiveCardId] = useState(null);
   const [activeSorting, setActiveSorting] = useState(SortingType.POPULAR);
+
+  const sortedOffers = sortOffers(activeSorting, filteredOffers);
 
   const onListItemHover = (offerID) => {
     setActiveCardId(offerID);
@@ -29,22 +31,6 @@ function MainPage(props) {
   };
 
   const onSortingChange = (newSortingType) => setActiveSorting(newSortingType);
-
-  let sortedOffers;
-
-  switch (activeSorting) {
-    case SortingType.PRICE_ASCENDING:
-      sortedOffers = sortOffersByPriceAscending(filteredOffers);
-      break;
-    case SortingType.PRICE_DESCENDING:
-      sortedOffers = sortOffersByPriceDescending(filteredOffers);
-      break;
-    case SortingType.RATING:
-      sortedOffers = sortOffersByRating(filteredOffers);
-      break;
-    default:
-      sortedOffers = [...filteredOffers];
-  }
 
 
   const emptyPage = (
