@@ -21,15 +21,9 @@ function App(props) {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path={AppRoute.ROOT}>
-          <MainPage />
-        </Route>
-        <Route exact path={AppRoute.LOGIN}>
-          <SignIn />
-        </Route>
-        <Route exact path={AppRoute.FAVORITES}>
-          <Favorites />
-        </Route>
+        <Route exact path={AppRoute.ROOT} component={MainPage} />
+        <Route exact path={AppRoute.LOGIN} component={SignIn} />
+        <Route exact path={AppRoute.FAVORITES} component={Favorites} />
         <Route exact path={AppRoute.ROOM} render={(properties) => <Room {...properties} /> } />
         <Route>
           <NotFound />

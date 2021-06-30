@@ -7,7 +7,7 @@ import { AppRoute } from '../../const';
 import Map from '../map/map';
 import { CardSetting } from '../../const';
 import { cities } from '../../const';
-import CitiesList from '../cities_list/cities-list';
+import CitiesList from '../cities-list/cities-list';
 import { connect } from 'react-redux';
 import OffersSorting from '../offers-sorting/offers-sorting';
 import { getFilteredOffers } from '../../utils/utils';

@@ -6,8 +6,7 @@ import { ActionCreator } from '../../store/action';
 function CitiesList(props) {
   const {cities, activeCity, onCityClick} = props;
 
-  const cityClickHandler = (e, cityName) => {
-    e.preventDefault();
+  const cityClickHandler = (cityName) => {
     onCityClick(cityName);
   };
 
@@ -16,13 +15,12 @@ function CitiesList(props) {
       <ul className="locations__list tabs__list">
         {cities.map((cityName) => (
           <li key={cityName} className="locations__item">
-            <a
-              onClick={(e) => cityClickHandler(e, cityName)}
+            <div style={{cursor: 'pointer'}}
+              onClick={(e) => cityClickHandler(cityName)}
               className={`locations__item-link tabs__item ${cityName === activeCity ? 'tabs__item--active' : ''}`}
-              href="foo"
             >
               <span>{cityName}</span>
-            </a>
+            </div>
           </li>
         ))}
       </ul>

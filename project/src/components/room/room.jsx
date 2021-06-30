@@ -13,12 +13,11 @@ import { roomTypeAlias } from '../../const';
 import { CardSetting } from '../../const';
 import { connect } from 'react-redux';
 
-
 function Room(props) {
   const {offers} = props;
   const reviews = [];
 
-  const offer = offers.filter((offerItem) => offerItem.id === Number(props.match.params.id))[0];
+  const offer = offers.find((offerItem) => offerItem.id === Number(props.match.params.id));
 
   if (!offer) {
     return <NotFound />;
