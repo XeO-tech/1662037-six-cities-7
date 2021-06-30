@@ -10,6 +10,7 @@ import NotFound from '../not-found/not-found';
 import { connect } from 'react-redux';
 import LoadingSpinner from '../loading-spinner/loading-spinner';
 import { isAuthUnknown } from '../../utils/utils';
+import PrivateRoute from '../private-route/private-route';
 
 function App(props) {
   const {isDataLoaded, authorizationStatus} = props;
@@ -23,7 +24,7 @@ function App(props) {
       <Switch>
         <Route exact path={AppRoute.ROOT} component={MainPage} />
         <Route exact path={AppRoute.LOGIN} component={SignIn} />
-        <Route exact path={AppRoute.FAVORITES} component={Favorites} />
+        <PrivateRoute exact path={AppRoute.FAVORITES} render={() => <Favorites />} />
         <Route exact path={AppRoute.ROOM} render={(properties) => <Room {...properties} /> } />
         <Route>
           <NotFound />
