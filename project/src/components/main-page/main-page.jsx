@@ -14,9 +14,10 @@ import { getFilteredOffers } from '../../utils/utils';
 import { sortOffers } from '../../utils/utils';
 import { SortingType } from '../../const';
 import { AuthorizationStatus } from '../../const';
+import { logout } from '../../store/api-actions';
 
 function MainPage(props) {
-  const {filteredOffers, activeCity, authorizationStatus} = props;
+  const {filteredOffers, activeCity, authorizationStatus, logoutApp} = props;
 
   const [activeCardId, setActiveCardId] = useState(null);
   const [activeSorting, setActiveSorting] = useState(SortingType.POPULAR);
@@ -77,7 +78,14 @@ function MainPage(props) {
         </Link>
       </li>
       <li className="header__nav-item">
-        <Link to={AppRoute.LOGOUT} className="header__nav-link">
+        <Link
+          onClick={(evt) => {
+            evt.preventDefault();
+            logoutApp();
+          }}
+          to='/'
+          className="header__nav-link"
+        >
           <span className="header__signout">Sign out</span>
         </Link>
       </li>
@@ -129,6 +137,7 @@ MainPage.propTypes = {
   filteredOffers: PropTypes.arrayOf(cardProp.offer).isRequired,
   activeCity: PropTypes.string.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
+  logoutApp: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -137,5 +146,11 @@ const mapStateToProps = (state) => ({
   authorizationStatus: state.authorizationStatus,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  logoutApp() {
+    dispatch(logout());
+  },
+});
+
 export { MainPage };
-export default connect(mapStateToProps, null)(MainPage);
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

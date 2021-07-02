@@ -1,6 +1,8 @@
 import React, { useRef } from 'react';
-import { connect, useDispatch } from 'react-redux';
-import { login, logout } from '../../store/api-actions';
+import { useDispatch } from 'react-redux';
+import { login } from '../../store/api-actions';
+import { Redirect } from 'react-router';
+import { AppRoute } from '../../const';
 
 function SignIn() {
   const loginRef = useRef();
@@ -16,6 +18,10 @@ function SignIn() {
       password: passwordRef.current.value,
     }));
   };
+
+  if (localStorage.token) {
+    return <Redirect to={AppRoute.ROOT} />;
+  }
 
   return (
     <div className="page page--gray page--login">
@@ -90,11 +96,4 @@ function SignIn() {
   );
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  logout() {
-    dispatch(logout);
-  },
-});
-
-export { SignIn };
-export default connect(null, mapDispatchToProps)(SignIn);
+export default SignIn;
