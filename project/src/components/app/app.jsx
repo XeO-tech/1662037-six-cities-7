@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import { Switch, Route, Router as BrowserRouter } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import MainPage from '../main-page/main-page';
 import SignIn from '../sign-in/sign-in';
@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import LoadingSpinner from '../loading-spinner/loading-spinner';
 import { isAuthUnknown } from '../../utils/utils';
 import PrivateRoute from '../private-route/private-route';
+import browserHisory from '../../browser-history';
 
 function App(props) {
   const {isDataLoaded, authorizationStatus} = props;
@@ -20,7 +21,7 @@ function App(props) {
   }
 
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHisory}>
       <Switch>
         <Route exact path={AppRoute.ROOT} component={MainPage} />
         <Route exact path={AppRoute.LOGIN} component={SignIn} />

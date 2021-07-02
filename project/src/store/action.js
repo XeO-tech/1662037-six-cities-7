@@ -4,6 +4,7 @@ export const ActionType = {
   LOAD_REVIEWS: 'data/reviews',
   REQUIRE_AUTHORIZATION: 'user/requireAuthorization',
   LOGOUT: 'user/logout',
+  REDIRECT_TO_ROUTE: 'app/redirect',
 };
 
 export const ActionCreator = {
@@ -25,5 +26,9 @@ export const ActionCreator = {
   }),
   logout: () => ({
     type: ActionType.LOGOUT,
+  }),
+  redirectToRoute: (url) => ({
+    type: ActionType.REDIRECT_TO_ROUTE,
+    payload: url,
   }),
 };

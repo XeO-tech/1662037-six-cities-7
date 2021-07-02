@@ -1,5 +1,5 @@
 import { ActionCreator } from './action';
-import { ApiRoute, AuthorizationStatus } from '../const';
+import { ApiRoute, AppRoute, AuthorizationStatus } from '../const';
 
 export const fetchOffersList = () => (dispatch, _getState, api) => (
   api.get(ApiRoute.HOTELS)
@@ -13,9 +13,10 @@ export const checkAuth = () => (dispatch, _getState, api) => (
 );
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
-  api.get(ApiRoute.LOGIN)
+  api.post(ApiRoute.LOGIN, {email, password})
     .then(({data}) => localStorage.setItem('token', data.token))
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
+    .then(() => dispatch(ActionCreator.redirectToRoute(AppRoute.ROOT)))
 );
 
 export const logout = () => (dispatch, _getState, api) => (
