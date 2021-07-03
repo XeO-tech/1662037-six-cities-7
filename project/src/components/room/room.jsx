@@ -38,6 +38,13 @@ function Room(props) {
       .then((data) =>
         setReviews(data));
 
+    return () => {
+      setOfferInfo(null);
+      setIsDataLoaded(false);
+      setOffersNearBy([]);
+      setReviews([]);
+    };
+
   }, [props.match.params.id, dispatch]);
 
   if (!isDataLoaded) {

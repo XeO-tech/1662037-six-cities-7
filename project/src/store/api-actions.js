@@ -32,16 +32,19 @@ export const logout = () => (dispatch, _getState, api) => (
     .then(() => dispatch(ActionCreator.logout()))
 );
 
-export const fetchOffer = (offerId) => (_dispatch, _getState, api) =>
+export const fetchOffer = (offerId) => (dispatch, _getState, api) =>
   api.get(`${ApiRoute.HOTELS}/${offerId}`)
     .then(({data}) => adaptOfferToClient(data))
+    .catch(() => dispatch(ActionCreator.redirectToRoute('/offer-not-found')));
 
 export const fetchOffersNearBy = (offerId) => (_dispatch, _getState, api) =>
   api.get(`${ApiRoute.HOTELS}/${offerId}/nearby`)
-    .then(({data}) => data.map((offerItem) => adaptOfferToClient(offerItem)));
+    .then(({data}) => data.map((offerItem) => adaptOfferToClient(offerItem)))
+    .catch(() => {});
 
 export const fetchReviews = (offerId) => (_dispatch, _getState, api) =>
   api.get(`${ApiRoute.COMMENTS}/${offerId}`)
-    .then(({data}) => data.map((review) => adaptReviewToClient(review)));
+    .then(({data}) => data.map((review) => adaptReviewToClient(review)))
+    .catch(() => {});
 
 
