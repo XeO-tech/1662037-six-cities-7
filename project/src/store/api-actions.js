@@ -47,4 +47,5 @@ export const fetchReviews = (offerId) => (_dispatch, _getState, api) =>
     .then(({data}) => data.map((review) => adaptReviewToClient(review)))
     .catch(() => {});
 
-
+export const postComment = (offerId, comment) => (_dispatch, _getState, api) =>
+  api.post(`${ApiRoute.COMMENTS}/${offerId}`, comment);

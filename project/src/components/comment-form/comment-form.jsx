@@ -1,23 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { postComment } from '../../store/api-actions';
+import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 
-function CommentForm() {
+function CommentForm(props) {
+  const {offerId} = props;
+
   const [formData, setFormData] = useState({
     rating:'',
-    review:'',
+    comment:'',
   });
+
+  const formInputs = [];
+
+  const dispatch = useDispatch();
+
+  const textRef = useRef();
+  const formRef = useRef();
+
+  const disableForm = () => formInputs.forEach((input) => input.disabled = true);
+
+  const enableForm = () => formInputs.forEach((input) => input.disabled = false);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    return formData;
+    disableForm();
+
+    // dispatch(postComment(offerId, formData))
+    //   .then(() => {})
+    //   .catch(() => {});
   };
 
   const handleFieldChange = (evt) => {
     const {name, value} = evt.target;
+
     setFormData(Object.assign({}, formData, {[name]: value}));
   };
 
+  useEffect(() => {
+    textRef.current.maxLength = 300;
+    textRef.current.minLength = 50;
+
+    formInputs.push(...formRef.current.querySelectorAll('input'));
+    formInputs.push(formRef.current.querySelector('textarea'));
+    formInputs.push(formRef.current.querySelector('button'));
+
+  });
+
+
   return (
-    <form onSubmit = {handleSubmit} onChange = {handleFieldChange} className="reviews__form form" action="#" method="post">
+    <form ref={formRef} onSubmit = {handleSubmit} onChange = {handleFieldChange} className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         <input className="form__rating-input visually-hidden" name="rating" value={5} id="5-stars" type="radio" />
@@ -51,7 +83,7 @@ function CommentForm() {
           </svg>
         </label>
       </div>
-      <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" defaultValue={''} />
+      <textarea ref={textRef} className="reviews__textarea form__textarea" id="review" name="comment" placeholder="Tell how was your stay, what you like and what can be improved" defaultValue={''} />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
       To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
@@ -61,5 +93,9 @@ function CommentForm() {
     </form>
   );
 }
+
+CommentForm.propTypes = {
+  offerId: PropTypes.number.isRequired,
+};
 
 export default CommentForm;

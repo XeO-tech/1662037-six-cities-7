@@ -150,7 +150,7 @@ function Room(props) {
                 {reviews.length === 0 ?
                   '' : <ReviewsList reviews={offerReviews} />}
                 {authorizationStatus === AuthorizationStatus.AUTH ?
-                  <CommentForm /> : ''}
+                  <CommentForm offerId={offer.id} /> : ''}
               </section>
             </div>
           </div>

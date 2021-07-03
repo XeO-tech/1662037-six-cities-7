@@ -32,34 +32,6 @@ export const adaptOfferToClient = (offer) => {
   return adaptedOffer;
 };
 
-export const adaptOfferToServer = (offer) => {
-  const clonedOffer = cloneDeep(offer);
-
-  const adaptedOffer = Object.assign(
-    clonedOffer,
-    {
-      host: {
-        'avatar_url': clonedOffer.host.avatarUrl,
-        'is_pro': clonedOffer.host.isPro,
-        id: clonedOffer.host.id,
-        name: clonedOffer.host.name,
-      },
-      'is_favorite': clonedOffer.isFavorite,
-      'is_premium': clonedOffer.isPremium,
-      'max_adults': clonedOffer.maxAdults,
-      'preview_image': clonedOffer.previewImage,
-    });
-
-  delete adaptedOffer.host.avatarUrl;
-  delete adaptedOffer.host.isPro;
-  delete adaptedOffer.isFavorite;
-  delete adaptedOffer.isPremium;
-  delete adaptedOffer.maxAdults;
-  delete adaptedOffer.previewImage;
-
-  return adaptedOffer;
-};
-
 export const adaptReviewToClient = (review) => {
   const clonedReview = cloneDeep(review);
 
@@ -76,26 +48,6 @@ export const adaptReviewToClient = (review) => {
 
   delete adaptedReview.user['avatar_url'];
   delete adaptedReview.user['is_pro'];
-
-  return adaptedReview;
-};
-
-export const adaptReviewToServer = (review) => {
-  const clonedReview = cloneDeep(review);
-
-  const adaptedReview = Object.assign(
-    clonedReview,
-    {
-      user: {
-        'avatar_url': clonedReview.user.avatarUrl,
-        'is_pro': clonedReview.user.isPro,
-        id: clonedReview.user.id,
-        name: clonedReview.user.name,
-      },
-    });
-
-  delete adaptedReview.user.avatarUrl;
-  delete adaptedReview.user.isPro;
 
   return adaptedReview;
 };
