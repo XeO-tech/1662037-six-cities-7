@@ -35,3 +35,15 @@ export const sortOffers = (activeSorting, offers) => {
 
 export const isAuthUnknown = (authorizationStatus) =>
   authorizationStatus === AuthorizationStatus.UNKNOWN;
+
+export const isEmailAddress = (email) => {
+  const emailRegExp = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+
+  return emailRegExp.test(email);
+};
+
+export const isPassword = (password) => {
+  const passwordRegExp = /^(?!\s*$).+/;
+
+  return passwordRegExp.test(password);
+};

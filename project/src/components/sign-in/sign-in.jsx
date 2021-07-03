@@ -3,15 +3,37 @@ import { useDispatch } from 'react-redux';
 import { login } from '../../store/api-actions';
 import { Redirect } from 'react-router';
 import { AppRoute } from '../../const';
+import { isEmailAddress, isPassword } from '../../utils/utils';
+import { Link } from 'react-router-dom';
 
 function SignIn() {
   const loginRef = useRef();
   const passwordRef = useRef();
+  const formRef = useRef();
 
   const dispatch = useDispatch();
 
+  const onFormChange = () => {
+    loginRef.current.setCustomValidity('');
+    passwordRef.current.setCustomValidity('');
+
+    if (!isEmailAddress(loginRef.current.value)) {
+      loginRef.current.setCustomValidity('Login should be a valid email address');
+    }
+
+    if (!isPassword(passwordRef.current.value)) {
+      passwordRef.current.setCustomValidity('Password shouldn\'t be blank or spaces only');
+    }
+
+    formRef.current.reportValidity();
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!formRef.current.reportValidity()) {
+      return;
+    }
 
     dispatch(login({
       login: loginRef.current.value,
@@ -29,18 +51,18 @@ function SignIn() {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="main.html">
+              <Link to={AppRoute.ROOT} className="header__logo-link" href="main.html">
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width={81} height={41} />
-              </a>
+              </Link>
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="foo">
+                  <Link to={AppRoute.LOGIN} className="header__nav-link header__nav-link--profile" >
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
                     <span className="header__login">Sign in</span>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </nav>
@@ -51,7 +73,13 @@ function SignIn() {
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>
-            <form className="login__form form" action="#" method="post">
+            <form
+              onChange={onFormChange}
+              ref={formRef}
+              className="login__form form"
+              action="#"
+              method="post"
+            >
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
                 <input
