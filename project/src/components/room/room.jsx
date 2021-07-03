@@ -11,16 +11,18 @@ import Header from '../header/header';
 import { fetchOffer, fetchOffersNearBy, fetchReviews } from '../../store/api-actions';
 import LoadingSpinner from '../loading-spinner/loading-spinner';
 import { useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
+import { AuthorizationStatus } from '../../const';
 
 const MAX_REVIEWS = 10;
 
 function Room(props) {
+  const {authorizationStatus} = props;
 
   const [offer, setOfferInfo] = useState(null);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [offersNearBy, setOffersNearBy] = useState([]);
   const [reviews, setReviews] = useState([]);
-
 
   const dispatch = useDispatch();
 
@@ -145,9 +147,10 @@ function Room(props) {
                 </div>
               </div>
               <section className="property__reviews reviews">
-                {reviews.length === 0 ? '' :
-                  <ReviewsList reviews={offerReviews} />}
-                <CommentForm />
+                {reviews.length === 0 ?
+                  '' : <ReviewsList reviews={offerReviews} />}
+                {authorizationStatus === AuthorizationStatus.AUTH ?
+                  <CommentForm /> : ''}
               </section>
             </div>
           </div>
@@ -180,6 +183,12 @@ Room.propTypes = {
       id: PropTypes.string.isRequired,
     }),
   }),
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
-export default Room;
+const mapStateToProps = (state) => ({
+  authorizationStatus: state.authorizationStatus,
+});
+
+export { Room };
+export default connect(mapStateToProps)(Room);
