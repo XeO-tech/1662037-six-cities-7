@@ -12,9 +12,15 @@ import LoadingSpinner from '../loading-spinner/loading-spinner';
 import { isAuthUnknown } from '../../utils/utils';
 import PrivateRoute from '../private-route/private-route';
 import browserHisory from '../../browser-history';
+import { init } from './app.init';
+
 
 function App(props) {
-  const {isDataLoaded, authorizationStatus} = props;
+  const {isDataLoaded, authorizationStatus, initApp} = props;
+
+  React.useEffect(() => {
+    initApp();
+  }, [initApp]);
 
   if (isAuthUnknown(authorizationStatus) || !isDataLoaded) {
     return <LoadingSpinner />;
@@ -38,6 +44,7 @@ function App(props) {
 App.propTypes = {
   isDataLoaded: PropTypes.bool.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
+  initApp: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -45,5 +52,9 @@ const mapStateToProps = (state) => ({
   authorizationStatus: state.authorizationStatus,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  initApp: () => dispatch(init()),
+});
+
 export { App };
-export default connect(mapStateToProps, null)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

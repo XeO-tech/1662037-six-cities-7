@@ -5,7 +5,6 @@ import { reducer } from './store/reducer';
 import { createStore, applyMiddleware } from 'redux';
 import { createAPI } from './services/api';
 import thunk from 'redux-thunk';
-import { fetchOffersList, checkAuth } from './store/api-actions';
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { ActionCreator } from './store/action';
@@ -23,9 +22,6 @@ const store = createStore(
     applyMiddleware(redirect),
   ),
 );
-
-store.dispatch(fetchOffersList());
-store.dispatch(checkAuth());
 
 ReactDOM.render(
   <React.StrictMode>
