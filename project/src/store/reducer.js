@@ -25,11 +25,6 @@ const reducer = (state = initialState, action) => {
         offers: action.payload.map((offer) => adaptOfferToClient(offer)),
         isDataLoaded: true,
       };
-    case ActionType.LOAD_OFFER:
-      return {
-        ...state,
-        currentOffer: adaptOfferToClient(action.payload),
-      };
     case ActionType.LOAD_REVIEWS:
       return {
         ...state,

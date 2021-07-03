@@ -1,35 +1,54 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import CommentForm from '../comment-form/comment-form';
 import { defineRatingWidth } from '../../utils/utils';
 import PropTypes from 'prop-types';
-import { cardProp } from '../card/card.prop';
 import ReviewsList from '../review-list/review-list';
 import Map from '../map/map';
 import OffersList from '../offers-list/offers-list';
 import { roomTypeAlias } from '../../const';
 import { CardSetting } from '../../const';
-import { connect } from 'react-redux';
 import Header from '../header/header';
-import { fetchOffer } from '../../store/api-actions';
+import { fetchOffer, fetchOffersNearBy, fetchReviews } from '../../store/api-actions';
 import LoadingSpinner from '../loading-spinner/loading-spinner';
+import { useDispatch } from 'react-redux';
+import { adaptOfferToClient, adaptReviewToClient } from '../../utils/adapter';
 
 function Room(props) {
-  const {offers, offer, fetchCurrentOffer} = props;
-  const reviews = [];
+
+  const [offer, setOfferInfo] = useState(null);
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
+  const [offersNearBy, setOffersNearBy] = useState([]);
+  const [reviews, setReviews] = useState([]);
+
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetchCurrentOffer(props.match.params.id);
-  }, [fetchCurrentOffer, props.match.params.id]);
+    dispatch(fetchOffer(props.match.params.id))
+      .then(({data}) => {
+        setOfferInfo(adaptOfferToClient(data));
+        setIsDataLoaded(true);
+      });
 
+    dispatch(fetchOffersNearBy(props.match.params.id))
+      .then(({data}) => {
+        const adaptedOffers = data.map((offerItem) => adaptOfferToClient(offerItem));
+        setOffersNearBy(adaptedOffers);
+      });
 
-  if (Object.keys(offer).length === 0 ) {
+    dispatch(fetchReviews(props.match.params.id))
+      .then(({data}) => {
+        const adaptedReviews = data.map((review) => adaptReviewToClient(review));
+        setReviews(adaptedReviews);
+      });
+
+  }, [props.match.params.id, dispatch]);
+
+  if (!isDataLoaded) {
     return <LoadingSpinner />;
   }
 
-  const offersNearBy = offers.slice(offers.length - 4, offers.length-1);
-
   const offerReviews = reviews
-    .filter((review) => review.id === Number(props.match.params.id))
     .slice(0,9)
     .sort((a, b) => new Date(b.date) - new Date(a.date));
 
@@ -123,7 +142,8 @@ function Room(props) {
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <ReviewsList reviews={offerReviews} />
+                {reviews.length === 0 ? '' :
+                  <ReviewsList reviews={offerReviews} />}
                 <CommentForm />
               </section>
             </div>
@@ -136,12 +156,13 @@ function Room(props) {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <OffersList
-                offers={offersNearBy}
-                setting={CardSetting.offerPage}
-                onListItemHover={() => {}}
-                onListItemOut={() => {}}
-              />
+              {offersNearBy.length === 0 ? '' :
+                <OffersList
+                  offers={offersNearBy}
+                  setting={CardSetting.offerPage}
+                  onListItemHover={() => {}}
+                  onListItemOut={() => {}}
+                />}
             </div>
           </section>
         </div>
@@ -156,19 +177,6 @@ Room.propTypes = {
       id: PropTypes.string.isRequired,
     }),
   }),
-  offers: PropTypes.arrayOf(cardProp.offer).isRequired,
-  offer: cardProp,
-  fetchCurrentOffer: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  offers: state.offers,
-  offer: state.currentOffer,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  fetchCurrentOffer: (id) => dispatch(fetchOffer(id)),
-});
-
-export { Room };
-export default connect(mapStateToProps, mapDispatchToProps)(Room);
+export default Room;

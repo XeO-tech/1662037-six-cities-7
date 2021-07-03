@@ -6,13 +6,12 @@ export const AppRoute = {
   FAVORITES: '/favorites',
   ROOM: '/offer/:id',
   ROOT: '/',
-  HOTEL: '/hotels',
 };
 
 export const ApiRoute = {
   HOTELS: '/hotels',
   FAVORITE: '/favorite',
-  COMMENTS: '/commetns/:hotel_id',
+  COMMENTS: '/comments',
   LOGIN: '/login',
   LOGOUT: '/logout',
 };
