@@ -14,13 +14,19 @@ export const checkAuth = () => (dispatch, _getState, api) => (
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
   api.post(ApiRoute.LOGIN, {email, password})
-    .then(({data}) => localStorage.setItem('token', data.token))
+    .then(({data}) => {
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('login', email);
+    })
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
     .then(() => dispatch(ActionCreator.redirectToRoute(AppRoute.ROOT)))
 );
 
 export const logout = () => (dispatch, _getState, api) => (
   api.delete(ApiRoute.LOGOUT)
-    .then(() => localStorage.removeItem('token'))
+    .then(() => {
+      localStorage.removeItem('token');
+      localStorage.removeItem('login');
+    })
     .then(() => dispatch(ActionCreator.logout()))
 );
