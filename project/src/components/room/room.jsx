@@ -11,7 +11,8 @@ import Header from '../header/header';
 import { fetchOffer, fetchOffersNearBy, fetchReviews } from '../../store/api-actions';
 import LoadingSpinner from '../loading-spinner/loading-spinner';
 import { useDispatch } from 'react-redux';
-import { adaptOfferToClient, adaptReviewToClient } from '../../utils/adapter';
+
+const MAX_REVIEWS = 10;
 
 function Room(props) {
 
@@ -25,22 +26,17 @@ function Room(props) {
 
   useEffect(() => {
     dispatch(fetchOffer(props.match.params.id))
-      .then(({data}) => {
-        setOfferInfo(adaptOfferToClient(data));
+      .then((data) => {
+        setOfferInfo(data);
         setIsDataLoaded(true);
       });
 
     dispatch(fetchOffersNearBy(props.match.params.id))
-      .then(({data}) => {
-        const adaptedOffers = data.map((offerItem) => adaptOfferToClient(offerItem));
-        setOffersNearBy(adaptedOffers);
-      });
+      .then((data) => setOffersNearBy(data));
 
     dispatch(fetchReviews(props.match.params.id))
-      .then(({data}) => {
-        const adaptedReviews = data.map((review) => adaptReviewToClient(review));
-        setReviews(adaptedReviews);
-      });
+      .then((data) =>
+        setReviews(data));
 
   }, [props.match.params.id, dispatch]);
 
@@ -49,7 +45,7 @@ function Room(props) {
   }
 
   const offerReviews = reviews
-    .slice(0,9)
+    .slice(0, MAX_REVIEWS - 1)
     .sort((a, b) => new Date(b.date) - new Date(a.date));
 
   return (

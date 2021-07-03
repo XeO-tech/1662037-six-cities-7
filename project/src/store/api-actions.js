@@ -1,5 +1,6 @@
 import { ActionCreator } from './action';
 import { ApiRoute, AppRoute, AuthorizationStatus } from '../const';
+import { adaptOfferToClient, adaptReviewToClient } from '../utils/adapter';
 
 export const fetchOffersList = () => (dispatch, _getState, api) => (
   api.get(ApiRoute.HOTELS)
@@ -32,12 +33,15 @@ export const logout = () => (dispatch, _getState, api) => (
 );
 
 export const fetchOffer = (offerId) => (_dispatch, _getState, api) =>
-  api.get(`${ApiRoute.HOTELS}/${offerId}`);
+  api.get(`${ApiRoute.HOTELS}/${offerId}`)
+    .then(({data}) => adaptOfferToClient(data))
 
 export const fetchOffersNearBy = (offerId) => (_dispatch, _getState, api) =>
-  api.get(`${ApiRoute.HOTELS}/${offerId}/nearby`);
+  api.get(`${ApiRoute.HOTELS}/${offerId}/nearby`)
+    .then(({data}) => data.map((offerItem) => adaptOfferToClient(offerItem)));
 
 export const fetchReviews = (offerId) => (_dispatch, _getState, api) =>
-  api.get(`${ApiRoute.COMMENTS}/${offerId}`);
+  api.get(`${ApiRoute.COMMENTS}/${offerId}`)
+    .then(({data}) => data.map((review) => adaptReviewToClient(review)));
 
 
