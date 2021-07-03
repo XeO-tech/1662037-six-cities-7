@@ -30,3 +30,9 @@ export const logout = () => (dispatch, _getState, api) => (
     })
     .then(() => dispatch(ActionCreator.logout()))
 );
+
+export const fetchOffer = (offerId) => (dispatch, _getState, api) =>
+  api.get(`${ApiRoute.HOTELS}/${offerId}`)
+    .then(({data}) => dispatch(ActionCreator.loadOffer(data)))
+    .catch(() => dispatch(ActionCreator.redirectToRoute('/offer-not-found')));
+

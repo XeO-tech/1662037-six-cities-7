@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route, Router as BrowserRouter } from 'react-router-dom';
 import { AppRoute } from '../../const';
@@ -18,7 +18,7 @@ import { init } from './app.init';
 function App(props) {
   const {isDataLoaded, authorizationStatus, initApp} = props;
 
-  React.useEffect(() => {
+  useEffect(() => {
     initApp();
   }, [initApp]);
 

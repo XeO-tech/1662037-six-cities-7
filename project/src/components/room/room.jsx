@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CommentForm from '../comment-form/comment-form';
-import NotFound from '../not-found/not-found';
 import { defineRatingWidth } from '../../utils/utils';
 import PropTypes from 'prop-types';
 import { cardProp } from '../card/card.prop';
@@ -11,16 +10,22 @@ import { roomTypeAlias } from '../../const';
 import { CardSetting } from '../../const';
 import { connect } from 'react-redux';
 import Header from '../header/header';
+import { fetchOffer } from '../../store/api-actions';
+import LoadingSpinner from '../loading-spinner/loading-spinner';
 
 function Room(props) {
-  const {offers} = props;
+  const {offers, offer, fetchCurrentOffer} = props;
   const reviews = [];
 
-  const offer = offers.find((offerItem) => offerItem.id === Number(props.match.params.id));
+  useEffect(() => {
+    fetchCurrentOffer(props.match.params.id);
+  }, [fetchCurrentOffer, props.match.params.id]);
 
-  if (!offer) {
-    return <NotFound />;
+
+  if (Object.keys(offer).length === 0 ) {
+    return <LoadingSpinner />;
   }
+
   const offersNearBy = offers.slice(offers.length - 4, offers.length-1);
 
   const offerReviews = reviews
@@ -152,12 +157,18 @@ Room.propTypes = {
     }),
   }),
   offers: PropTypes.arrayOf(cardProp.offer).isRequired,
+  offer: cardProp,
+  fetchCurrentOffer: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   offers: state.offers,
+  offer: state.currentOffer,
+});
 
+const mapDispatchToProps = (dispatch) => ({
+  fetchCurrentOffer: (id) => dispatch(fetchOffer(id)),
 });
 
 export { Room };
-export default connect(mapStateToProps, null)(Room);
+export default connect(mapStateToProps, mapDispatchToProps)(Room);
