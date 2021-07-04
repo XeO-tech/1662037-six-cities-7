@@ -26,6 +26,14 @@ function Room(props) {
 
   const dispatch = useDispatch();
 
+  const updateReviews = () => dispatch(fetchReviews(props.match.params.id))
+    .then((data) => setReviews(data));
+
+
+  const offerReviews = reviews
+    .slice(0, MAX_REVIEWS)
+    .sort((a, b) => new Date(b.date) - new Date(a.date));
+
   useEffect(() => {
     dispatch(fetchOffer(props.match.params.id))
       .then((data) => {
@@ -52,10 +60,6 @@ function Room(props) {
   if (!isDataLoaded) {
     return <LoadingSpinner />;
   }
-
-  const offerReviews = reviews
-    .slice(0, MAX_REVIEWS - 1)
-    .sort((a, b) => new Date(b.date) - new Date(a.date));
 
   return (
     <div className="page">
@@ -150,7 +154,7 @@ function Room(props) {
                 {reviews.length === 0 ?
                   '' : <ReviewsList reviews={offerReviews} />}
                 {authorizationStatus === AuthorizationStatus.AUTH ?
-                  <CommentForm offerId={offer.id} /> : ''}
+                  <CommentForm initReviewsUpdate={updateReviews} offerId={offer.id} /> : ''}
               </section>
             </div>
           </div>

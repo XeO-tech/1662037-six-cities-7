@@ -3,49 +3,74 @@ import { postComment } from '../../store/api-actions';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 
-function CommentForm(props) {
-  const {offerId} = props;
+const MAX_COMMENT_LENGTH = 300;
+const MIN_COMMENT_LENGTH = 50;
 
-  const [formData, setFormData] = useState({
+
+function CommentForm(props) {
+  const {offerId, initReviewsUpdate} = props;
+
+  const defaultFormData = {
     rating:'',
     comment:'',
-  });
+  };
 
-  const formInputs = [];
+  const [formData, setFormData] = useState(defaultFormData);
 
   const dispatch = useDispatch();
 
-  const textRef = useRef();
   const formRef = useRef();
+  const textareaRef = useRef();
+  const buttonRef = useRef();
+
+  const formInputs = [];
 
   const disableForm = () => formInputs.forEach((input) => input.disabled = true);
-
   const enableForm = () => formInputs.forEach((input) => input.disabled = false);
+
+  const disableSubmitButton = () => buttonRef.current.disabled = true;
+  const enableSubmitButton = () => buttonRef.current.disabled = false;
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
     disableForm();
+    disableSubmitButton();
 
-    // dispatch(postComment(offerId, formData))
-    //   .then(() => {})
-    //   .catch(() => {});
+    dispatch(postComment(offerId, formData))
+      .then(() => {
+        enableForm();
+        enableSubmitButton();
+        setFormData(defaultFormData);
+        formRef.current.reset();
+        initReviewsUpdate();
+      })
+      .catch(() => {
+        enableForm();
+        enableSubmitButton();
+      });
   };
 
   const handleFieldChange = (evt) => {
     const {name, value} = evt.target;
-
     setFormData(Object.assign({}, formData, {[name]: value}));
   };
 
   useEffect(() => {
-    textRef.current.maxLength = 300;
-    textRef.current.minLength = 50;
+    textareaRef.current.maxLength = MAX_COMMENT_LENGTH;
+    textareaRef.current.minLength = MIN_COMMENT_LENGTH;
 
     formInputs.push(...formRef.current.querySelectorAll('input'));
     formInputs.push(formRef.current.querySelector('textarea'));
-    formInputs.push(formRef.current.querySelector('button'));
 
-  });
+    disableSubmitButton();
+  }, []);
+
+  useEffect(() => {
+    (formRef.current.checkValidity() && formData.rating !== '') ?
+      enableSubmitButton() :
+      disableSubmitButton();
+
+  }, [formData]);
 
 
   return (
@@ -83,12 +108,12 @@ function CommentForm(props) {
           </svg>
         </label>
       </div>
-      <textarea ref={textRef} className="reviews__textarea form__textarea" id="review" name="comment" placeholder="Tell how was your stay, what you like and what can be improved" defaultValue={''} />
+      <textarea ref={textareaRef} className="reviews__textarea form__textarea" id="review" name="comment" placeholder="Tell how was your stay, what you like and what can be improved" defaultValue={''} required/>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
       To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" >Submit</button>
+        <button ref={buttonRef} className="reviews__submit form__submit button" type="submit" >Submit</button>
       </div>
     </form>
   );
@@ -96,6 +121,7 @@ function CommentForm(props) {
 
 CommentForm.propTypes = {
   offerId: PropTypes.number.isRequired,
+  initReviewsUpdate: PropTypes.func.isRequired,
 };
 
 export default CommentForm;
