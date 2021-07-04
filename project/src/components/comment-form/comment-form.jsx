@@ -63,7 +63,7 @@ function CommentForm(props) {
     formInputs.push(formRef.current.querySelector('textarea'));
 
     disableSubmitButton();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     (formRef.current.checkValidity() && formData.rating !== '') ?
