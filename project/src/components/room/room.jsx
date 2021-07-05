@@ -169,7 +169,7 @@ function Room(props) {
                   offers={offersNearBy}
                   setting={CardSetting.offerPage}
                   onListItemHover={() => {}}
-                  onListItemOut={() => {}}
+                  onListItemLeave={() => {}}
                 />}
             </div>
           </section>

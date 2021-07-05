@@ -26,7 +26,7 @@ function MainPage(props) {
     setActiveCardId(offerID);
   };
 
-  const onListItemOut = (offerID) => {
+  const onListItemLeave = (offerID) => {
     setActiveCardId(null);
   };
 
@@ -56,7 +56,7 @@ function MainPage(props) {
             offers={sortedOffers}
             setting={CardSetting.mainPage}
             onListItemHover = {onListItemHover}
-            onListItemOut = {onListItemOut}
+            onListItemLeave = {onListItemLeave}
           />
         </div>
       </section>

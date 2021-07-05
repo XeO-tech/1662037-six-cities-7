@@ -5,13 +5,13 @@ import { Link } from 'react-router-dom';
 import { defineRatingWidth } from '../../utils/utils';
 
 function Card(props) {
-  const {offer, onListItemHover, onListItemOut, setting} = props;
+  const {offer, onListItemHover, onListItemLeave, setting} = props;
   const offerUrl = `/offer/${offer.id}`;
 
   return (
     <article
       onMouseEnter = {onListItemHover}
-      onMouseOut = {onListItemOut}
+      onMouseLeave = {onListItemLeave}
       className={setting.ARTICLE_CLASS}
     >
       <div className={setting.MAIN_DIV_CLASS}>
@@ -49,7 +49,7 @@ function Card(props) {
 Card.propTypes = {
   offer: cardProp.offer.isRequired,
   onListItemHover: PropTypes.func,
-  onListItemOut: PropTypes.func,
+  onListItemLeave: PropTypes.func,
   setting: cardProp.setting.isRequired,
 };
 

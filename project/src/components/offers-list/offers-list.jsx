@@ -5,14 +5,14 @@ import PropTypes from 'prop-types';
 
 
 function OffersList(props) {
-  const {offers, setting, onListItemHover, onListItemOut} = props;
+  const {offers, setting, onListItemHover, onListItemLeave} = props;
 
   return (
     <>
       {offers.map((offer) => (
         <Card
           onListItemHover = {() => onListItemHover(offer.id)}
-          onListItemOut = {() => onListItemOut(offer.id)}
+          onListItemLeave = {() => onListItemLeave(offer.id)}
           setting={setting}
           key={offer.id}
           offer={offer}
@@ -24,7 +24,7 @@ function OffersList(props) {
 OffersList.propTypes = {
   offers: PropTypes.arrayOf(cardProp.offer).isRequired,
   onListItemHover: PropTypes.func,
-  onListItemOut: PropTypes.func,
+  onListItemLeave: PropTypes.func,
   setting: cardProp.setting.isRequired,
 };
 
