@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { postComment } from '../../store/api-actions';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const MAX_REVIEW_LENGTH = 300;
 const MIN_REVIEW_LENGTH = 50;
@@ -50,6 +52,9 @@ function ReviewForm(props) {
       .catch(() => {
         enableForm();
         enableSubmitButton();
+        toast.error('Comment post failed. Try again later.', {
+          position: toast.POSITION.TOP_LEFT,
+        });
       });
   };
 
@@ -68,6 +73,7 @@ function ReviewForm(props) {
 
   return (
     <form ref={formRef} onSubmit = {handleSubmit} onChange = {handleFieldChange} className="reviews__form form" action="#" method="post">
+      <ToastContainer />
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         <input className="form__rating-input visually-hidden" name="rating" value={5} id="5-stars" type="radio" />
