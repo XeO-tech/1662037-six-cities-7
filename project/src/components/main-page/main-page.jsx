@@ -8,9 +8,9 @@ import { cities } from '../../const';
 import CitiesList from '../cities-list/cities-list';
 import { connect } from 'react-redux';
 import OffersSorting from '../offers-sorting/offers-sorting';
-import { getFilteredOffers } from '../../utils/utils';
 import { sortOffers } from '../../utils/utils';
 import { SortingType } from '../../const';
+import { selectOffersByCity } from './selectors';
 
 import Header from '../header/header';
 
@@ -88,7 +88,7 @@ MainPage.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  filteredOffers: getFilteredOffers(state.offers, state.city),
+  filteredOffers: selectOffersByCity(state.offers, state.city),
   activeCity: state.city,
 });
 

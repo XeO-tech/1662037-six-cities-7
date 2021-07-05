@@ -12,8 +12,6 @@ export const sortOffersByPriceDescending = (offers) =>
 export const sortOffersByRating = (offers) =>
   [...offers].sort((a,b) => b.rating - a.rating);
 
-export const getFilteredOffers = (offers, city) => offers.filter((offer) => offer.city.name === city);
-
 export const sortOffers = (activeSorting, offers) => {
   let sortedOffers;
 
