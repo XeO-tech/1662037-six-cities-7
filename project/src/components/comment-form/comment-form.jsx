@@ -20,13 +20,16 @@ function CommentForm(props) {
   const dispatch = useDispatch();
 
   const formRef = useRef();
-  const textareaRef = useRef();
   const buttonRef = useRef();
 
-  const formInputs = [];
-
-  const disableForm = () => formInputs.forEach((input) => input.disabled = true);
-  const enableForm = () => formInputs.forEach((input) => input.disabled = false);
+  const disableForm = () =>
+    [...formRef.current.querySelectorAll('input'),
+      formRef.current.querySelector('textarea')]
+      .forEach((input) => input.disabled = true);
+  const enableForm = () =>
+    [...formRef.current.querySelectorAll('input'),
+      formRef.current.querySelector('textarea')]
+      .forEach((input) => input.disabled = false);
 
   const disableSubmitButton = () => buttonRef.current.disabled = true;
   const enableSubmitButton = () => buttonRef.current.disabled = false;
@@ -54,16 +57,6 @@ function CommentForm(props) {
     const {name, value} = evt.target;
     setFormData(Object.assign({}, formData, {[name]: value}));
   };
-
-  useEffect(() => {
-    textareaRef.current.maxLength = MAX_COMMENT_LENGTH;
-    textareaRef.current.minLength = MIN_COMMENT_LENGTH;
-
-    formInputs.push(...formRef.current.querySelectorAll('input'));
-    formInputs.push(formRef.current.querySelector('textarea'));
-
-    disableSubmitButton();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     (formRef.current.checkValidity() && formData.rating !== '') ?
@@ -108,7 +101,15 @@ function CommentForm(props) {
           </svg>
         </label>
       </div>
-      <textarea ref={textareaRef} className="reviews__textarea form__textarea" id="review" name="comment" placeholder="Tell how was your stay, what you like and what can be improved" defaultValue={''} required/>
+      <textarea
+        maxLength={MAX_COMMENT_LENGTH}
+        minLength={MIN_COMMENT_LENGTH} className="reviews__textarea form__textarea"
+        id="review"
+        name="comment"
+        placeholder="Tell how was your stay, what you like and what can be improved"
+        defaultValue={''}
+        required
+      />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
       To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
