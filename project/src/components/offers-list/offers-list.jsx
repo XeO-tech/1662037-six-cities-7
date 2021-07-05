@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 
 function OffersList(props) {
-  const {offers, setting, onListItemHover, onListItemLeave} = props;
+  const {offers, setting, onListItemHover = () => {}, onListItemLeave = () => {}} = props;
 
   return (
     <>

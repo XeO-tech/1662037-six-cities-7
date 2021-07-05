@@ -168,8 +168,6 @@ function Room(props) {
                 <OffersList
                   offers={offersNearBy}
                   setting={CardSetting.offerPage}
-                  onListItemHover={() => {}}
-                  onListItemLeave={() => {}}
                 />}
             </div>
           </section>

@@ -38,8 +38,6 @@ function Favorites(props) {
               <OffersList
                 offers={favoriteOffers.filter((offer) => offer.city.name === location)}
                 setting={CardSetting.favoritesPage}
-                onListItemHover={() => {}}
-                onListItemLeave={() => {}}
               />
             </div>
           </li>
