@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import CommentForm from '../comment-form/comment-form';
+import ReviewForm from '../review-form/review-form';
 import { defineRatingWidth } from '../../utils/utils';
 import PropTypes from 'prop-types';
 import ReviewsList from '../review-list/review-list';
@@ -26,13 +26,12 @@ function Room(props) {
 
   const dispatch = useDispatch();
 
-  const updateReviews = () => dispatch(fetchReviews(props.match.params.id))
-    .then((data) => setReviews(data));
-
-
-  const offerReviews = reviews
+  const normalizeReviews = (rawReviews) => rawReviews
     .slice(0, MAX_REVIEWS)
     .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  const updateReviews = () => dispatch(fetchReviews(props.match.params.id))
+    .then((data) => setReviews(normalizeReviews(data)));
 
   useEffect(() => {
     dispatch(fetchOffer(props.match.params.id))
@@ -45,8 +44,7 @@ function Room(props) {
       .then((data) => setOffersNearBy(data));
 
     dispatch(fetchReviews(props.match.params.id))
-      .then((data) =>
-        setReviews(data));
+      .then((data) => setReviews(normalizeReviews(data)));
 
     return () => {
       setOfferInfo(null);
@@ -152,9 +150,9 @@ function Room(props) {
               </div>
               <section className="property__reviews reviews">
                 {reviews.length === 0 ?
-                  '' : <ReviewsList reviews={offerReviews} />}
+                  '' : <ReviewsList reviews={reviews} />}
                 {authorizationStatus === AuthorizationStatus.AUTH ?
-                  <CommentForm initReviewsUpdate={updateReviews} offerId={offer.id} /> : ''}
+                  <ReviewForm initReviewsUpdate={updateReviews} offerId={offer.id} /> : ''}
               </section>
             </div>
           </div>

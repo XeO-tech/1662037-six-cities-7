@@ -3,11 +3,11 @@ import { postComment } from '../../store/api-actions';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 
-const MAX_COMMENT_LENGTH = 300;
-const MIN_COMMENT_LENGTH = 50;
+const MAX_REVIEW_LENGTH = 300;
+const MIN_REVIEW_LENGTH = 50;
 
 
-function CommentForm(props) {
+function ReviewForm(props) {
   const {offerId, initReviewsUpdate} = props;
 
   const defaultFormData = {
@@ -102,8 +102,8 @@ function CommentForm(props) {
         </label>
       </div>
       <textarea
-        maxLength={MAX_COMMENT_LENGTH}
-        minLength={MIN_COMMENT_LENGTH} className="reviews__textarea form__textarea"
+        maxLength={MAX_REVIEW_LENGTH}
+        minLength={MIN_REVIEW_LENGTH} className="reviews__textarea form__textarea"
         id="review"
         name="comment"
         placeholder="Tell how was your stay, what you like and what can be improved"
@@ -120,9 +120,9 @@ function CommentForm(props) {
   );
 }
 
-CommentForm.propTypes = {
+ReviewForm.propTypes = {
   offerId: PropTypes.number.isRequired,
   initReviewsUpdate: PropTypes.func.isRequired,
 };
 
-export default CommentForm;
+export default ReviewForm;
