@@ -12,7 +12,7 @@ import LoadingSpinner from '../loading-spinner/loading-spinner';
 import { isAuthUnknown } from '../../utils/utils';
 import PrivateRoute from '../private-route/private-route';
 import browserHisory from '../../browser-history';
-import { init } from './init';
+import { init } from './actions/init';
 
 
 function App(props) {
