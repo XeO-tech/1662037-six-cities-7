@@ -26,9 +26,11 @@ function Room(props) {
 
   const dispatch = useDispatch();
 
-  const normalizeReviews = (rawReviews) => rawReviews
-    .slice(0, MAX_REVIEWS)
-    .sort((a, b) => new Date(b.date) - new Date(a.date));
+  const normalizeReviews = (rawReviews) => {
+    const sortedReviews = [...rawReviews];
+    sortedReviews.sort((a, b) => new Date(b.date) - new Date(a.date));
+    return sortedReviews.slice(0, MAX_REVIEWS);
+  };
 
   const updateReviews = () => dispatch(fetchReviews(props.match.params.id))
     .then((data) => setReviews(normalizeReviews(data)));
