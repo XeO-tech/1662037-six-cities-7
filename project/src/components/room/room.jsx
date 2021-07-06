@@ -27,6 +27,9 @@ function Room(props) {
   const dispatch = useDispatch();
 
   const normalizeReviews = (rawReviews) => {
+    if (!rawReviews) {
+      return;
+    }
     const sortedReviews = [...rawReviews];
     sortedReviews.sort((a, b) => new Date(b.date) - new Date(a.date));
     return sortedReviews.slice(0, MAX_REVIEWS);
