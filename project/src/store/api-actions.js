@@ -1,15 +1,15 @@
-import { ActionCreator } from './action';
 import { ApiRoute, AppRoute, AuthorizationStatus } from '../const';
 import { adaptOfferToClient, adaptReviewToClient } from '../utils/adapter';
+import { loadOffers, requireAuthorization, redirectToRoute  } from './action';
 
 export const fetchOffersList = () => (dispatch, _getState, api) => (
   api.get(ApiRoute.HOTELS)
-    .then(({data}) => dispatch(ActionCreator.loadOffers(data)))
+    .then(({data}) => dispatch(loadOffers(data)))
 );
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(ApiRoute.LOGIN)
-    .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
+    .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
     .catch(() => {
       localStorage.removeItem('token');
       localStorage.removeItem('login');
@@ -22,8 +22,8 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
       localStorage.setItem('token', data.token);
       localStorage.setItem('login', email);
     })
-    .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
-    .then(() => dispatch(ActionCreator.redirectToRoute(AppRoute.ROOT)))
+    .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
+    .then(() => dispatch(redirectToRoute(AppRoute.ROOT)))
 );
 
 export const logout = () => (dispatch, _getState, api) => (
@@ -32,13 +32,13 @@ export const logout = () => (dispatch, _getState, api) => (
       localStorage.removeItem('token');
       localStorage.removeItem('login');
     })
-    .then(() => dispatch(ActionCreator.logout()))
+    .then(() => dispatch(logout()))
 );
 
 export const fetchOffer = (offerId) => (dispatch, _getState, api) =>
   api.get(`${ApiRoute.HOTELS}/${offerId}`)
     .then(({data}) => adaptOfferToClient(data))
-    .catch(() => dispatch(ActionCreator.redirectToRoute('/offer-not-found')));
+    .catch(() => dispatch(redirectToRoute('/offer-not-found')));
 
 export const fetchOffersNearBy = (offerId) => (_dispatch, _getState, api) =>
   api.get(`${ApiRoute.HOTELS}/${offerId}/nearby`)

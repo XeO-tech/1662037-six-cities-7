@@ -7,28 +7,31 @@ export const ActionType = {
   REDIRECT_TO_ROUTE: 'app/redirect',
 };
 
-export const ActionCreator = {
-  changeCity: (newCity) => ({
-    type: ActionType.CHANGE_CITY,
-    payload: newCity,
-  }),
-  loadOffers: (offers) => ({
-    type: ActionType.LOAD_OFFERS,
-    payload: offers,
-  }),
-  loadReviews: (reviews) => ({
-    type: ActionType.LOAD_REVIEWS,
-    payload: reviews,
-  }),
-  requireAuthorization: (status) => ({
-    type: ActionType.REQUIRE_AUTHORIZATION,
-    payload: status,
-  }),
-  logout: () => ({
-    type: ActionType.LOGOUT,
-  }),
-  redirectToRoute: (url) => ({
-    type: ActionType.REDIRECT_TO_ROUTE,
-    payload: url,
-  }),
-};
+export const changeCity = (newCity) => ({
+  type: ActionType.CHANGE_CITY,
+  payload: newCity,
+});
+
+export const loadOffers = (offers) => ({
+  type: ActionType.LOAD_OFFERS,
+  payload: offers,
+});
+
+export const loadReviews = (reviews) => ({
+  type: ActionType.LOAD_REVIEWS,
+  payload: reviews,
+});
+
+export const requireAuthorization = (status) => ({
+  type: ActionType.REQUIRE_AUTHORIZATION,
+  payload: status,
+});
+
+export const logout = () => ({
+  type: ActionType.LOGOUT,
+});
+
+export const redirectToRoute = (url) => ({
+  type: ActionType.REDIRECT_TO_ROUTE,
+  payload: url,
+});
