@@ -34,8 +34,8 @@ CitiesList.propTypes = {
   onCityClick: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  activeCity: state.city,
+const mapStateToProps = ({APP_DATA}) => ({
+  activeCity: APP_DATA.city,
 });
 
 const mapDispatchToProps = (dispatch) => ({

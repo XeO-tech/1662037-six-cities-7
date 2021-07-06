@@ -87,9 +87,9 @@ MainPage.propTypes = {
   activeCity: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  filteredOffers: selectOffersByCity(state.offers, state.city),
-  activeCity: state.city,
+const mapStateToProps = ({APP_DATA}) => ({
+  filteredOffers: selectOffersByCity(APP_DATA.offers, APP_DATA.city),
+  activeCity: APP_DATA.city,
 });
 
 export { MainPage };

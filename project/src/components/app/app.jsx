@@ -47,9 +47,9 @@ App.propTypes = {
   initApp: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  isDataLoaded: state.isDataLoaded,
-  authorizationStatus: state.authorizationStatus,
+const mapStateToProps = ({USER, APP_DATA}) => ({
+  isDataLoaded: APP_DATA.isDataLoaded,
+  authorizationStatus: USER.authorizationStatus,
 });
 
 const mapDispatchToProps = (dispatch) => ({

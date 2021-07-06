@@ -6,10 +6,8 @@ import { adaptOfferToClient, adaptReviewToClient } from '../utils/adapter';
 const initialState = {
   city: cities[0],
   offers: [],
-  reviews: [],
   authorizationStatus: AuthorizationStatus.UNKNOWN,
   isDataLoaded: false,
-  currentOffer: {},
 };
 
 const reducer = (state = initialState, action) => {
@@ -24,11 +22,6 @@ const reducer = (state = initialState, action) => {
         ...state,
         offers: action.payload.map((offer) => adaptOfferToClient(offer)),
         isDataLoaded: true,
-      };
-    case ActionType.LOAD_REVIEWS:
-      return {
-        ...state,
-        reviews: action.payload.map((review) => adaptReviewToClient(review)),
       };
     case ActionType.REQUIRE_AUTHORIZATION:
       return {

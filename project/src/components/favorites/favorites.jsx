@@ -67,8 +67,8 @@ Favorites.propTypes = {
   offers: PropTypes.arrayOf(cardProp.offer).isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  offers: state.offers,
+const mapStateToProps = ({APP_DATA}) => ({
+  offers: APP_DATA.offers,
 });
 
 export { Favorites };
