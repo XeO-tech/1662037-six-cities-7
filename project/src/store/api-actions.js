@@ -10,7 +10,10 @@ export const fetchOffersList = () => (dispatch, _getState, api) => (
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(ApiRoute.LOGIN)
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
-    .catch(() => {})
+    .catch(() => {
+      localStorage.removeItem('token');
+      localStorage.removeItem('login');
+    })
 );
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
