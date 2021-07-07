@@ -10,15 +10,14 @@ import { CardSetting } from '../../const';
 import Header from '../header/header';
 import { fetchOffer, fetchOffersNearBy, fetchReviews } from '../../store/api-actions';
 import LoadingSpinner from '../loading-spinner/loading-spinner';
-import { useDispatch } from 'react-redux';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AuthorizationStatus } from '../../const';
 import { getAuthorizationStatus } from '../../store/user/selectors';
 
 const MAX_REVIEWS = 10;
 
 function Room(props) {
-  const {authorizationStatus} = props;
+  const authorizationStatus = useSelector(getAuthorizationStatus);
 
   const [offer, setOfferInfo] = useState(null);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
@@ -189,12 +188,6 @@ Room.propTypes = {
       id: PropTypes.string.isRequired,
     }),
   }),
-  authorizationStatus: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  authorizationStatus: getAuthorizationStatus(state),
-});
-
-export { Room };
-export default connect(mapStateToProps)(Room);
+export default Room;

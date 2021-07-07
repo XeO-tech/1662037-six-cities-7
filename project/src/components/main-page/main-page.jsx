@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import OffersList from '../offers-list/offers-list';
-import { cardProp } from '../card/card.prop';
 import Map from '../map/map';
 import { CardSetting } from '../../const';
-import { cities } from '../../const';
 import CitiesList from '../cities-list/cities-list';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import OffersSorting from '../offers-sorting/offers-sorting';
 import { sortOffers } from '../../utils/utils';
 import { SortingType } from '../../const';
@@ -16,8 +13,11 @@ import { getCity } from '../../store/app-data/selectors';
 
 import Header from '../header/header';
 
-function MainPage(props) {
-  const {filteredOffers, activeCity} = props;
+function MainPage() {
+  const offers = useSelector(getOffers);
+  const activeCity = useSelector(getCity);
+
+  const filteredOffers = selectOffersByCity(offers, activeCity);
 
   const [activeCardId, setActiveCardId] = useState(null);
   const [activeSorting, setActiveSorting] = useState(SortingType.POPULAR);
@@ -74,7 +74,7 @@ function MainPage(props) {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <CitiesList cities={cities} />
+          <CitiesList />
         </div>
         <div className="cities">
           {filteredOffers.length === 0 ? emptyPage : pageWithCards}
@@ -84,15 +84,4 @@ function MainPage(props) {
   );
 }
 
-MainPage.propTypes = {
-  filteredOffers: PropTypes.arrayOf(cardProp.offer).isRequired,
-  activeCity: PropTypes.string.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  filteredOffers: selectOffersByCity(getOffers(state), getCity(state)),
-  activeCity: getCity(state),
-});
-
-export { MainPage };
-export default connect(mapStateToProps)(MainPage);
+export default MainPage;

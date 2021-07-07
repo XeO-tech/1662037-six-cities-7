@@ -1,14 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { cardProp } from '../card/card.prop';
 import OffersList from '../offers-list/offers-list';
 import { CardSetting } from '../../const';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Header from '../header/header';
 import { getOffers } from '../../store/app-data/selectors';
 
-function Favorites(props) {
-  const {offers} = props;
+function Favorites() {
+  const offers = useSelector(getOffers);
+
   const favoriteOffers = offers.filter((offer) => offer.isFavorite);
   const uniqueLocations = [...(new Set(favoriteOffers.map((offer) => offer.city.name)))];
 
@@ -64,13 +63,4 @@ function Favorites(props) {
   );
 }
 
-Favorites.propTypes = {
-  offers: PropTypes.arrayOf(cardProp.offer).isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  offers: getOffers(state),
-});
-
-export { Favorites };
-export default connect(mapStateToProps, null)(Favorites);
+export default Favorites;

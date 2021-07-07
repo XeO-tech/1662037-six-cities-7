@@ -1,15 +1,16 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AuthorizationStatus } from '../../const';
 import { AppRoute } from '../../const';
 import { Link } from 'react-router-dom';
 import { logout } from '../../store/api-actions';
-import PropTypes from 'prop-types';
 import { getAuthorizationStatus } from '../../store/user/selectors';
 
 
-function Header(props) {
-  const {authorizationStatus, logoutApp} = props;
+function Header() {
+  const dispatch = useDispatch();
+
+  const authorizationStatus = useSelector(getAuthorizationStatus);
 
   const authorizedUserLink = (
     <>
@@ -24,7 +25,7 @@ function Header(props) {
         <Link
           onClick={(evt) => {
             evt.preventDefault();
-            logoutApp();
+            dispatch(logout());
           }}
           to='/'
           className="header__nav-link"
@@ -65,19 +66,5 @@ function Header(props) {
   );
 }
 
-Header.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-  logoutApp: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  authorizationStatus: getAuthorizationStatus(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  logoutApp: () => dispatch(logout()),
-});
-
-export { Header };
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;
 

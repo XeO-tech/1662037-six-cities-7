@@ -11,8 +11,9 @@ const initialState = {
 
 const appData = createReducer(initialState, (builder) => {
   builder
-    .addCase(changeCity, (state, action) =>
-      state.city = action.payload)
+    .addCase(changeCity, (state, action) => {
+      state.city = action.payload;
+    })
     .addCase(loadOffers, (state, action) => {
       state.offers = action.payload.map((offer) => adaptOfferToClient(offer));
       state.isDataLoaded = true;
