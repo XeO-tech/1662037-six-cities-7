@@ -13,6 +13,8 @@ import { isAuthUnknown } from '../../utils/utils';
 import PrivateRoute from '../private-route/private-route';
 import browserHisory from '../../browser-history';
 import { init } from './actions/init';
+import { getLoadedDataStatus } from '../../store/app-data/selectors';
+import { getAuthorizationStatus } from '../../store/user/selectors';
 
 
 function App(props) {
@@ -47,9 +49,9 @@ App.propTypes = {
   initApp: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({USER, APP_DATA}) => ({
-  isDataLoaded: APP_DATA.isDataLoaded,
-  authorizationStatus: USER.authorizationStatus,
+const mapStateToProps = (state) => ({
+  isDataLoaded: getLoadedDataStatus(state),
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

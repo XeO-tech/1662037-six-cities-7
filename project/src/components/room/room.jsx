@@ -13,6 +13,7 @@ import LoadingSpinner from '../loading-spinner/loading-spinner';
 import { useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
 import { AuthorizationStatus } from '../../const';
+import { getAuthorizationStatus } from '../../store/user/selectors';
 
 const MAX_REVIEWS = 10;
 
@@ -191,8 +192,8 @@ Room.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({USER}) => ({
-  authorizationStatus: USER.authorizationStatus,
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 export { Room };

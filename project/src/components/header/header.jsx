@@ -5,6 +5,7 @@ import { AppRoute } from '../../const';
 import { Link } from 'react-router-dom';
 import { logout } from '../../store/api-actions';
 import PropTypes from 'prop-types';
+import { getAuthorizationStatus } from '../../store/user/selectors';
 
 
 function Header(props) {
@@ -69,8 +70,8 @@ Header.propTypes = {
   logoutApp: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({USER}) => ({
-  authorizationStatus: USER.authorizationStatus,
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

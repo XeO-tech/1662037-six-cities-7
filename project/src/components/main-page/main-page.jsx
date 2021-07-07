@@ -11,6 +11,8 @@ import OffersSorting from '../offers-sorting/offers-sorting';
 import { sortOffers } from '../../utils/utils';
 import { SortingType } from '../../const';
 import { selectOffersByCity } from './selectors';
+import { getOffers } from '../../store/app-data/selectors';
+import { getCity } from '../../store/app-data/selectors';
 
 import Header from '../header/header';
 
@@ -87,9 +89,9 @@ MainPage.propTypes = {
   activeCity: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({APP_DATA}) => ({
-  filteredOffers: selectOffersByCity(APP_DATA.offers, APP_DATA.city),
-  activeCity: APP_DATA.city,
+const mapStateToProps = (state) => ({
+  filteredOffers: selectOffersByCity(getOffers(state), getCity(state)),
+  activeCity: getCity(state),
 });
 
 export { MainPage };

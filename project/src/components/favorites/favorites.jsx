@@ -5,6 +5,7 @@ import OffersList from '../offers-list/offers-list';
 import { CardSetting } from '../../const';
 import { connect } from 'react-redux';
 import Header from '../header/header';
+import { getOffers } from '../../store/app-data/selectors';
 
 function Favorites(props) {
   const {offers} = props;
@@ -67,8 +68,8 @@ Favorites.propTypes = {
   offers: PropTypes.arrayOf(cardProp.offer).isRequired,
 };
 
-const mapStateToProps = ({APP_DATA}) => ({
-  offers: APP_DATA.offers,
+const mapStateToProps = (state) => ({
+  offers: getOffers(state),
 });
 
 export { Favorites };
