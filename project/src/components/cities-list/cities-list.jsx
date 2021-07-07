@@ -10,7 +10,7 @@ function CitiesList() {
 
   const dispatch = useDispatch();
 
-  const cityClickHandler = (cityName) => dispatch(changeCity(cityName));
+  const onCityClick = (cityName) => dispatch(changeCity(cityName));
 
   return (
     <section className="locations container">
@@ -18,7 +18,7 @@ function CitiesList() {
         {cities.map((cityName) => (
           <li key={cityName} className="locations__item">
             <div style={{cursor: 'pointer'}}
-              onClick={(e) => cityClickHandler(cityName)}
+              onClick={(e) => onCityClick(cityName)}
               className={`locations__item-link tabs__item ${cityName === activeCity ? 'tabs__item--active' : ''}`}
             >
               <span>{cityName}</span>

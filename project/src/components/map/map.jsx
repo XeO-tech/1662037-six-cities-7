@@ -5,22 +5,25 @@ import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/map/useMap';
 
+const icon = leaflet.icon({
+  iconUrl: 'img/pin.svg',
+  iconSize: [20, 30],
+  iconAnchor: [10, 30],
+});
+
+const activeIcon = leaflet.icon({
+  iconUrl: 'img/pin-active.svg',
+  iconSize: [20, 30],
+  iconAnchor: [10, 30],
+});
+
+const MAP_HEIGHT = '100%';
+
 function Map(props) {
   const {offers, activeCardId, currentCard} = props;
+
   const mapRef = useRef(null);
-  const map = useMap(mapRef, currentCard ? currentCard : offers[0].city);
-
-  const icon = leaflet.icon({
-    iconUrl: 'img/pin.svg',
-    iconSize: [20, 30],
-    iconAnchor: [10, 30],
-  });
-
-  const activeIcon = leaflet.icon({
-    iconUrl: 'img/pin-active.svg',
-    iconSize: [20, 30],
-    iconAnchor: [10, 30],
-  });
+  const map = useMap(mapRef, currentCard ?? offers[0].city);
 
   useEffect(() => {
     if (map.instance) {
@@ -38,10 +41,10 @@ function Map(props) {
           .addTo(map.markerLayer);
       });
     }
-  }, [map, offers, icon, activeIcon, activeCardId, currentCard]);
+  }, [map, offers, activeCardId, currentCard]);
 
   return (
-    <div style={{height: '100%'}} ref={mapRef} />
+    <div style={{height: MAP_HEIGHT}} ref={mapRef} />
   );
 }
 

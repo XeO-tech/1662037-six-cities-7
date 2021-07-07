@@ -28,7 +28,7 @@ function SignIn() {
     formRef.current.reportValidity();
   };
 
-  const handleSubmit = (e) => {
+  const onButtonClick = (e) => {
     e.preventDefault();
 
     if (!formRef.current.reportValidity()) {
@@ -103,7 +103,7 @@ function SignIn() {
                 />
               </div>
               <button
-                onClick={handleSubmit}
+                onClick={onButtonClick}
                 className="login__submit form__submit button"
                 type="submit"
               >Sign in

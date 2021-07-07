@@ -36,7 +36,7 @@ function ReviewForm(props) {
   const disableSubmitButton = () => buttonRef.current.disabled = true;
   const enableSubmitButton = () => buttonRef.current.disabled = false;
 
-  const handleSubmit = (evt) => {
+  const onFormSubmit = (evt) => {
     evt.preventDefault();
     disableForm();
     disableSubmitButton();
@@ -58,7 +58,7 @@ function ReviewForm(props) {
       });
   };
 
-  const handleFieldChange = (evt) => {
+  const onFormInputChange = (evt) => {
     const {name, value} = evt.target;
     setFormData(Object.assign({}, formData, {[name]: value}));
   };
@@ -72,7 +72,7 @@ function ReviewForm(props) {
 
 
   return (
-    <form ref={formRef} onSubmit = {handleSubmit} onChange = {handleFieldChange} className="reviews__form form" action="#" method="post">
+    <form ref={formRef} onSubmit = {onFormSubmit} onChange = {onFormInputChange} className="reviews__form form" action="#" method="post">
       <ToastContainer />
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">

@@ -1,9 +1,10 @@
 import React from 'react';
 import OffersList from '../offers-list/offers-list';
-import { CardSetting } from '../../const';
+import { AppRoute, CardSetting } from '../../const';
 import { useSelector } from 'react-redux';
 import Header from '../header/header';
 import { getOffers } from '../../store/app-data/selectors';
+import { Link } from 'react-router-dom';
 
 function Favorites() {
   const offers = useSelector(getOffers);
@@ -55,9 +56,9 @@ function Favorites() {
         </div>
       </main>
       <footer className="footer container">
-        <a className="footer__logo-link" href="main.html">
+        <Link to={AppRoute.ROOT} className="footer__logo-link">
           <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
-        </a>
+        </Link>
       </footer>
     </div>
   );

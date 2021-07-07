@@ -15,6 +15,7 @@ import { AuthorizationStatus } from '../../const';
 import { getAuthorizationStatus } from '../../store/user/selectors';
 
 const MAX_REVIEWS = 10;
+const MAX_IMAGES = 6;
 
 function Room(props) {
   const authorizationStatus = useSelector(getAuthorizationStatus);
@@ -30,8 +31,9 @@ function Room(props) {
     if (!rawReviews) {
       return;
     }
-    const sortedReviews = [...rawReviews];
-    sortedReviews.sort((a, b) => new Date(b.date) - new Date(a.date));
+    const sortedReviews = [...rawReviews]
+      .sort((a, b) => new Date(b.date) - new Date(a.date));
+
     return sortedReviews.slice(0, MAX_REVIEWS);
   };
 
@@ -71,13 +73,15 @@ function Room(props) {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {offer.images
-                .slice(0,4)
-                .map((imageUrl) => (
-                  <div key={imageUrl} className="property__image-wrapper">
-                    <img className="property__image" src={imageUrl} alt={offer.type} />
-                  </div>
-                ))}
+              {
+                offer.images
+                  .slice(0, MAX_IMAGES)
+                  .map((imageUrl) => (
+                    <div key={imageUrl} className="property__image-wrapper">
+                      <img className="property__image" src={imageUrl} alt={offer.type} />
+                    </div>
+                  ))
+              }
             </div>
           </div>
           <div className="property__container container">
@@ -124,11 +128,13 @@ function Room(props) {
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
-                  {offer.goods.map((feature) => (
-                    <li key={feature} className="property__inside-item">
-                      {feature}
-                    </li>
-                  ))}
+                  {
+                    offer.goods.map((feature) => (
+                      <li key={feature} className="property__inside-item">
+                        {feature}
+                      </li>
+                    ))
+                  }
                 </ul>
               </div>
               <div className="property__host">
@@ -169,11 +175,13 @@ function Room(props) {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              {offersNearBy.length === 0 ? '' :
-                <OffersList
-                  offers={offersNearBy}
-                  setting={CardSetting.offerPage}
-                />}
+              {
+                offersNearBy.length === 0 ? '' :
+                  <OffersList
+                    offers={offersNearBy}
+                    setting={CardSetting.offerPage}
+                  />
+              }
             </div>
           </section>
         </div>

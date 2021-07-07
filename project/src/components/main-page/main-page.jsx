@@ -24,15 +24,11 @@ function MainPage() {
 
   const sortedOffers = sortOffers(activeSorting, filteredOffers);
 
-  const onListItemHover = (offerID) => {
-    setActiveCardId(offerID);
-  };
-
-  const onListItemLeave = (offerID) => {
-    setActiveCardId(null);
-  };
-
   const onSortingChange = (newSortingType) => setActiveSorting(newSortingType);
+
+  const onListItemHover = (offerID) => setActiveCardId(offerID);
+
+  const onListItemLeave = () => setActiveCardId(null);
 
 
   const emptyPage = (
@@ -63,7 +59,9 @@ function MainPage() {
         </div>
       </section>
       <div className="cities__right-section">
-        <section className="cities__map map"><Map offers={filteredOffers} activeCardId={activeCardId} /></section>
+        <section className="cities__map map">
+          <Map offers={filteredOffers} activeCardId={activeCardId} />
+        </section>
       </div>
     </div>
   );
