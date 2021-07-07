@@ -1,6 +1,6 @@
 import { ApiRoute, AppRoute, AuthorizationStatus } from '../const';
 import { adaptOfferToClient, adaptReviewToClient } from '../utils/adapter';
-import { loadOffers, requireAuthorization, redirectToRoute  } from './action';
+import { loadOffers, requireAuthorization, redirectToRoute, logout as CloseSession  } from './action';
 
 export const fetchOffersList = () => (dispatch, _getState, api) => (
   api.get(ApiRoute.HOTELS)
@@ -32,7 +32,7 @@ export const logout = () => (dispatch, _getState, api) => (
       localStorage.removeItem('token');
       localStorage.removeItem('login');
     })
-    .then(() => dispatch(logout()))
+    .then(() => dispatch(CloseSession()))
 );
 
 export const fetchOffer = (offerId) => (dispatch, _getState, api) =>
