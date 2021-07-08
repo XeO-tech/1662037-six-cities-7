@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import Header from '../header/header';
 import { getOffers } from '../../store/app-data/selectors';
 import { Link } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 function Favorites() {
   const offers = useSelector(getOffers);
@@ -24,6 +25,7 @@ function Favorites() {
 
   const pageWithCards = (
     <section className="favorites">
+      <ToastContainer />
       <h1 className="favorites__title">Saved listing</h1>
       <ul className="favorites__list">
         {uniqueLocations.map((location, i) => (

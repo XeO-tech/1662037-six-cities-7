@@ -8,11 +8,13 @@ import OffersList from '../offers-list/offers-list';
 import { roomTypeAlias } from '../../const';
 import { CardSetting } from '../../const';
 import Header from '../header/header';
-import { fetchOffer, fetchOffersNearBy, fetchReviews } from '../../store/api-actions';
+import { fetchOffer, fetchOffersNearBy, fetchReviews, toggleFavorites } from '../../store/api-actions';
 import LoadingSpinner from '../loading-spinner/loading-spinner';
 import { useDispatch, useSelector } from 'react-redux';
 import { AuthorizationStatus } from '../../const';
 import { getAuthorizationStatus } from '../../store/user/selectors';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const MAX_REVIEWS = 10;
 const MAX_IMAGES = 6;
@@ -27,6 +29,18 @@ function Room(props) {
 
   const dispatch = useDispatch();
 
+  const onFavoriteClick = () => {
+    dispatch(toggleFavorites(offer.isFavorite, offer.id))
+      .then((data) => setOfferInfo(Object.assign(
+        {},
+        offer,
+        {'isFavorite': data.isFavorite},
+      )))
+      .catch(() => toast.error('Adding to favorites failed. Try again later.', {
+        position: toast.POSITION.TOP_LEFT,
+      }));
+  };
+
   const normalizeReviews = (rawReviews) => {
     if (!rawReviews) {
       return;
@@ -39,6 +53,7 @@ function Room(props) {
 
   const updateReviews = () => dispatch(fetchReviews(props.match.params.id))
     .then((data) => setReviews(normalizeReviews(data)));
+
 
   useEffect(() => {
     dispatch(fetchOffer(props.match.params.id))
@@ -68,6 +83,7 @@ function Room(props) {
 
   return (
     <div className="page">
+      <ToastContainer />
       <Header />
       <main className="page__main page__main--property">
         <section className="property">
@@ -96,7 +112,11 @@ function Room(props) {
                 <h1 className="property__name">
                   {offer.title}
                 </h1>
-                <button className="property__bookmark-button button" type="button">
+                <button
+                  onClick={onFavoriteClick}
+                  className={`property__bookmark-button button ${offer.isFavorite ? 'property__bookmark-button--active' : ''}`}
+                  type="button"
+                >
                   <svg className="property__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>

@@ -1,12 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { cardProp } from '../card/card.prop';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { defineRatingWidth } from '../../utils/utils';
+import { toggleFavorites } from '../../store/api-actions';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Card(props) {
   const {offer, onListItemHover, onListItemLeave, setting} = props;
   const offerUrl = `/offer/${offer.id}`;
+
+  const [favoriteStatus, setFavoriteStatus] = useState(offer.isFavorite);
+
+  const dispatch = useDispatch();
+
+  const onFavoriteClick = () => {
+    dispatch(toggleFavorites(favoriteStatus, offer.id))
+      .then((data) => setFavoriteStatus(data.isFavorite))
+      .catch(() => toast.error('Adding to favorites failed. Try again later.', {
+        position: toast.POSITION.TOP_LEFT,
+      }));
+  };
 
   return (
     <article
@@ -25,7 +41,11 @@ function Card(props) {
             <b className="place-card__price-value">&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
+          <button
+            onClick={onFavoriteClick}
+            className={`place-card__bookmark-button button ${favoriteStatus ? 'place-card__bookmark-button--active' : ''}`}
+            type="button"
+          >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>

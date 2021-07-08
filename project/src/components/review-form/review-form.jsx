@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { postComment } from '../../store/api-actions';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const MAX_REVIEW_LENGTH = 300;
@@ -73,7 +73,6 @@ function ReviewForm(props) {
 
   return (
     <form ref={formRef} onSubmit = {onFormSubmit} onChange = {onFormInputChange} className="reviews__form form" action="#" method="post">
-      <ToastContainer />
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         <input className="form__rating-input visually-hidden" name="rating" value={5} id="5-stars" type="radio" />

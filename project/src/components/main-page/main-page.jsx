@@ -11,6 +11,7 @@ import { selectOffersByCity } from './selectors';
 import { getOffers } from '../../store/app-data/selectors';
 import { getCity } from '../../store/app-data/selectors';
 import EmptyPage from './empty-main-page';
+import { ToastContainer } from 'react-toastify';
 
 import Header from '../header/header';
 
@@ -34,6 +35,7 @@ function MainPage() {
 
   const pageWithCards = (
     <div className="cities__places-container container">
+      <ToastContainer />
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
         <b className="places__found">{filteredOffers.length} places to stay in {activeCity}</b>
