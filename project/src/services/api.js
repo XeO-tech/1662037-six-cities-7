@@ -5,7 +5,7 @@ const REQUEST_TIMEOUT = 5000;
 
 const token = localStorage.getItem('token') ?? '';
 
-const HttpCode = {
+export const HttpCode = {
   UNATHORIZED: 401,
 };
 

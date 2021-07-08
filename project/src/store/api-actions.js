@@ -1,6 +1,7 @@
 import { ApiRoute, AppRoute, AuthorizationStatus } from '../const';
 import { adaptOfferToClient, adaptReviewToClient } from '../utils/adapter';
 import { loadOffers, requireAuthorization, redirectToRoute, logout as CloseSession  } from './action';
+import { HttpCode } from '../services/api';
 
 export const fetchOffersList = () => (dispatch, _getState, api) => (
   api.get(ApiRoute.HOTELS)
@@ -53,10 +54,15 @@ export const fetchReviews = (offerId) => (_dispatch, _getState, api) =>
 export const postComment = (offerId, comment) => (_dispatch, _getState, api) =>
   api.post(`${ApiRoute.REVIEWS}/${offerId}`, comment);
 
-export const toggleFavorites = (isFavorite, offerId) => (_dispatch, _getState, api) => {
+export const toggleFavorites = (isFavorite, offerId) => (dispatch, _getState, api) => {
   let status;
   isFavorite ? status = 0 : status = 1;
 
   return api.post(`${ApiRoute.FAVORITE}/${offerId}/${status}`)
-    .then(({data}) => adaptOfferToClient(data));
+    .then(({data}) => adaptOfferToClient(data))
+    .catch((err) => {
+      if (err.response.status === HttpCode.UNATHORIZED) {
+        dispatch(redirectToRoute(AppRoute.LOGIN));
+      }
+    });
 };
