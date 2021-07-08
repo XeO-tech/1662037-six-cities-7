@@ -57,6 +57,6 @@ export const toggleFavorites = (isFavorite, offerId) => (_dispatch, _getState, a
   let status;
   isFavorite ? status = 0 : status = 1;
 
-  return api.post(`cxc/${offerId}/${status}`)
+  return api.post(`${ApiRoute.FAVORITE}/${offerId}/${status}`)
     .then(({data}) => adaptOfferToClient(data));
 };
