@@ -11,6 +11,8 @@ import LoadingSpinner from '../loading-spinner/loading-spinner';
 function Favorites() {
   const [favoriteOffers, setFavoriteOffers] = useState([]);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
+  const [isError, setIsError] = useState(false);
+
   const uniqueLocations = [...(new Set(favoriteOffers.map((offer) => offer.city.name)))];
 
   const dispatch = useDispatch();
@@ -20,15 +22,17 @@ function Favorites() {
       .then((data) => {
         setFavoriteOffers(data);
         setIsDataLoaded(true);
-      });
+      })
+      .catch(() => setIsError(true));
 
     return () => {
       setFavoriteOffers([]);
       setIsDataLoaded(false);
+      setIsError(false);
     };
   }, [dispatch]);
 
-  if (!isDataLoaded) {
+  if (!isDataLoaded && !isError) {
     return <LoadingSpinner />;
   }
 
@@ -36,8 +40,8 @@ function Favorites() {
     <section className="favorites favorites--empty">
       <h1 className="visually-hidden">Favorites (empty)</h1>
       <div className="favorites__status-wrapper">
-        <b className="favorites__status">Nothing yet saved.</b>
-        <p className="favorites__status-description">Save properties to narrow down search or plan your future trips.</p>
+        <b className="favorites__status">{isError ? 'Couldn\'t load data' : 'Nothing yet saved.'}</b>
+        <p className="favorites__status-description">{isError ? 'Try again later' : 'Save properties to narrow down search or plan your future trips.'}</p>
       </div>
     </section>
   );
