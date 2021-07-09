@@ -66,3 +66,13 @@ export const toggleFavorites = (isFavorite, offerId) => (dispatch, _getState, ap
       }
     });
 };
+
+export const fetchFavorites = () => (dispatch, _getState, api) =>
+  api.get(ApiRoute.FAVORITE)
+    .then(({data}) => data.map((offerItem) => adaptOfferToClient(offerItem)))
+    .catch((err) => {
+      if (err.response.status === HttpCode.UNATHORIZED) {
+        dispatch(redirectToRoute(AppRoute.LOGIN));
+      }
+    });
+

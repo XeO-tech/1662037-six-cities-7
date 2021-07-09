@@ -1,17 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import OffersList from '../offers-list/offers-list';
 import { AppRoute, CardSetting } from '../../const';
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Header from '../header/header';
-import { getOffers } from '../../store/app-data/selectors';
 import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import { fetchFavorites } from '../../store/api-actions';
+import LoadingSpinner from '../loading-spinner/loading-spinner';
 
 function Favorites() {
-  const offers = useSelector(getOffers);
-
-  const favoriteOffers = offers.filter((offer) => offer.isFavorite);
+  const [favoriteOffers, setFavoriteOffers] = useState([]);
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
   const uniqueLocations = [...(new Set(favoriteOffers.map((offer) => offer.city.name)))];
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchFavorites())
+      .then((data) => {
+        setFavoriteOffers(data);
+        setIsDataLoaded(true);
+      });
+
+    return () => {
+      setFavoriteOffers([]);
+      setIsDataLoaded(false);
+    };
+  }, [dispatch]);
+
+  if (!isDataLoaded) {
+    return <LoadingSpinner />;
+  }
 
   const emptyPage = (
     <section className="favorites favorites--empty">
@@ -28,7 +47,7 @@ function Favorites() {
       <ToastContainer />
       <h1 className="favorites__title">Saved listing</h1>
       <ul className="favorites__list">
-        {uniqueLocations.map((location, i) => (
+        {uniqueLocations.map((location) => (
           <li key={location} className="favorites__locations-items">
             <div className="favorites__locations locations locations--current">
               <div className="locations__item">
