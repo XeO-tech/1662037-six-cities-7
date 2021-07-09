@@ -8,6 +8,11 @@ import 'react-toastify/dist/ReactToastify.css';
 const MAX_REVIEW_LENGTH = 300;
 const MIN_REVIEW_LENGTH = 50;
 
+const Status = {
+  DISABLED: true,
+  ENABLED: false,
+};
+
 
 function ReviewForm(props) {
   const {offerId, initReviewsUpdate} = props;
@@ -24,34 +29,31 @@ function ReviewForm(props) {
   const formRef = useRef();
   const buttonRef = useRef();
 
-  const disableForm = () =>
+  const toggleFormStatus = (formStatus) =>
     [...formRef.current.querySelectorAll('input'),
       formRef.current.querySelector('textarea')]
-      .forEach((input) => input.disabled = true);
-  const enableForm = () =>
-    [...formRef.current.querySelectorAll('input'),
-      formRef.current.querySelector('textarea')]
-      .forEach((input) => input.disabled = false);
+      .forEach((input) => input.disabled = formStatus);
 
-  const disableSubmitButton = () => buttonRef.current.disabled = true;
-  const enableSubmitButton = () => buttonRef.current.disabled = false;
+
+  const toggleSubmitButtonStatus = (buttonStatus) =>
+    buttonRef.current.disabled = buttonStatus;
 
   const onFormSubmit = (evt) => {
     evt.preventDefault();
-    disableForm();
-    disableSubmitButton();
+    toggleFormStatus(Status.DISABLED);
+    toggleSubmitButtonStatus(Status.DISABLED);
 
     dispatch(postComment(offerId, formData))
       .then(() => {
-        enableForm();
-        enableSubmitButton();
+        toggleFormStatus(Status.ENABLED);
+        toggleSubmitButtonStatus(Status.ENABLED);
         setFormData(defaultFormData);
         formRef.current.reset();
         initReviewsUpdate();
       })
       .catch(() => {
-        enableForm();
-        enableSubmitButton();
+        toggleFormStatus(Status.ENABLED);
+        toggleSubmitButtonStatus(Status.ENABLED);
         toast.error('Comment post failed. Try again later.', {
           position: toast.POSITION.TOP_LEFT,
         });
@@ -65,8 +67,8 @@ function ReviewForm(props) {
 
   useEffect(() => {
     (formRef.current.checkValidity() && formData.rating !== '') ?
-      enableSubmitButton() :
-      disableSubmitButton();
+      toggleSubmitButtonStatus(Status.ENABLED) :
+      toggleSubmitButtonStatus(Status.DISABLED);
 
   }, [formData]);
 
