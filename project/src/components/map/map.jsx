@@ -54,4 +54,4 @@ Map.propTypes = {
   currentCard: cardProp.offer,
 };
 
-export default Map;
+export default React.memo(Map);

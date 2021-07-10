@@ -28,4 +28,4 @@ OffersList.propTypes = {
   setting: cardProp.setting.isRequired,
 };
 
-export default OffersList;
+export default React.memo(OffersList);

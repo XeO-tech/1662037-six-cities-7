@@ -132,4 +132,4 @@ ReviewForm.propTypes = {
   initReviewsUpdate: PropTypes.func.isRequired,
 };
 
-export default ReviewForm;
+export default React.memo(ReviewForm);

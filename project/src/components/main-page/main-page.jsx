@@ -12,7 +12,6 @@ import { getOffers } from '../../store/app-data/selectors';
 import { getCity } from '../../store/app-data/selectors';
 import EmptyPage from './empty-main-page';
 import { ToastContainer } from 'react-toastify';
-
 import Header from '../header/header';
 
 function MainPage() {
