@@ -72,7 +72,7 @@ function SignIn() {
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">
-            <h1 className="login__title">Sign in</h1>
+            <h1 data-testid="sign-in" className="login__title">Sign in</h1>
             <form
               onChange={onFormChange}
               ref={formRef}
@@ -89,6 +89,7 @@ function SignIn() {
                   name="email"
                   placeholder="Email"
                   required
+                  data-testid="login"
                 />
               </div>
               <div className="login__input-wrapper form__input-wrapper">
@@ -100,6 +101,7 @@ function SignIn() {
                   name="password"
                   placeholder="Password"
                   required
+                  data-testid="password"
                 />
               </div>
               <button
