@@ -8,6 +8,9 @@ import { Provider } from 'react-redux';
 import { requireAuthorization } from './store/action';
 import { AuthorizationStatus } from './const';
 import { redirect } from './store/middlewares/redirect';
+import { Router as BrowserRouter } from 'react-router-dom';
+import browserHisory from './browser-history';
+
 
 const api = createAPI(
   () => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH)),
@@ -26,7 +29,9 @@ const store = configureStore({
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <BrowserRouter history={browserHisory}>
+        <App />
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'));
