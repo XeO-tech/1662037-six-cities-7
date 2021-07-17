@@ -73,6 +73,7 @@ export const fetchFavorites = () => (dispatch, _getState, api) =>
     .catch((err) => {
       if (err.response.status === HttpCode.UNATHORIZED) {
         dispatch(redirectToRoute(AppRoute.LOGIN));
+        return;
       }
       throw new Error('Can\'t load favorites');
     });
