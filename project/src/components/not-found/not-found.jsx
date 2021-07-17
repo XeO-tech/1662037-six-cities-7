@@ -1,5 +1,7 @@
 import React from 'react';
 import Header from '../header/header';
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
 
 function NotFound() {
   return (
@@ -8,7 +10,7 @@ function NotFound() {
       <main className="page__main page__main--index">
         <div className="page__favorites-container container">
           <h1>404. Page not found</h1>
-          <a href="/">Вернуться на главную</a>
+          <Link to={AppRoute.ROOT}>Вернуться на главную</Link>
         </div>
       </main>
     </div>
