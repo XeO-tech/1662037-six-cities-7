@@ -2,7 +2,8 @@ import MockAdapter from 'axios-mock-adapter';
 import { createAPI } from '../services/api';
 import { ActionType } from './action';
 import { ApiRoute, AppRoute, AuthorizationStatus } from '../const';
-import { checkAuth, fetchOffersList, fetchOffer, fetchFavorites, toggleFavorites, login, logout} from './api-actions';
+import { checkAuth, fetchOffersList, fetchOffersNearBy, fetchOffer, fetchReviews, fetchFavorites, toggleFavorites, login, logout} from './api-actions';
+import { inputOffer, outputOffer, inputReview, outputReview } from './api-actions.test-mocks';
 
 let api = null;
 
@@ -95,6 +96,35 @@ describe('Async oprations', () => {
       });
   });
 
+  it('should make a correct API call to GET /hotels/:id', () => {
+    const apiMock = new MockAdapter(api);
+    const offerId = 1;
+    const fetchOfferLoader = fetchOffer(offerId);
+
+    apiMock
+      .onGet(`${ApiRoute.HOTELS}/${offerId}`)
+      .reply(200, inputOffer);
+
+    return fetchOfferLoader(() => {}, () => {}, api)
+      .then((data) => {
+        expect(data).toEqual(outputOffer);
+      });
+  });
+  it('should make a correct API call to GET /hotels/:id/nearby', () => {
+    const apiMock = new MockAdapter(api);
+    const offerId = 1;
+    const fetchOffersNearByLoader = fetchOffersNearBy(offerId);
+
+    apiMock
+      .onGet(`${ApiRoute.HOTELS}/${offerId}/nearby`)
+      .reply(200, [inputOffer]);
+
+    return fetchOffersNearByLoader(() => {}, () => {}, api)
+      .then((data) => {
+        expect(data).toEqual([outputOffer]);
+      });
+  });
+
   it('should make a redirect to \'/offer-not-found\'on API call to non-exsistence offer at GET /hotels/:hotel_id', () => {
     const apiMock = new MockAdapter(api);
     const dispatch = jest.fn();
@@ -113,6 +143,21 @@ describe('Async oprations', () => {
           type: ActionType.REDIRECT_TO_ROUTE,
           payload: '/offer-not-found',
         });
+      });
+  });
+
+  it('should make a correct API call to GET /comments/:id', () => {
+    const apiMock = new MockAdapter(api);
+    const offerId = 1;
+    const fetchReviewsLoader = fetchReviews(offerId);
+
+    apiMock
+      .onGet(`${ApiRoute.REVIEWS}/${offerId}`)
+      .reply(200, [inputReview]);
+
+    return fetchReviewsLoader(() => {}, () => {}, api)
+      .then((data) => {
+        expect(data).toEqual([outputReview]);
       });
   });
 
@@ -158,4 +203,5 @@ describe('Async oprations', () => {
         });
       });
   });
+
 });
