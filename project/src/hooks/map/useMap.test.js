@@ -1,6 +1,5 @@
-import {renderHook, act} from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react-hooks';
 import useMap from './useMap';
-import React from 'react';
 
 let city = null;
 let testRef = null;
