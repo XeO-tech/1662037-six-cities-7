@@ -3,11 +3,6 @@ import { adaptOfferToClient, adaptReviewToClient } from '../utils/adapter';
 import { loadOffers, requireAuthorization, redirectToRoute, logout as CloseSession  } from './action';
 import { HttpCode } from '../services/api';
 
-export const fetchOffersList = () => (dispatch, _getState, api) => (
-  api.get(ApiRoute.HOTELS)
-    .then(({data}) => dispatch(loadOffers(data)))
-);
-
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(ApiRoute.LOGIN)
     .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
@@ -21,7 +16,7 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
   api.post(ApiRoute.LOGIN, {email, password})
     .then(({data}) => {
       localStorage.setItem('token', data.token);
-      localStorage.setItem('login', email);
+      localStorage.setItem('login', data.email);
     })
     .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
     .then(() => dispatch(redirectToRoute(AppRoute.ROOT)))
@@ -34,6 +29,11 @@ export const logout = () => (dispatch, _getState, api) => (
       localStorage.removeItem('login');
     })
     .then(() => dispatch(CloseSession()))
+);
+
+export const fetchOffersList = () => (dispatch, _getState, api) => (
+  api.get(ApiRoute.HOTELS)
+    .then(({data}) => dispatch(loadOffers(data)))
 );
 
 export const fetchOffer = (offerId) => (dispatch, _getState, api) =>
