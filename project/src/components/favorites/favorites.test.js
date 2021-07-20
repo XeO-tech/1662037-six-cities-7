@@ -1,3 +1,4 @@
+
 import React from 'react';
 import {render, screen} from '@testing-library/react';
 import {Router} from 'react-router-dom';
@@ -5,13 +6,11 @@ import {createMemoryHistory} from 'history';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { AuthorizationStatus, AppRoute } from '../../const';
-import App from './app';
 import * as Redux from 'react-redux';
-
+import Favorites from './favorites';
 
 let history = null;
 let store = null;
-let fakeApp = null;
 
 const cities = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
@@ -50,7 +49,7 @@ const testOffer = {
   previewImage: 'https://7.react.pages.academy/static/hotel/15.jpg',
 };
 
-describe('Application Routing', () => {
+describe('Component: Favorites', () => {
   beforeEach(() => {
     history = createMemoryHistory();
 
@@ -64,43 +63,6 @@ describe('Application Routing', () => {
       },
     });
 
-    const dispatch = jest.fn();
-    const useDispatch = jest.spyOn(Redux, 'useDispatch');
-    useDispatch.mockReturnValue(dispatch);
-
-    fakeApp = (
-      <Provider store={store}>
-        <Router history={history}>
-          <App />
-        </Router>
-      </Provider>
-    );
-  });
-
-  it('should render "MainPage" when user navigate to "/"', () => {
-
-    history.push(AppRoute.ROOT);
-    render(fakeApp);
-
-    expect(screen.getByText(/places to stay in/i)).toBeInTheDocument();
-  });
-
-  it('should render "SignIn" when user navigate to "/login"', () => {
-    history.push(AppRoute.LOGIN);
-    render(fakeApp);
-
-    expect(screen.getByTestId('sign-in')).toBeInTheDocument();
-  });
-
-  it('should render "NotFound" when user navigate to non-existent route', () => {
-    history.push('/non-existent-route');
-    render(fakeApp);
-
-    expect(screen.getByText('404. Page not found')).toBeInTheDocument();
-    expect(screen.getByText('Вернуться на главную')).toBeInTheDocument();
-  });
-
-  it('should render "Saved listing" when user navigate to favorite page', () => {
     const dispatch = jest.fn(() => Promise.resolve());
     const useDispatch = jest.spyOn(Redux, 'useDispatch');
     useDispatch.mockReturnValue(dispatch);
@@ -113,14 +75,20 @@ describe('Application Routing', () => {
     const setIsDataLoaded = jest.fn();
     const isError = jest.fn();
 
-
     React.useState = jest.fn()
       .mockReturnValueOnce([initialStateForFirstUseStateCall, setFavoriteOffers])
       .mockReturnValueOnce([initialStateForSecondUseStateCall, setIsDataLoaded])
       .mockReturnValueOnce([initialStateForThirdUseStateCall, isError]);
+  });
 
-    history.push(AppRoute.FAVORITES);
-    render(fakeApp);
+  it('should render "Saved listing" when receive data with offers from server', () => {
+
+    render(
+      <Provider store={store}>
+        <Router history={history}>
+          <Favorites />
+        </Router>
+      </Provider>);
 
     expect(screen.getByText('Saved listing')).toBeInTheDocument();
   });
