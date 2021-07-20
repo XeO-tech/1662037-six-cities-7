@@ -1,10 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks';
 import useMap from './useMap';
-import React, {useRef} from 'react';
-import { render } from 'react-dom';
 
 let city = null;
-let testRef = null;
 describe('Hook: useMap', () => {
   beforeAll(() => {
     city =  {
@@ -15,18 +12,33 @@ describe('Hook: useMap', () => {
         zoom: 13,
       },
     };
-
-    testRef = renderHook(() => useRef());
-    render(<div ref={testRef}></div>);
   });
-  it('should return Object', () => {
+
+  it('should return map instance with markerLayer the provided center point coordinates', () => {
+    const element = document.createElement('div');
+
+    const testRef = {
+      current: element,
+    };
+
     const {result} = renderHook(() =>
       useMap(testRef, city));
 
-    expect(result).toBeInstanceOf(Object);
-    expect(Object.keys(result.current)).toHaveLength(2);
+    expect(Object.keys(result.current)[0]).toEqual('instance');
+    expect(Object.keys(result.current)[1]).toEqual('markerLayer');
+  });
 
-    // expect(result.instance).toEqual(city.location.latitude);
+  it('map should be centered as in the provided center point coordinates', () => {
+    const element = document.createElement('div');
+
+    const testRef = {
+      current: element,
+    };
+
+    const {result} = renderHook(() =>
+      useMap(testRef, city));
+
+    expect(result.current.instance.options.center.lat).toEqual(city.location.latitude);
   });
 });
-// похоже нужно использовать jsdom для создания виртуального элемента для карты
+
