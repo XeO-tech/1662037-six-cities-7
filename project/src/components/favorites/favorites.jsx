@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import OffersList from '../offers-list/offers-list';
 import { AppRoute, CardSetting } from '../../const';
 import { useDispatch } from 'react-redux';
@@ -9,9 +9,9 @@ import { fetchFavorites } from '../../store/api-actions';
 import LoadingSpinner from '../loading-spinner/loading-spinner';
 
 function Favorites() {
-  const [favoriteOffers, setFavoriteOffers] = useState([]);
-  const [isDataLoaded, setIsDataLoaded] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [favoriteOffers, setFavoriteOffers] = React.useState([]);
+  const [isDataLoaded, setIsDataLoaded] = React.useState(false);
+  const [isError, setIsError] = React.useState(false);
 
   const uniqueLocations = [...(new Set(favoriteOffers.map((offer) => offer.city.name)))];
 

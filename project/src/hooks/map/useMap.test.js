@@ -1,5 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks';
 import useMap from './useMap';
+import React, {useRef} from 'react';
+import { render } from 'react-dom';
 
 let city = null;
 let testRef = null;
@@ -14,7 +16,8 @@ describe('Hook: useMap', () => {
       },
     };
 
-    testRef = document;
+    testRef = renderHook(() => useRef());
+    render(<div ref={testRef}></div>);
   });
   it('should return Object', () => {
     const {result} = renderHook(() =>
