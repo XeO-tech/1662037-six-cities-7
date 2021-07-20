@@ -1,11 +1,10 @@
-
 import React from 'react';
 import {render, screen} from '@testing-library/react';
 import {Router} from 'react-router-dom';
 import {createMemoryHistory} from 'history';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import { AuthorizationStatus, AppRoute } from '../../const';
+import { AuthorizationStatus } from '../../const';
 import * as Redux from 'react-redux';
 import Favorites from './favorites';
 
@@ -67,6 +66,11 @@ describe('Component: Favorites', () => {
     const useDispatch = jest.spyOn(Redux, 'useDispatch');
     useDispatch.mockReturnValue(dispatch);
 
+
+
+  });
+
+  it('should render "Saved listing" when receive data with offers from server', () => {
     const initialStateForFirstUseStateCall = [testOffer];
     const initialStateForSecondUseStateCall = true;
     const initialStateForThirdUseStateCall = false;
@@ -79,9 +83,6 @@ describe('Component: Favorites', () => {
       .mockReturnValueOnce([initialStateForFirstUseStateCall, setFavoriteOffers])
       .mockReturnValueOnce([initialStateForSecondUseStateCall, setIsDataLoaded])
       .mockReturnValueOnce([initialStateForThirdUseStateCall, isError]);
-  });
-
-  it('should render "Saved listing" when receive data with offers from server', () => {
 
     render(
       <Provider store={store}>
@@ -91,5 +92,53 @@ describe('Component: Favorites', () => {
       </Provider>);
 
     expect(screen.getByText('Saved listing')).toBeInTheDocument();
+  });
+
+  it('should render "Nothing yet saved" when receive empty data from server', () => {
+    const initialStateForFirstUseStateCall = [];
+    const initialStateForSecondUseStateCall = true;
+    const initialStateForThirdUseStateCall = false;
+
+    const setFavoriteOffers = jest.fn();
+    const setIsDataLoaded = jest.fn();
+    const isError = jest.fn();
+
+    React.useState = jest.fn()
+      .mockReturnValueOnce([initialStateForFirstUseStateCall, setFavoriteOffers])
+      .mockReturnValueOnce([initialStateForSecondUseStateCall, setIsDataLoaded])
+      .mockReturnValueOnce([initialStateForThirdUseStateCall, isError]);
+
+    render(
+      <Provider store={store}>
+        <Router history={history}>
+          <Favorites />
+        </Router>
+      </Provider>);
+
+    expect(screen.getByText('Nothing yet saved.')).toBeInTheDocument();
+  });
+
+  it('should render "Loading..." when data is loading', () => {
+    const initialStateForFirstUseStateCall = [];
+    const initialStateForSecondUseStateCall = false;
+    const initialStateForThirdUseStateCall = false;
+
+    const setFavoriteOffers = jest.fn();
+    const setIsDataLoaded = jest.fn();
+    const isError = jest.fn();
+
+    React.useState = jest.fn()
+      .mockReturnValueOnce([initialStateForFirstUseStateCall, setFavoriteOffers])
+      .mockReturnValueOnce([initialStateForSecondUseStateCall, setIsDataLoaded])
+      .mockReturnValueOnce([initialStateForThirdUseStateCall, isError]);
+
+    render(
+      <Provider store={store}>
+        <Router history={history}>
+          <Favorites />
+        </Router>
+      </Provider>);
+
+    expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 });
