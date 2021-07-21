@@ -27,7 +27,7 @@ function Header() {
             evt.preventDefault();
             dispatch(logout());
           }}
-          to='/'
+          to={AppRoute.ROOT}
           className="header__nav-link"
         >
           <span className="header__signout">Sign out</span>
