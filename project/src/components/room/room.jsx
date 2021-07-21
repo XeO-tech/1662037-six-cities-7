@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import ReviewForm from '../review-form/review-form';
 import { defineRatingWidth } from '../../utils/utils';
 import PropTypes from 'prop-types';
@@ -22,10 +22,10 @@ const MAX_IMAGES = 6;
 function Room(props) {
   const authorizationStatus = useSelector(getAuthorizationStatus);
 
-  const [offer, setOfferInfo] = useState(null);
-  const [isDataLoaded, setIsDataLoaded] = useState(false);
-  const [offersNearBy, setOffersNearBy] = useState([]);
-  const [reviews, setReviews] = useState([]);
+  const [offer, setOfferInfo] = React.useState(null);
+  const [isDataLoaded, setIsDataLoaded] = React.useState(false);
+  const [offersNearBy, setOffersNearBy] = React.useState([]);
+  const [reviews, setReviews] = React.useState([]);
 
   const dispatch = useDispatch();
 

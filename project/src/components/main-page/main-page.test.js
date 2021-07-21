@@ -13,6 +13,9 @@ let history = null;
 let store = null;
 let fakeComponent = null;
 
+let setActiveCardId = null;
+let setActiveSorting = null;
+
 const cities = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
 const testOffer = {
@@ -77,6 +80,9 @@ describe('Component: Favorites', () => {
       },
     });
 
+    setActiveCardId = jest.fn();
+    setActiveSorting = jest.fn();
+
     fakeComponent = (
       <Provider store={store}>
         <Router history={history}>
@@ -89,9 +95,6 @@ describe('Component: Favorites', () => {
   it('should render "No places to stay available" when receive empty data  from server', () => {
     const initialStateForFirstUseStateCall = null;
     const initialStateForSecondUseStateCall = SortingType.POPULAR;
-
-    const setActiveCardId = jest.fn();
-    const setActiveSorting = jest.fn();
 
     useSelectorMock
       .mockReturnValueOnce([])
@@ -109,9 +112,6 @@ describe('Component: Favorites', () => {
   it('should render "1 places to stay in Paris" when receive data with 1 offer in Paris from server', () => {
     const initialStateForFirstUseStateCall = null;
     const initialStateForSecondUseStateCall = SortingType.POPULAR;
-
-    const setActiveCardId = jest.fn();
-    const setActiveSorting = jest.fn();
 
     useSelectorMock
       .mockReturnValueOnce([testOffer])

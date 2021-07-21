@@ -11,6 +11,10 @@ import Favorites from './favorites';
 let history = null;
 let store = null;
 
+let setFavoriteOffers = null;
+let setIsDataLoaded = null;
+let isError = null;
+
 const cities = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
 const testOffer = {
@@ -65,16 +69,16 @@ describe('Component: Favorites', () => {
     const dispatch = jest.fn(() => Promise.resolve());
     const useDispatch = jest.spyOn(Redux, 'useDispatch');
     useDispatch.mockReturnValue(dispatch);
+
+    setFavoriteOffers = jest.fn();
+    setIsDataLoaded = jest.fn();
+    isError = jest.fn();
   });
 
   it('should render "Saved listing" when receive data with offers from server', () => {
     const initialStateForFirstUseStateCall = [testOffer];
     const initialStateForSecondUseStateCall = true;
     const initialStateForThirdUseStateCall = false;
-
-    const setFavoriteOffers = jest.fn();
-    const setIsDataLoaded = jest.fn();
-    const isError = jest.fn();
 
     React.useState = jest.fn()
       .mockReturnValueOnce([initialStateForFirstUseStateCall, setFavoriteOffers])
@@ -96,10 +100,6 @@ describe('Component: Favorites', () => {
     const initialStateForSecondUseStateCall = true;
     const initialStateForThirdUseStateCall = false;
 
-    const setFavoriteOffers = jest.fn();
-    const setIsDataLoaded = jest.fn();
-    const isError = jest.fn();
-
     React.useState = jest.fn()
       .mockReturnValueOnce([initialStateForFirstUseStateCall, setFavoriteOffers])
       .mockReturnValueOnce([initialStateForSecondUseStateCall, setIsDataLoaded])
@@ -119,10 +119,6 @@ describe('Component: Favorites', () => {
     const initialStateForFirstUseStateCall = [];
     const initialStateForSecondUseStateCall = false;
     const initialStateForThirdUseStateCall = false;
-
-    const setFavoriteOffers = jest.fn();
-    const setIsDataLoaded = jest.fn();
-    const isError = jest.fn();
 
     React.useState = jest.fn()
       .mockReturnValueOnce([initialStateForFirstUseStateCall, setFavoriteOffers])
