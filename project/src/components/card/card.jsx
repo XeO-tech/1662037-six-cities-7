@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { cardProp } from '../card/card.prop';
 import PropTypes from 'prop-types';
@@ -9,10 +9,10 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function Card(props) {
-  const {offer, onListItemHover, onListItemLeave, setting} = props;
+  const {offer, onListItemHover = () => {}, onListItemLeave = () => {}, setting} = props;
   const offerUrl = `/offer/${offer.id}`;
 
-  const [favoriteStatus, setFavoriteStatus] = useState(offer.isFavorite);
+  const [favoriteStatus, setFavoriteStatus] = React.useState(offer.isFavorite);
 
   const dispatch = useDispatch();
 
