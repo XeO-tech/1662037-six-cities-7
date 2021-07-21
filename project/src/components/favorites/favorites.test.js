@@ -65,9 +65,6 @@ describe('Component: Favorites', () => {
     const dispatch = jest.fn(() => Promise.resolve());
     const useDispatch = jest.spyOn(Redux, 'useDispatch');
     useDispatch.mockReturnValue(dispatch);
-
-
-
   });
 
   it('should render "Saved listing" when receive data with offers from server', () => {

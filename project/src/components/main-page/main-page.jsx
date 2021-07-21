@@ -65,7 +65,7 @@ function MainPage() {
           <CitiesList />
         </div>
         <div className="cities">
-          {filteredOffers.length === 0 ? <EmptyPage /> : pageWithCards}
+          {filteredOffers.length === 0 ? <EmptyPage activeCity={activeCity} /> : pageWithCards}
         </div>
       </main>
     </div>
