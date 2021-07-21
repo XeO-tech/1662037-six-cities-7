@@ -29,7 +29,7 @@ const testReviews = [
   },
 ];
 
-describe('Component: Favorites', () => {
+describe('Component: ReviewsList', () => {
   beforeEach(() => {
     render(<ReviewList reviews={testReviews}/>);
   });

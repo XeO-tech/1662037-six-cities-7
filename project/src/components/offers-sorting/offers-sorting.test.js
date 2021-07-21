@@ -6,7 +6,7 @@ import { SortingType } from '../../const';
 
 let onSortingChange = null;
 
-describe('Component: Favorites', () => {
+describe('Component: OffersSorting', () => {
 
   beforeEach(() => {
     onSortingChange = jest.fn();

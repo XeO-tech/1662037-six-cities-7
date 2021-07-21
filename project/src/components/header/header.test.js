@@ -16,7 +16,7 @@ let dispatch = null;
 
 const cities = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
-describe('Component: Favorites', () => {
+describe('Component: Header', () => {
   const useSelectorMock = jest
     .spyOn(Redux, 'useSelector');
 

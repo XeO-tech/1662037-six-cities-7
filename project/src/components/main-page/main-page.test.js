@@ -61,7 +61,7 @@ jest.mock('../map/map', () => {
   };
 });
 
-describe('Component: Favorites', () => {
+describe('Component: MainPage', () => {
   const useSelectorMock = jest
     .spyOn(Redux, 'useSelector');
 

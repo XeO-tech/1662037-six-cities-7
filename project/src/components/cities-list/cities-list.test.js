@@ -16,7 +16,7 @@ let dispatch = null;
 
 const cities = ['Paris', 'Cologne', 'Brussels'];
 
-describe('Component: Favorites', () => {
+describe('Component: CitiesList', () => {
   const useSelectorMock = jest
     .spyOn(Redux, 'useSelector');
 

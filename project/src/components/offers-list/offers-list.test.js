@@ -14,7 +14,7 @@ let store = null;
 let onListItemHover = null;
 let onListItemLeave = null;
 
-describe('Component: Favorites', () => {
+describe('Component: OffersList', () => {
 
   beforeEach(() => {
     history = createMemoryHistory();
