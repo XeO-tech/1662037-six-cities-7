@@ -48,6 +48,16 @@ describe('Component: Favorites', () => {
     );
   });
 
+  it('should render cities list in the document', () => {
+
+    useSelectorMock.mockReturnValueOnce(cities[0]);
+
+    render(fakeComponent);
+
+    expect(screen.getByText(cities[0])).toBeInTheDocument();
+    expect(screen.getByText(cities[1])).toBeInTheDocument();
+  });
+
   it('should higlight active city by adding active class', () => {
 
     useSelectorMock.mockReturnValueOnce(cities[0]);

@@ -3,7 +3,6 @@ import Card from '../card/card';
 import { cardProp } from '../card/card.prop';
 import PropTypes from 'prop-types';
 
-
 function OffersList(props) {
   const {offers, setting, onListItemHover = () => {}, onListItemLeave = () => {}} = props;
 
