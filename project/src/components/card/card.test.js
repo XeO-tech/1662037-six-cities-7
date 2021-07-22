@@ -61,7 +61,7 @@ const setting = {
   IMAGE_HEIGHT: '110',
 };
 
-describe('Component: Favorites', () => {
+describe('Component: Card', () => {
   beforeEach(() => {
     history = createMemoryHistory();
 
