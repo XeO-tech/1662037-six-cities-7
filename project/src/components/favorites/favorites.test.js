@@ -1,12 +1,14 @@
 import React from 'react';
-import {render, screen} from '@testing-library/react';
-import {Router} from 'react-router-dom';
-import {createMemoryHistory} from 'history';
+import { render, screen } from '@testing-library/react';
+import { Router, Route, Switch } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { AuthorizationStatus } from '../../const';
 import * as Redux from 'react-redux';
 import Favorites from './favorites';
+import { AppRoute } from '../../const';
+import userEvent from '@testing-library/user-event';
 
 let history = null;
 let store = null;
@@ -14,6 +16,14 @@ let store = null;
 let setFavoriteOffers = null;
 let setIsDataLoaded = null;
 let isError = null;
+
+jest.mock('../card/card', () => {
+  const mockMap = () => <>This is card</>;
+  return {
+    __esModule: true,
+    default: mockMap,
+  };
+});
 
 const cities = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
@@ -75,7 +85,7 @@ describe('Component: Favorites', () => {
     isError = jest.fn();
   });
 
-  it('should render "Saved listing" when receive data with offers from server', () => {
+  it('should render "Saved listing" and "Paris" when receive data with offers in Paris from server', () => {
     const initialStateForFirstUseStateCall = [testOffer];
     const initialStateForSecondUseStateCall = true;
     const initialStateForThirdUseStateCall = false;
@@ -93,6 +103,8 @@ describe('Component: Favorites', () => {
       </Provider>);
 
     expect(screen.getByText('Saved listing')).toBeInTheDocument();
+    expect(screen.getByText('Paris')).toBeInTheDocument();
+
   });
 
   it('should render "Nothing yet saved" when receive empty data from server', () => {
@@ -133,5 +145,35 @@ describe('Component: Favorites', () => {
       </Provider>);
 
     expect(screen.getByText('Loading...')).toBeInTheDocument();
+  });
+
+  it('should route to main page when click on logo in the bottom of the page', () => {
+    const initialStateForFirstUseStateCall = [];
+    const initialStateForSecondUseStateCall = true;
+    const initialStateForThirdUseStateCall = false;
+
+    React.useState = jest.fn()
+      .mockReturnValueOnce([initialStateForFirstUseStateCall, setFavoriteOffers])
+      .mockReturnValueOnce([initialStateForSecondUseStateCall, setIsDataLoaded])
+      .mockReturnValueOnce([initialStateForThirdUseStateCall, isError]);
+
+    history.push(AppRoute.FAVORITES);
+
+    render(
+      <Provider store={store}>
+        <Router history={history}>
+          <Switch>
+            <Route exact path={AppRoute.FAVORITES}>
+              <Favorites />
+            </Route>
+            <Route exact path={AppRoute.ROOT}>
+              <div>Mock main page</div>
+            </Route>
+          </Switch>
+        </Router>
+      </Provider>);
+
+    userEvent.click(document.querySelector('.footer__logo'));
+    expect(screen.getByText('Mock main page')).toBeInTheDocument();
   });
 });

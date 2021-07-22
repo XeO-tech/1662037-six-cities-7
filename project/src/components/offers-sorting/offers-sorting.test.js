@@ -19,8 +19,7 @@ describe('Component: OffersSorting', () => {
     expect(document.querySelector('.places__option--active')).toBeInTheDocument();
   });
 
-  it('should fire onSortingChange callback when click on non-active sorting type', () => {
-
+  it('should fire onSortingChange callback when click on sorting type', () => {
     userEvent.click(document.querySelector('.places__option'));
     expect(onSortingChange).toBeCalled();
   });

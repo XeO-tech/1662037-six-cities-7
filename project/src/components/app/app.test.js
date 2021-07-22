@@ -1,13 +1,12 @@
 import React from 'react';
-import {render, screen} from '@testing-library/react';
-import {Router} from 'react-router-dom';
-import {createMemoryHistory} from 'history';
+import { render, screen } from '@testing-library/react';
+import { Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { AuthorizationStatus, AppRoute } from '../../const';
 import App from './app';
 import * as Redux from 'react-redux';
-
 
 let history = null;
 let store = null;
@@ -78,11 +77,10 @@ describe('Application Routing', () => {
   });
 
   it('should render "MainPage" when user navigate to "/"', () => {
-
     history.push(AppRoute.ROOT);
     render(fakeApp);
 
-    expect(screen.getByText(/places to stay in/i)).toBeInTheDocument();
+    expect(screen.getByText('places to stay in')).toBeInTheDocument();
   });
 
   it('should render "SignIn" when user navigate to "/login"', () => {
@@ -112,7 +110,6 @@ describe('Application Routing', () => {
     const setFavoriteOffers = jest.fn();
     const setIsDataLoaded = jest.fn();
     const isError = jest.fn();
-
 
     React.useState = jest.fn()
       .mockReturnValueOnce([initialStateForFirstUseStateCall, setFavoriteOffers])

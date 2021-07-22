@@ -15,7 +15,6 @@ let onListItemHover = null;
 let onListItemLeave = null;
 
 describe('Component: OffersList', () => {
-
   beforeEach(() => {
     history = createMemoryHistory();
 

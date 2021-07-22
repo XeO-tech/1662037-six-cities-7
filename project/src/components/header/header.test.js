@@ -49,7 +49,6 @@ describe('Component: Header', () => {
   });
 
   it('should render "Sign In" when user is unauthorized', () => {
-
     useSelectorMock.mockReturnValueOnce(AuthorizationStatus.NO_AUTH);
 
     render(fakeComponent);
@@ -57,8 +56,31 @@ describe('Component: Header', () => {
     expect(screen.getByText('Sign in')).toBeInTheDocument();
   });
 
-  it('should render user login when user is authorized', () => {
+  it('should render sign in page when user click on Sign in', () => {
+    useSelectorMock.mockReturnValueOnce(AuthorizationStatus.NO_AUTH);
 
+    history.push('/header');
+
+    render(
+      <Provider store={store}>
+        <Router history={history}>
+          <Switch>
+            <Route exact path={'/header'}>
+              <Header />
+            </Route>
+            <Route exact path={AppRoute.LOGIN}>
+              <div>Mock sign in page</div>
+            </Route>
+          </Switch>
+        </Router>
+      </Provider>,
+    );
+
+    userEvent.click(document.querySelector('.header__nav-link'));
+    expect(screen.getByText('Mock sign in page')).toBeInTheDocument();
+  });
+
+  it('should render user login when user is authorized', () => {
     useSelectorMock.mockReturnValueOnce(AuthorizationStatus.AUTH);
     Storage.prototype.getItem = jest.fn(() => 'user@test.ru');
 
@@ -68,7 +90,6 @@ describe('Component: Header', () => {
   });
 
   it('should render favorites page when user click on his login', () => {
-
     useSelectorMock.mockReturnValueOnce(AuthorizationStatus.AUTH);
     Storage.prototype.getItem = jest.fn(() => 'user@test.ru');
     history.push('/header');
@@ -88,23 +109,21 @@ describe('Component: Header', () => {
       </Provider>,
     );
 
-    userEvent.click(screen.getByText(/user@test.ru/i));
+    userEvent.click(screen.getByText('user@test.ru'));
     expect(screen.getByText('Mock favorites')).toBeInTheDocument();
   });
 
   it('should dispatch logout when user click sign out', () => {
-
     useSelectorMock.mockReturnValueOnce(AuthorizationStatus.AUTH);
     Storage.prototype.getItem = jest.fn(() => 'user@test.ru');
 
     render(fakeComponent);
 
-    userEvent.click(screen.getByText(/Sign out/i));
+    userEvent.click(screen.getByText('Sign out'));
     expect(dispatch).toHaveBeenCalledTimes(1);
   });
 
   it('should render main page when user click on logo', () => {
-
     useSelectorMock.mockReturnValueOnce(AuthorizationStatus.AUTH);
     Storage.prototype.getItem = jest.fn(() => 'user@test.ru');
     history.push('/header');

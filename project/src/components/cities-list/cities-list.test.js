@@ -49,7 +49,6 @@ describe('Component: CitiesList', () => {
   });
 
   it('should render cities list in the document', () => {
-
     useSelectorMock.mockReturnValueOnce(cities[0]);
 
     render(fakeComponent);
@@ -59,7 +58,6 @@ describe('Component: CitiesList', () => {
   });
 
   it('should higlight active city by adding active class', () => {
-
     useSelectorMock.mockReturnValueOnce(cities[0]);
 
     render(fakeComponent);
@@ -68,7 +66,6 @@ describe('Component: CitiesList', () => {
   });
 
   it('should dispatch a changeCity function on city click', () => {
-
     useSelectorMock.mockReturnValueOnce(cities[0]);
 
     render(fakeComponent);

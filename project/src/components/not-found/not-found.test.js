@@ -1,10 +1,12 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import { Router } from 'react-router-dom';
+import { render, screen } from '@testing-library/react';
+import { Router, Route, Switch } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import NotFound from './not-found';
+import userEvent from '@testing-library/user-event';
+import { AppRoute } from '../../const';
 
-describe('Component: NotFoundScreen', () => {
+describe('Component: NotFound', () => {
   it('should render correctly', () => {
     const history = createMemoryHistory();
     const {getByText} = render(
@@ -17,5 +19,26 @@ describe('Component: NotFoundScreen', () => {
 
     expect(headerElement).toBeInTheDocument();
     expect(linkElement).toBeInTheDocument();
+  });
+
+  it('should render main page on link click', () => {
+    const history = createMemoryHistory();
+    history.push('/not-found-page');
+
+    render(
+      <Router history={history}>
+        <Switch>
+          <Route exact path={'/not-found-page'}>
+            <NotFound />
+          </Route>
+          <Route exact path={AppRoute.ROOT}>
+            <div>Mock main page</div>
+          </Route>
+        </Switch>
+      </Router>,
+    );
+
+    userEvent.click(screen.getByText('Вернуться на главную'));
+    expect(screen.getByText('Mock main page')).toBeInTheDocument();
   });
 });
