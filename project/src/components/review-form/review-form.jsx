@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { postComment } from '../../store/api-actions';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
@@ -22,7 +22,7 @@ function ReviewForm(props) {
     comment:'',
   };
 
-  const [formData, setFormData] = useState(defaultFormData);
+  const [formData, setFormData] = React.useState(defaultFormData);
 
   const dispatch = useDispatch();
 
