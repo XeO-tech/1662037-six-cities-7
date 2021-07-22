@@ -1,15 +1,18 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { Router } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { AuthorizationStatus } from '../../const';
 import * as Redux from 'react-redux';
 import Card from './card';
+import userEvent from '@testing-library/user-event';
+import { AppRoute } from '../../const';
 
 let history = null;
 let store = null;
+let dispatch = null;
 
 let setFavoriteStatus = null;
 
@@ -72,14 +75,14 @@ describe('Component: Favorites', () => {
       },
     });
 
-    const dispatch = jest.fn(() => Promise.resolve());
+    dispatch = jest.fn(() => Promise.resolve());
     const useDispatch = jest.spyOn(Redux, 'useDispatch');
     useDispatch.mockReturnValue(dispatch);
 
     setFavoriteStatus = jest.fn();
   });
 
-  it('should render "Penthouse..."', () => {
+  it('should render the card with "Penthouse..." title', () => {
     const initialStateForFirstUseStateCall = [false];
 
     React.useState = jest.fn()
@@ -95,4 +98,72 @@ describe('Component: Favorites', () => {
     expect(screen.getByText('Penthouse...')).toBeInTheDocument();
   });
 
+  it('should dispatch toggleFavorites function on favorites icon click', () => {
+    const initialStateForFirstUseStateCall = [false];
+
+    React.useState = jest.fn()
+      .mockReturnValueOnce([initialStateForFirstUseStateCall, setFavoriteStatus]);
+
+    render(
+      <Provider store={store}>
+        <Router history={history}>
+          <Card offer={testOffer} setting={setting} />
+        </Router>
+      </Provider>);
+
+    userEvent.click(document.querySelector('.place-card__bookmark-button'));
+    expect(dispatch).toBeCalledTimes(1);
+  });
+
+  it('should route to offer page when user click on offer\'s image', () => {
+    const initialStateForFirstUseStateCall = [false];
+
+    React.useState = jest.fn()
+      .mockReturnValueOnce([initialStateForFirstUseStateCall, setFavoriteStatus]);
+
+    history.push(AppRoute.ROOT);
+
+    render(
+      <Provider store={store}>
+        <Router history={history}>
+          <Switch>
+            <Route exact path={AppRoute.ROOT}>
+              <Card offer={testOffer} setting={setting} />
+            </Route>
+            <Route exact path={`/offer/${testOffer.id}`}>
+              <div>Mock offer</div>
+            </Route>
+          </Switch>
+        </Router>
+      </Provider>);
+
+    userEvent.click(document.querySelector('.place-card__image'));
+    expect(screen.getByText('Mock offer')).toBeInTheDocument();
+  });
+
+  it('should route to offer page when user click on offer\'s title', () => {
+    const initialStateForFirstUseStateCall = [false];
+
+    React.useState = jest.fn()
+      .mockReturnValueOnce([initialStateForFirstUseStateCall, setFavoriteStatus]);
+
+    history.push(AppRoute.ROOT);
+
+    render(
+      <Provider store={store}>
+        <Router history={history}>
+          <Switch>
+            <Route exact path={AppRoute.ROOT}>
+              <Card offer={testOffer} setting={setting} />
+            </Route>
+            <Route exact path={`/offer/${testOffer.id}`}>
+              <div>Mock offer</div>
+            </Route>
+          </Switch>
+        </Router>
+      </Provider>);
+
+    userEvent.click(screen.getByText(testOffer.title));
+    expect(screen.getByText('Mock offer')).toBeInTheDocument();
+  });
 });
