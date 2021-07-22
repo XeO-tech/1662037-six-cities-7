@@ -49,6 +49,14 @@ const testOffer = {
   previewImage: 'https://7.react.pages.academy/static/hotel/15.jpg',
 };
 
+jest.mock('../card/card', () => {
+  const mockMap = () => <>This is card</>;
+  return {
+    __esModule: true,
+    default: mockMap,
+  };
+});
+
 describe('Application Routing', () => {
   beforeEach(() => {
     history = createMemoryHistory();
@@ -80,7 +88,7 @@ describe('Application Routing', () => {
     history.push(AppRoute.ROOT);
     render(fakeApp);
 
-    expect(screen.getByText('places to stay in')).toBeInTheDocument();
+    expect(screen.getByText(/places to stay in/i)).toBeInTheDocument();
   });
 
   it('should render "SignIn" when user navigate to "/login"', () => {
