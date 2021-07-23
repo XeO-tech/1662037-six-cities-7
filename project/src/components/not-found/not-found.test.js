@@ -6,6 +6,14 @@ import NotFound from './not-found';
 import userEvent from '@testing-library/user-event';
 import { AppRoute } from '../../const';
 
+jest.mock('../header/header', () => {
+  const mockMap = () => <>This is Header</>;
+  return {
+    __esModule: true,
+    default: mockMap,
+  };
+});
+
 describe('Component: NotFound', () => {
   it('should render correctly', () => {
     const history = createMemoryHistory();
