@@ -16,7 +16,6 @@ import { getAuthorizationStatus } from '../../store/user/selectors';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const MAX_REVIEWS = 10;
 const MAX_IMAGES = 6;
 
 function Room(props) {
@@ -41,18 +40,10 @@ function Room(props) {
       }));
   };
 
-  const normalizeReviews = (rawReviews) => {
-    if (!rawReviews) {
-      return;
-    }
-    const sortedReviews = [...rawReviews]
-      .sort((a, b) => new Date(b.date) - new Date(a.date));
-
-    return sortedReviews.slice(0, MAX_REVIEWS);
-  };
-
   const updateReviews = () => dispatch(fetchReviews(props.match.params.id))
-    .then((data) => setReviews(normalizeReviews(data)));
+    .then((data) => {
+      setReviews(data);
+    });
 
 
   useEffect(() => {
@@ -66,7 +57,9 @@ function Room(props) {
       .then((data) => setOffersNearBy(data));
 
     dispatch(fetchReviews(props.match.params.id))
-      .then((data) => setReviews(normalizeReviews(data)));
+      .then((data) => {
+        setReviews(data);
+      });
 
     return () => {
       setOfferInfo(null);

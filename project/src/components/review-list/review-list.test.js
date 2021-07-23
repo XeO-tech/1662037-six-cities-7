@@ -39,7 +39,7 @@ describe('Component: ReviewsList', () => {
     expect(screen.getByText('Nice place')).toBeInTheDocument();
   });
 
-  it('should render "Reviews · 2"', () => {
+  it('should render "Reviews · 2" in reviews header', () => {
     expect(document.querySelector('.reviews__amount').textContent).toEqual('2');
   });
 });

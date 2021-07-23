@@ -8,7 +8,6 @@ import { AuthorizationStatus } from '../../const';
 import * as Redux from 'react-redux';
 import Room from './room';
 import { cities, testOffer, testReviews, testOfferNearBy } from './room.test-mocks';
-import userEvent from '@testing-library/user-event';
 
 let history = null;
 let store = null;
