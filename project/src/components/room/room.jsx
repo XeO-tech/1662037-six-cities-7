@@ -1,20 +1,18 @@
 import React, { useEffect } from 'react';
-import ReviewForm from '../review-form/review-form';
-import { defineRatingWidth } from '../../utils/utils';
 import PropTypes from 'prop-types';
-import ReviewsList from '../review-list/review-list';
-import Map from '../map/map';
-import OffersList from '../offers-list/offers-list';
-import { roomTypeAlias } from '../../const';
-import { CardSetting } from '../../const';
-import Header from '../header/header';
-import { fetchOffer, fetchOffersNearBy, fetchReviews, toggleFavorites } from '../../store/api-actions';
-import LoadingSpinner from '../loading-spinner/loading-spinner';
 import { useDispatch, useSelector } from 'react-redux';
-import { AuthorizationStatus } from '../../const';
+import { defineRatingWidth } from '../../utils/utils';
+import { fetchOffer, fetchOffersNearBy, fetchReviews, toggleFavorites } from '../../store/api-actions';
 import { getAuthorizationStatus } from '../../store/user/selectors';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AuthorizationStatus, CardSetting, roomTypeAlias } from '../../const';
+import OffersList from '../offers-list/offers-list';
+import ReviewsList from '../review-list/review-list';
+import Header from '../header/header';
+import Map from '../map/map';
+import ReviewForm from '../review-form/review-form';
+import LoadingSpinner from '../loading-spinner/loading-spinner';
 
 const MAX_IMAGES = 6;
 

@@ -1,8 +1,8 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { cardProp } from '../card/card.prop';
 import PropTypes from 'prop-types';
+import { cardProp } from '../card/card.prop';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { defineRatingWidth } from '../../utils/utils';
 import { toggleFavorites } from '../../store/api-actions';
 import { toast } from 'react-toastify';

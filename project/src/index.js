@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/app/app';
-import rootReducer from './store/root-reducer';
-import { configureStore } from '@reduxjs/toolkit';
-import { createAPI } from './services/api';
-import { Provider } from 'react-redux';
-import { requireAuthorization } from './store/action';
-import { AuthorizationStatus } from './const';
-import { redirect } from './store/middlewares/redirect';
 import { Router as BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import rootReducer from './store/root-reducer';
+import { requireAuthorization } from './store/action';
+import { createAPI } from './services/api';
+import { redirect } from './store/middlewares/redirect';
 import browserHisory from './browser-history';
+import { AuthorizationStatus } from './const';
+import App from './components/app/app';
 
 
 const api = createAPI(

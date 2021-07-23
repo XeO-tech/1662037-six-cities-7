@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
+import { Redirect } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { login } from '../../store/api-actions';
-import { Redirect } from 'react-router';
 import { AppRoute } from '../../const';
 import { isEmailAddress, isPassword } from '../../utils/utils';
 import { Link } from 'react-router-dom';

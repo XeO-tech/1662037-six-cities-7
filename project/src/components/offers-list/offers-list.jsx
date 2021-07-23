@@ -1,7 +1,7 @@
 import React from 'react';
-import Card from '../card/card';
-import { cardProp } from '../card/card.prop';
 import PropTypes from 'prop-types';
+import { cardProp } from '../card/card.prop';
+import Card from '../card/card';
 
 function OffersList(props) {
   const {offers, setting, onListItemHover = () => {}, onListItemLeave = () => {}} = props;

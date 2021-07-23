@@ -1,7 +1,7 @@
-import { cities } from '../../const';
-import { adaptOfferToClient } from '../../utils/adapter';
 import { createReducer } from '@reduxjs/toolkit';
+import { adaptOfferToClient } from '../../utils/adapter';
 import { changeCity, loadOffers } from '../action';
+import { cities } from '../../const';
 
 const initialState = {
   city: cities[0],

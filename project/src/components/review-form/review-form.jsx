@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
-import { postComment } from '../../store/api-actions';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
+import { postComment } from '../../store/api-actions';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

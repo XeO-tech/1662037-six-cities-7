@@ -1,5 +1,4 @@
-import { SortingType } from '../const';
-import { AuthorizationStatus } from '../const';
+import { AuthorizationStatus, SortingType } from '../const';
 
 export const defineRatingWidth = (rating) => {
   if (rating >= 5) {

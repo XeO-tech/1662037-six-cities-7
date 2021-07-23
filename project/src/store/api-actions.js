@@ -1,7 +1,7 @@
-import { ApiRoute, AppRoute, AuthorizationStatus } from '../const';
 import { adaptOfferToClient, adaptReviewToClient } from '../utils/adapter';
 import { loadOffers, requireAuthorization, redirectToRoute, logout as CloseSession  } from './action';
 import { HttpCode } from '../services/api';
+import { ApiRoute, AppRoute, AuthorizationStatus } from '../const';
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(ApiRoute.LOGIN)

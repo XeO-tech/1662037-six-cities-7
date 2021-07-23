@@ -1,6 +1,6 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { AuthorizationStatus, AppRoute } from '../../const';
 import { getAuthorizationStatus } from '../../store/user/selectors';

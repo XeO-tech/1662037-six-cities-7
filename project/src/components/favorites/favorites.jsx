@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import OffersList from '../offers-list/offers-list';
-import { AppRoute, CardSetting } from '../../const';
 import { useDispatch } from 'react-redux';
-import Header from '../header/header';
 import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { fetchFavorites } from '../../store/api-actions';
+import { AppRoute, CardSetting } from '../../const';
+import Header from '../header/header';
 import LoadingSpinner from '../loading-spinner/loading-spinner';
+import OffersList from '../offers-list/offers-list';
 
 function Favorites() {
   const [favoriteOffers, setFavoriteOffers] = React.useState([]);

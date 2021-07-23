@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
-import OffersList from '../offers-list/offers-list';
-import Map from '../map/map';
-import { CardSetting } from '../../const';
-import CitiesList from '../cities-list/cities-list';
 import { useSelector } from 'react-redux';
-import OffersSorting from '../offers-sorting/offers-sorting';
 import { sortOffers } from '../../utils/utils';
-import { SortingType } from '../../const';
 import { selectOffersByCity } from './selectors';
 import { getOffers } from '../../store/app-data/selectors';
 import { getCity } from '../../store/app-data/selectors';
-import EmptyPage from './empty-main-page';
 import { ToastContainer } from 'react-toastify';
+import { SortingType, CardSetting } from '../../const';
 import Header from '../header/header';
+import CitiesList from '../cities-list/cities-list';
+import OffersSorting from '../offers-sorting/offers-sorting';
+import OffersList from '../offers-list/offers-list';
+import Map from '../map/map';
+import EmptyPage from './empty-main-page';
 
 function MainPage() {
   const offers = useSelector(getOffers);

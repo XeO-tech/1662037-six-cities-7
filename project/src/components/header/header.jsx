@@ -1,10 +1,9 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { AuthorizationStatus } from '../../const';
-import { AppRoute } from '../../const';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../store/api-actions';
 import { getAuthorizationStatus } from '../../store/user/selectors';
+import { AppRoute, AuthorizationStatus } from '../../const';
 
 
 function Header() {

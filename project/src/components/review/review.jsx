@@ -1,6 +1,6 @@
 import React from 'react';
-import dayjs from 'dayjs';
 import { reviewProp } from '../review/review.prop';
+import dayjs from 'dayjs';
 import { defineRatingWidth } from '../../utils/utils';
 
 function Review(props) {

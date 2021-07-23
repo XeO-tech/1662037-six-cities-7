@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { isAuthUnknown } from '../../utils/utils';
+import { init } from './actions/init';
+import { getLoadedDataStatus } from '../../store/app-data/selectors';
+import { getAuthorizationStatus } from '../../store/user/selectors';
 import { AppRoute } from '../../const';
 import MainPage from '../main-page/main-page';
 import SignIn from '../sign-in/sign-in';
 import Favorites from '../favorites/favorites';
 import Room from '../room/room';
 import NotFound from '../not-found/not-found';
-import { useDispatch, useSelector } from 'react-redux';
 import LoadingSpinner from '../loading-spinner/loading-spinner';
-import { isAuthUnknown } from '../../utils/utils';
 import PrivateRoute from '../private-route/private-route';
-import { init } from './actions/init';
-import { getLoadedDataStatus } from '../../store/app-data/selectors';
-import { getAuthorizationStatus } from '../../store/user/selectors';
 
 
 function App() {
