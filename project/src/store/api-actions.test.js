@@ -2,8 +2,8 @@ import MockAdapter from 'axios-mock-adapter';
 import { createAPI } from '../services/api';
 import { ActionType } from './action';
 import { ApiRoute, AppRoute, AuthorizationStatus } from '../const';
-import { checkAuth, fetchOffersList, fetchOffersNearBy, fetchOffer, fetchReviews, fetchFavorites, toggleFavorites, login, logout} from './api-actions';
 import { inputOffer, outputOffer, inputReview, outputReview } from './api-actions.test-mocks';
+import { checkAuth, fetchOffersList, fetchOffersNearBy, fetchOffer, fetchReviews, fetchFavorites, toggleFavorites, login, logout} from './api-actions';
 
 let api = null;
 

@@ -1,6 +1,6 @@
-import { user } from './user';
 import { ActionType } from '../action';
 import { AuthorizationStatus } from '../../const';
+import { user } from './user';
 
 describe('Reducer: user', () => {
   it('without additional parameters should return initial state', () => {

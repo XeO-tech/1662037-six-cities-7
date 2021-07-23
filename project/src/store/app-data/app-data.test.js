@@ -1,5 +1,5 @@
-import { appData } from './app-data';
 import { ActionType } from '../action';
+import { appData } from './app-data';
 
 const cities = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 

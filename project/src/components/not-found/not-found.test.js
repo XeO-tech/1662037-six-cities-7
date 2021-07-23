@@ -1,10 +1,10 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
 import { Router, Route, Switch } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import NotFound from './not-found';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { AppRoute } from '../../const';
+import NotFound from './not-found';
 
 jest.mock('../header/header', () => {
   const mockMap = () => <>This is Header</>;

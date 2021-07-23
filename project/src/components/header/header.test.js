@@ -1,13 +1,13 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
 import { Router, Switch, Route } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
+import * as Redux from 'react-redux';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import configureStore from 'redux-mock-store';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import * as Redux from 'react-redux';
 import Header from './header';
-import userEvent from '@testing-library/user-event';
 
 let history = null;
 let store = null;

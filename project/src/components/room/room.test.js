@@ -1,13 +1,13 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
-import configureStore from 'redux-mock-store';
-import { AuthorizationStatus } from '../../const';
 import * as Redux from 'react-redux';
-import Room from './room';
+import { render, screen } from '@testing-library/react';
+import configureStore from 'redux-mock-store';
 import { cities, testOffer, testReviews, testOfferNearBy } from './room.test-mocks';
+import { AuthorizationStatus } from '../../const';
+import Room from './room';
 
 let history = null;
 let store = null;

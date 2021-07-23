@@ -1,5 +1,5 @@
-import { defineRatingWidth, sortOffers, isEmailAddress, isPassword } from './utils';
 import { SortingType } from '../const';
+import { defineRatingWidth, sortOffers, isEmailAddress, isPassword } from './utils';
 
 const testOffers = [
   {

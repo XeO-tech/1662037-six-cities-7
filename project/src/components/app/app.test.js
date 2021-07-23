@@ -1,12 +1,12 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { Provider } from 'react-redux';
+import * as Redux from 'react-redux';
+import { render, screen } from '@testing-library/react';
 import configureStore from 'redux-mock-store';
 import { AuthorizationStatus, AppRoute } from '../../const';
 import App from './app';
-import * as Redux from 'react-redux';
 
 let history = null;
 let store = null;

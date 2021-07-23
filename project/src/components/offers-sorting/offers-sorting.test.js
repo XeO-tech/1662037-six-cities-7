@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import OffersSorting from './offers-sorting';
 import { SortingType } from '../../const';
+import OffersSorting from './offers-sorting';
 
 let onSortingChange = null;
 

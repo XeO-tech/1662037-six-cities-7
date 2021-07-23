@@ -1,12 +1,12 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
 import { Router, Route, Switch } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import SignIn from './sign-in';
+import configureStore from 'redux-mock-store';
 import { AppRoute } from '../../const';
+import SignIn from './sign-in';
 
 const mockStore = configureStore({});
 let history = null;

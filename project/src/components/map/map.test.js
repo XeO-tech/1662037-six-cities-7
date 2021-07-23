@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import Map from './map';
 import { testOffers } from './map.test-mocks';
+import Map from './map';
 
 
 describe('Component: Map', () => {

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Router, Route } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
+import { Provider } from 'react-redux';
 import { render, screen } from '@testing-library/react';
 import configureStore from 'redux-mock-store';
-import { Provider } from 'react-redux';
 import { AuthorizationStatus } from '../../const';
 import PrivateRoute from './private-route';
 
