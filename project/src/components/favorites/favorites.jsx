@@ -55,9 +55,9 @@ function Favorites() {
           <li key={location} className="favorites__locations-items">
             <div className="favorites__locations locations locations--current">
               <div className="locations__item">
-                <a className="locations__item-link" href="foo">
+                <div className="locations__item-link">
                   <span>{location}</span>
-                </a>
+                </div>
               </div>
             </div>
             <div className="favorites__places">

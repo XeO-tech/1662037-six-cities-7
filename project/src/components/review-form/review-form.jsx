@@ -38,7 +38,7 @@ function ReviewForm(props) {
   const toggleSubmitButtonStatus = (buttonStatus) =>
     buttonRef.current.disabled = buttonStatus;
 
-  const onFormSubmit = (evt) => {
+  const handleFormSubmit = (evt) => {
     evt.preventDefault();
     toggleFormStatus(Status.DISABLED);
     toggleSubmitButtonStatus(Status.DISABLED);
@@ -60,7 +60,7 @@ function ReviewForm(props) {
       });
   };
 
-  const onFormInputChange = (evt) => {
+  const handleFormInputChange = (evt) => {
     const {name, value} = evt.target;
     setFormData(Object.assign({}, formData, {[name]: value}));
   };
@@ -74,7 +74,7 @@ function ReviewForm(props) {
 
 
   return (
-    <form ref={formRef} onSubmit = {onFormSubmit} onChange = {onFormInputChange} className="reviews__form form" action="#" method="post">
+    <form ref={formRef} onSubmit = {handleFormSubmit} onChange = {handleFormInputChange} className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         <input className="form__rating-input visually-hidden" name="rating" value={5} id="5-stars" type="radio" />
