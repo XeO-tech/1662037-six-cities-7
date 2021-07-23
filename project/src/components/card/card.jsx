@@ -30,6 +30,12 @@ function Card(props) {
       onMouseLeave = {onListItemLeave}
       className={setting.ARTICLE_CLASS}
     >
+      {
+        offer.isPremium &&
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div>
+      }
       <div className={setting.MAIN_DIV_CLASS}>
         <Link to={offerUrl}>
           <img className="place-card__image" src={offer.previewImage} width={setting.IMAGE_WIDTH} height={setting.IMAGE_HEIGHT} alt="Place pic" />
