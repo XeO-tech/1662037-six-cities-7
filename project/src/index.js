@@ -7,7 +7,7 @@ import rootReducer from './store/root-reducer';
 import { requireAuthorization } from './store/action';
 import { createAPI } from './services/api';
 import { redirect } from './store/middlewares/redirect';
-import browserHisory from './browser-history';
+import browserHistory from './browser-history';
 import { AuthorizationStatus } from './const';
 import App from './components/app/app';
 
@@ -29,7 +29,7 @@ const store = configureStore({
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter history={browserHisory}>
+      <BrowserRouter history={browserHistory}>
         <App />
       </BrowserRouter>
     </Provider>
